@@ -1,0 +1,2548 @@
+---
+title: "Untitled"
+author: "Chase Fensore"
+date: "2024-10-30"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Bringing in AHRQ data
+# MERGE IN:
+- County AHRQ data
+- Census tract AHRQ data
+- 
+```{r}
+library(caret)
+library(data.table)
+library(dplyr)
+library(sets)
+library(scales)
+library(tidyr)
+library(stringr)
+
+# State plotting
+library(usmap)
+library(sf)
+library(rio)  
+library(sp) # Dependency
+library(maps)
+
+# Set wd when not in RStudio
+source('data_cleaners.R')
+```
+
+# Load AHRQ data: county, census tract, zip
+```{r}
+library(stringi)
+
+
+# County AHRQ
+# cty_ahrq_df_2009 <- read.csv("./COUNTY_AHRQ/SDOH_2010_COUNTY_1_0.csv") # header=FALSE
+cty_ahrq_df_2010 <- read.csv("./COUNTY_AHRQ/SDOH_2010_COUNTY_1_0.csv") # header=FALSE
+cty_ahrq_df_2011 <- read.csv("./COUNTY_AHRQ/SDOH_2011_COUNTY_1_0.csv") # header=FALSE
+cty_ahrq_df_2012 <- read.csv("./COUNTY_AHRQ/SDOH_2012_COUNTY_1_0.csv") # header=FALSE
+cty_ahrq_df_2013 <- read.csv("./COUNTY_AHRQ/SDOH_2013_COUNTY_1_0.csv") # header=FALSE
+cty_ahrq_df_2014 <- read.csv("./COUNTY_AHRQ/SDOH_2014_COUNTY_1_0.csv") # header=FALSE
+cty_ahrq_df_2015 <- read.csv("./COUNTY_AHRQ/SDOH_2015_COUNTY_1_0.csv") # header=FALSE
+cty_ahrq_df_2016 <- read.csv("./COUNTY_AHRQ/SDOH_2016_COUNTY_1_0.csv") # header=FALSE
+cty_ahrq_df_2017 <- read.csv("./COUNTY_AHRQ/SDOH_2017_COUNTY_1_0.csv") # header=FALSE
+cty_ahrq_df_2018 <- read.csv("./COUNTY_AHRQ/SDOH_2018_COUNTY_1_1.csv") # header=FALSE
+# cty_ahrq_df_2019 <- read.csv("./COUNTY_AHRQ/SDOH_2019_COUNTY_1_0.csv") # header=FALSE
+# cty_ahrq_df_2020 <- read.csv("./COUNTY_AHRQ/SDOH_2020_COUNTY_1_0.csv") # header=FALSE
+
+# Use fill to ensured consistent number of columns, merge dfs from 2009-2020 (via mean).
+# Merge dfs on the 6 items below in list.
+# cty_ahrq_df_2009, 
+cty_ahrq_total <- rbindlist(list(cty_ahrq_df_2010, cty_ahrq_df_2011, cty_ahrq_df_2012, cty_ahrq_df_2013,
+                             cty_ahrq_df_2014, cty_ahrq_df_2015, cty_ahrq_df_2016, cty_ahrq_df_2017, cty_ahrq_df_2018), fill=TRUE)
+
+
+# Save names WITHOUT suffix first.
+cty_features_nosuffix <- colnames(cty_ahrq_total)
+# Rename cty_ahrq_total FEATURE names: append "_countylevel"
+
+# Columns to exclude from renaming
+exclude_columns_cty <- c("COUNTY", "COUNTYFIPS", "REGION", "STATE", "STATEFIPS", "TERRITORY", "YEAR")
+
+cty_ahrq_total <- cty_ahrq_total %>%
+  rename_at(vars(-one_of(exclude_columns_cty)), ~paste0(., "_countylevel"))
+
+# Import AHRQ data
+# tr_ahrq_df_2009 <- read.csv("./TRACT_AHRQ/sdoh_2009_tract_1_0.csv")
+tr_ahrq_df_2010 <- read.csv("./TRACT_AHRQ/sdoh_2010_tract_1_0.csv") # header=FALSE
+tr_ahrq_df_2011 <- read.csv("./TRACT_AHRQ/sdoh_2011_tract_1_0.csv")
+tr_ahrq_df_2012 <- read.csv("./TRACT_AHRQ/sdoh_2012_tract_1_0.csv")
+tr_ahrq_df_2013 <- read.csv("./TRACT_AHRQ/sdoh_2013_tract_1_0.csv")
+tr_ahrq_df_2014 <- read.csv("./TRACT_AHRQ/sdoh_2014_tract_1_0.csv")
+tr_ahrq_df_2015 <- read.csv("./TRACT_AHRQ/sdoh_2015_tract_1_0.csv")
+tr_ahrq_df_2016 <- read.csv("./TRACT_AHRQ/sdoh_2016_tract_1_0.csv")
+tr_ahrq_df_2017 <- read.csv("./TRACT_AHRQ/sdoh_2017_tract_1_0.csv")
+tr_ahrq_df_2018 <- read.csv("./TRACT_AHRQ/sdoh_2018_tract_1_0.csv")
+# tr_ahrq_df_2019 <- read.csv("./TRACT_AHRQ/sdoh_2019_tract_1_0.csv")
+# tr_ahrq_df_2020 <- read.csv("./TRACT_AHRQ/sdoh_2020_tract_1_0.csv")
+
+
+# tr_ahrq_df_2009, 
+tr_ahrq_total <- rbindlist(list(tr_ahrq_df_2010, tr_ahrq_df_2011, tr_ahrq_df_2012, tr_ahrq_df_2013,
+                             tr_ahrq_df_2014, tr_ahrq_df_2015, tr_ahrq_df_2016, tr_ahrq_df_2017, tr_ahrq_df_2018), fill=TRUE)
+
+
+# Save names WITHOUT suffix first.
+trct_features_nosuffix <- colnames(tr_ahrq_total)
+
+
+# Rename tr_ahrq_total FEATURE names: append "_census_tractlevel"
+# Columns to exclude from renaming
+exclude_columns_trct <- c("COUNTY", "COUNTYFIPS", "REGION", "STATE", "STATEFIPS", "TERRITORY", "TRACTFIPS", "YEAR") # "TRACTFIPS_padded",
+
+tr_ahrq_total <- tr_ahrq_total %>%
+  rename_at(vars(-one_of(exclude_columns_trct)), ~paste0(., "_census_tractlevel"))
+
+
+
+# SAVE VAR NAMES: 
+# COUNTY:
+cty_features <- colnames(cty_ahrq_total)
+trct_features <- colnames(tr_ahrq_total)
+
+
+all_gran_feats_metadata <- readxl::read_excel("2010-18-all-granularities-AHRQ-dict.xlsx") # has 2010-2018 feats, metadata.
+
+# -- todo: merge all AHRQ features w/ their metadata (from cty_features_metadata ) 
+# length(set_intersection(cty_features, cty_feats_metadata$`Variable Name`))
+
+########### COUNTY LEVEL: #################
+# COUNTY: 1267 county features (2010-2018)
+length(set_intersection(cty_features_nosuffix, all_gran_feats_metadata$`Variable Name`))
+# Only select feats metadata which are present in "cty_features."
+cty_features_and_metadata <- all_gran_feats_metadata[all_gran_feats_metadata$`Variable Name` %in% cty_features_nosuffix, ]
+
+# Lower-case domain names.
+cty_features_and_metadata <- cty_features_and_metadata %>%
+  mutate(Domain = stri_trans_tolower(stri_trans_general(Domain, "Latin-ASCII")))
+
+# Columns to exclude from renaming
+exclude_columns_cty <- c("COUNTY", "COUNTYFIPS", "REGION", "STATE", "STATEFIPS", "TERRITORY", "YEAR")
+
+cty_features_and_metadata <- cty_features_and_metadata %>%
+  mutate(`Variable Name` = case_when(
+    `Variable Name` %in% exclude_columns_cty ~ `Variable Name`,
+    TRUE ~ paste0(`Variable Name`, "_countylevel")
+  ))
+
+
+# Print the modified dataframe
+cat("COUNTY Num variables per Domain: ", "\n")
+table(cty_features_and_metadata$Domain)
+
+# print(cty_features_and_metadata)
+
+
+########### TRACT LEVEL: #################
+length(set_intersection(trct_features_nosuffix, all_gran_feats_metadata$`Variable Name`))
+# TRACT: 519 county features (2010-2018)
+# Only select feats metadata which are present in "trct_features_nosuffix"
+trct_features_and_metadata <- all_gran_feats_metadata[all_gran_feats_metadata$`Variable Name` %in% trct_features_nosuffix, ]
+
+# Lower-case domain names.
+trct_features_and_metadata <- trct_features_and_metadata %>%
+  mutate(Domain = stri_trans_tolower(stri_trans_general(Domain, "Latin-ASCII")))
+
+# Append _census_tractlevel to all feats in this METADATA:
+
+exclude_columns_trct <- c("COUNTY", "COUNTYFIPS", "REGION", "STATE", "STATEFIPS", "TERRITORY", "TRACTFIPS", "YEAR") # "TRACTFIPS_padded"
+
+trct_features_and_metadata <- trct_features_and_metadata %>%
+  mutate(`Variable Name` = case_when(
+    `Variable Name` %in% exclude_columns_trct ~ `Variable Name`,
+    TRUE ~ paste0(`Variable Name`, "_census_tractlevel")
+  ))
+
+
+# Print the modified dataframe
+# print(trct_features_and_metadata)
+
+cat("TRACT Num variables per Domain: ", "\n")
+table(trct_features_and_metadata$Domain)
+
+
+cat("OVERALL COUNTY (not geo or identifiers): 1240 \n")
+cat("OVERALL TRACT (not geo or identifiers): 506 \n")
+
+```
+
+
+# Over 2010-2018 at county level: how many distinct datasets (Data Source) does AHRQ contain?
+```{r}
+
+# First, ignore geography variables.
+all_cty_unique_databases <- subset(subset(cty_features_and_metadata, Domain != '6. geography'),  Domain != 'identifier')
+nrow(cty_features_and_metadata)
+nrow(all_cty_unique_databases)
+
+# 1. 2010-2018 county: save unique 'Data Source' (excluding geography, identifier)
+print("Unique 2010-2018 County data sources, excluding geography/identifier: ")
+unique(all_cty_unique_databases$'Data Source')
+
+# 2. 2010-2018 county: save variable names within each 'Data Souce'
+all_cty_unique_databases
+
+
+
+############
+# First, ignore geography variables.
+all_trct_unique_databases <- subset(subset(trct_features_and_metadata, Domain != '6. geography'), Domain != 'identifier')
+nrow(trct_features_and_metadata)
+nrow(all_trct_unique_databases) 
+
+# 1. 2010-2018 tract: save unique 'Data Source' (excluding geography, identifier)
+print("Unique 2010-2018 Tract data sources, excluding geography/identifier:")
+unique(all_trct_unique_databases$'Data Source')
+
+
+# 2. 2010-2018 tract: save variable names within each 'Data Souce'
+# all_trct_unique_databases
+
+```
+
+
+# Save AHRQ census tract variables for LLM annotation:
+```{r}
+llm_tract_AHRQ_prompts <- trct_features_and_metadata
+
+# 1.) Rename columns: 
+# Domain, Variable Name, Variable Label, Data Source
+# domain, variable_name, variable_label, data_source
+llm_tract_AHRQ_prompts <- llm_tract_AHRQ_prompts %>%
+  rename(
+    domain = Domain,
+    SDOH_topic = Topic,
+    variable_name = `Variable Name`,  # Enclose the column name in backticks because it contains spaces
+    variable_label = `Variable Label`, # Enclose the column name in backticks because it contains spaces
+    data_source = `Data Source`       # Enclose the column name in backticks because it contains spaces
+  )
+
+
+# 2.) Don't include vars: drop these rows.
+# exclude_columns_trct <- c("COUNTY", "COUNTYFIPS", "REGION", "STATE", "STATEFIPS", "TERRITORY", "TRACTFIPS", "YEAR") # "TRACTFIPS_padded"
+exclude_columns_trct <- c("6. geography", "identifier")
+llm_tract_AHRQ_prompts <- llm_tract_AHRQ_prompts %>%
+  filter(!(domain %in% exclude_columns_trct))
+
+# TODO: We *could* insert full names in data_source:
+
+write.csv(llm_tract_AHRQ_prompts ,"AHRQ_tract_varnames_2010-2018.csv", row.names = FALSE )
+
+
+nrow(llm_tract_AHRQ_prompts)
+cat("Excluding geography/identifier variables: \n")
+table(llm_tract_AHRQ_prompts$domain)
+```
+
+
+
+
+# Read in patient data (includes maximum possible number of geocoded patients)
+```{r}
+
+patient_cohort <- read.csv(file="./ML4H_Circ_Nonmissing_Cohort.csv") # Fully geocoded from patient_inclusion_Circ_2024.Rmd
+cat("Number patients fully geocoded: ", nrow(patient_cohort), "\n")
+
+
+# Pad censustract column to 11 characters with leading zeroes
+patient_cohort$censustract <- str_pad(patient_cohort$censustract, width = 11, pad = "0") # Tract fips.
+patient_cohort$fips <- str_pad(patient_cohort$fips, width = 5, pad = "0") # County fips.
+
+```
+
+
+# For "patient_cohort" df with missing ADI & SDI values (since newly geocoded via addresses), fill in ADI & SDI Columns: 
+- "ADI_national_rank"
+- "sdi"
+
+
+CHALLENGE -- all of ADI, & some of SDI are not able to match with patient_cohort DF via "censustract"!
+
+
+```{r}
+# Read in ADI:
+
+adi_tract <- read.csv("./adi-download-2020-tract/US_2020_ADI_Census_Block_Group_v4_0_1.csv")
+# Convert to character and ensure all values have exactly 11 digits
+adi_tract$FIPS <- ifelse(
+  nchar(as.character(adi_tract$FIPS)) == 12,
+  substr(as.character(adi_tract$FIPS), 1, 11),
+  as.character(adi_tract$FIPS)
+)
+# Pad censustract column to 11 characters with leading zeroes
+adi_tract$FIPS <- str_pad(adi_tract$FIPS, width = 11, pad = "0", side = "left")
+
+# Read in SDI: 
+sdi_censustract <- read.csv("./sdi-download-2019-tract/rgcsdi-2015-2019-censustract.csv")
+
+
+sdi_censustract$CENSUSTRACT_FIPS <- as.character(sdi_censustract$CENSUSTRACT_FIPS) # Cast to <chr> for future join.
+sdi_censustract$CENSUSTRACT_FIPS <- str_pad(sdi_censustract$CENSUSTRACT_FIPS, width = 11, pad = "0", side = "left")
+
+
+
+cat("Before merging: \n")
+# ###########
+# ADI missing: 
+# table(patient_cohort$ADI_national_rank)
+sum(is.na(patient_cohort$ADI_national_rank))
+# SDI missing:
+# table(patient_cohort$sdi)
+sum(is.na(patient_cohort$sdi))
+
+
+# MERGE: 
+# ADI, SDI values are shown in "patient_cohort" as NA.
+# Join adi_tract data to patient_cohort on matching census tract FIPS codes
+# 1.) ADI:
+#patient_cohort <- patient_cohort %>%
+#  left_join(adi_tract %>% select(FIPS, ADI_NATRANK), by = c("censustract" = "FIPS")) %>%
+#  mutate(
+#    ADI_national_rank = ifelse(is.na(ADI_national_rank), ADI_NATRANK, ADI_national_rank)
+#  ) %>%
+#  select(-ADI_NATRANK) # Remove the extra column after filling in
+
+# First, sample a random ADI_NATRANK value per tract in adi_tract
+adi_tract_random <- adi_tract %>%
+  group_by(FIPS) %>%
+  sample_n(1) %>%
+  ungroup() %>%
+  select(FIPS, ADI_NATRANK)
+
+# Now perform the left join as before, only filling NA values in patient_cohort$ADI_national_rank
+patient_cohort <- patient_cohort %>%
+  left_join(adi_tract_random, by = c("censustract" = "FIPS")) %>%
+  mutate(
+    ADI_national_rank = ifelse(is.na(ADI_national_rank), ADI_NATRANK, ADI_national_rank)
+  ) %>%
+  select(-ADI_NATRANK) # Remove the extra column after filling in
+
+
+
+# 2.) SDI:
+patient_cohort <- patient_cohort %>%
+  left_join(sdi_censustract %>% select(CENSUSTRACT_FIPS, SDI_score), by = c("censustract" = "CENSUSTRACT_FIPS")) %>%
+  mutate(
+    sdi = ifelse(is.na(sdi), SDI_score, sdi)
+  ) %>%
+  select(-SDI_score) # Remove the extra column after filling in
+
+# SDI: Finally, merge other columns in:
+# List of column names to merge into patient_cohort
+# "sdi",
+columns_to_merge <- c(
+  "PovertyLT100_FPL_score", "Single_Parent_Fam_score", "Education_LT12years_score", 
+  "HHNo_Vehicle_score", "HHRenter_Occupied_score", "HHCrowding_score", 
+  "Nonemployed_score", "pct_Poverty_LT100", "pct_Single_Parent_Fam", 
+  "pct_Education_LT12years", "pct_NonEmployed", "pctHH_No_Vehicle", 
+  "pctHH_Renter_Occupied", "pctHH_Crowding"
+)
+
+# Merge columns into patient_cohort
+patient_cohort <- patient_cohort %>%
+  left_join(
+    sdi_censustract %>% select(CENSUSTRACT_FIPS, all_of(columns_to_merge)), 
+    by = c("censustract" = "CENSUSTRACT_FIPS")
+  )
+
+nrow(patient_cohort)
+
+```
+
+
+```{r}
+# Check missing rows...
+# patient_cohort[is.na(patient_cohort$ADI_national_rank), ]
+# sum(table(sdi_censustract$SDI_score))
+# nrow(sdi_censustract)
+
+
+#table(sdi_censustract$SDI_score, useNA = "ifany") # 646 MISSING VALUES shown as: "<NA>"
+#table(adi_tract$ADI_NATRANK, useNA = "ifany") # MISSING VALUES shown as: "GQ", "GQ-PH", "PH", "QDI". Rates: c(2803, 778, 2649, 215)
+
+
+# For ADI, SDI: check how many censustract values do not have counterparts to match on within adi_tract df (has FIPS column).
+unmatched_tract_ADI <- setdiff(patient_cohort$censustract, adi_tract$FIPS)
+unmatched_tract_SDI <- setdiff(patient_cohort$censustract, sdi_censustract$CENSUSTRACT_FIPS)
+
+length(unmatched_tract_ADI) # 1356
+length(unmatched_tract_SDI) # 858
+
+
+# Check ADI for these census tracts...
+
+# Before merging: 
+#[1] 6586
+#[1] 4778
+#After merging: 
+#[1] 1338
+#[1] 2155
+
+
+# Breaking down missing values of deprivation indices...
+cat("After merging: \n")
+sum(is.na(patient_cohort$ADI_national_rank))
+sum(is.na(patient_cohort$sdi))
+
+# ADI: 
+# 'ADI_national_rank' has 6586 missing before merging with ADI data, 1338 after. Among the 1338, 1356 do not have a matching census tract between patient_cohort & adi_tract.
+# --> ___ don't match ??
+# table(patient_cohort$ADI_national_rank, useNA = "ifany") # INSERT 'NA' for these values: 'GQ' 'GQ-PH'    'PH'   'QDI' 
+
+# SDI: 
+# 'sdi' has 4778 missing before merging with SDI data, 2155 after. Among the 2155, 858 do not have a matching census tract between patient_cohort & sdi_censustract.
+# --> the other 1297: ____ unreported SDI from small areas, or poorly collected data. So there's no SDI from these. 
+
+# Find rows where NO value for patient_cohort$sdi, and patient_cohort$censustract is NOT contained within the list unmatched_tract_SDI.
+# Filter rows based on the conditions for `sdi` and `censustract`
+
+
+#table(patient_cohort$sdi, useNA = "ifany")
+table(patient_cohort$sdi.x, useNA = "ifany") # Has integers. 2155 <NA>
+table(patient_cohort$sdi.y, useNA = "ifany") # Has decimals, +/-. How many <NA> ?
+
+nrow(patient_cohort)
+```
+
+
+
+
+
+# We already have ADI, SDI in the dataset. But we need to merge in SVI.
+```{r}
+# SVI Year: 2014. SVI Geo level: census tract. All states in US included. 
+SVI_2014_US <- read.csv("./TRACT_AHRQ/SVI_2014_US.csv") 
+
+# Cast FIPS to 11 digit double. (before, some are 10, some are 11).
+SVI_2014_US$FIPS <- sprintf("%011s", SVI_2014_US$FIPS)
+
+
+keep_svi <- c(
+              "FIPS",
+              "SPL_THEMES",
+              "EPL_POV", "EPL_UNEMP", "EPL_PCI", "EPL_NOHSDP",
+              "EPL_AGE65", "EPL_AGE17", "EPL_DISABL", "EPL_SNGPNT",
+              "EPL_MINRTY", "EPL_LIMENG", "EPL_MUNIT", "EPL_MOBILE",
+              "EPL_CROWD", "EPL_NOVEH", "EPL_GROUPQ",
+              "RPL_THEME1",
+              "RPL_THEME2",
+              "RPL_THEME3",
+              "RPL_THEME4",
+              "EPL_POV", "EPL_UNEMP", "EPL_PCI", "EPL_NOHSDP",
+              "EPL_AGE65", "EPL_AGE17", "EPL_DISABL", "EPL_SNGPNT",
+              "EPL_MINRTY", "EPL_LIMENG", "EPL_MUNIT", "EPL_MOBILE",
+              "EPL_CROWD", "EPL_NOVEH", "EPL_GROUPQ",
+              "RPL_THEMES",
+              "F_TOTAL",
+              "E_HU", "E_HH", "E_POV", "E_UNEMP", "E_PCI", 
+                   "E_NOHSDP", "E_AGE65", "E_AGE17", "E_DISABL", "E_SNGPNT", 
+                   "E_MINRTY", "E_LIMENG", "E_MUNIT", "E_MOBILE", "E_CROWD", 
+                   "E_NOVEH", "E_GROUPQ",
+              "EP_POV", "EP_UNEMP", "EP_PCI", "EP_NOHSDP", 
+                            "EP_AGE65", "EP_AGE17", "EP_DISABL", "EP_SNGPNT", 
+                            "EP_MINRTY", "EP_LIMENG", "EP_MUNIT", "EP_MOBILE", 
+                            "EP_CROWD", "EP_NOVEH", "EP_GROUPQ")
+
+# Subset only necessary SVI columns + FIPS (tract fips). Don't need county fips.
+SVI_2014_US <- SVI_2014_US[, keep_svi]
+
+
+head(SVI_2014_US)
+
+# Merge SVI_2014_US:
+
+
+# Finally, merge in SVI 2014 data:
+# use cty code: ahrq_baseline ++ SVI_2014_US (by 'censustract', 'FIPS')
+# Old approach: patient_cohort <- merge(patient_cohort, SVI_2014_US  , by.x="censustract", by.y="FIPS" )
+# Make sure to keep all rows in patient_cohort.
+patient_cohort <- patient_cohort %>%
+  left_join(SVI_2014_US, by = c("censustract" = "FIPS"))
+nrow(patient_cohort)
+
+# SVI has 2155 missing:
+sum(is.na(patient_cohort$SPL_THEMES)) # 2155 missing.
+
+```
+# Contains full data for AHRQ 2010-2018. Able to merge using these DFs. 
+```{r}
+
+# These have AHRQ variables as the COLUMNS.
+# head(cty_ahrq_total) # May not show all columns & rows (too many to view here)
+# head(tr_ahrq_total)
+# These have AHRQ variables as the ROWS.
+# cty_features_and_metadata
+# trct_features_and_metadata
+
+# PREPARE AHRQ spatial codes: 
+# Prepare AHRQ join keys (county, tract datasets):
+# cty_ahrq_total$COUNTYFIPS # 4-5 digit int (e.g., 4 digit min: 1001, 5 digit max: 78030)
+# Coerce to 5 digit *chr*: 
+cty_ahrq_total$COUNTYFIPS_padded <- sprintf("%05s", cty_ahrq_total$COUNTYFIPS)
+# TRACT: state + county + tract
+# tr_ahrq_total$TRACTFIPS # 10-11 digit *double* (e.g., 10 digit min: 1001020100, 11 digit max: 78030990000). Do NOT coerce to int, numbers will overflow.
+# Coerce to 11 digit *chr*:
+tr_ahrq_total$TRACTFIPS_padded <- sprintf("%011s", tr_ahrq_total$TRACTFIPS)
+
+```
+
+
+# 1.) Merge (cty_ahrq_total, tr_ahrq_total) <<->> patient_cohort
+```{r}
+# MERGE: both on subject's 'baselineyear' (admission year)
+# Bring in County AHRQ:
+
+# OLD: patient_cohort <- merge(patient_cohort, cty_ahrq_total, by.x=c("fips", "baselineyear"), by.y=c("COUNTYFIPS_padded", "YEAR"))
+# Make sure to keep all rows in patient_cohort.
+patient_cohort <- patient_cohort %>%
+  left_join(cty_ahrq_total, by = c("fips" = "COUNTYFIPS_padded", "baselineyear" = "YEAR")) %>%
+  mutate(across(ends_with(".x"), ~ coalesce(.x, get(sub(".x$", ".y", cur_column()))))) %>%
+  rename_with(~ sub("\\.x$", "", .), ends_with(".x")) %>%
+  select(-ends_with(".y"))
+
+
+# Tract AHRQ baseline: use later for patient-level cenus tract missingness calculations. 
+# OLD: patient_cohort <- merge(patient_cohort, tr_ahrq_total, by.x=c("censustract", "baselineyear"), by.y=c("TRACTFIPS_padded", "YEAR"))
+patient_cohort <- patient_cohort %>%
+  left_join(tr_ahrq_total, by = c("censustract" = "TRACTFIPS_padded", "baselineyear" = "YEAR")) %>%
+  mutate(across(ends_with(".x"), ~ coalesce(.x, get(sub(".x$", ".y", cur_column()))))) %>%
+  rename_with(~ sub("\\.x$", "", .), ends_with(".x")) %>%
+  select(-ends_with(".y"))
+
+head(patient_cohort) # Patient data + ADI + SDI + SVI + AHRQ matched at county & tract. AHRQ naming scheme: _countylevel, _census_tractlevel
+nrow(patient_cohort)
+# Patient cohort: 35964
+
+```
+
+
+# Final steps: only for Circ.
+
+# Before feeding to classifiers, drop potential PHI from ahrq_baseline
+```{r}
+
+drop_vars <- c("Lon__Lat", "cxy_address", "cxy_matched_address", "cxy_tiger_line_id", "cxy_tract_id", "cxy_block_id")
+ncol(patient_cohort)
+
+# Remove drop_vars
+patient_cohort <- patient_cohort[, !(names(patient_cohort) %in% drop_vars)]
+
+ncol(patient_cohort)
+
+
+# CREATE DEMOGRAPHIC VARS: 
+
+patient_cohort <- patient_cohort %>%
+  mutate(baselineyear = as.numeric(baselineyear), na.rm=FALSE)
+
+# Then merge
+# ahrq_AQI_baseline_final <- merge(ahrq_baseline, original_df, by.x=c("COUNTYFIPS", "YEAR"), by.y=c("COUNTY_FIPS", "YEAR"))
+#sum(is.na(ahrq_baseline$ACS_PCT_PUB_COMMT_59MIN)) # Should be 0 for all columns.
+
+
+############ Prepare subgroup flags:
+# Subgroups to eval on: 
+# 1. Race
+# white <int>: 0/1
+# black <int>: 0/1
+# other <int>: 0/1
+patient_cohort <- patient_cohort %>%
+  mutate(blackorwhite = if_else(black == 1 | white == 1, 1, 0))
+
+# 2. Sex (or binary gender)
+# female <int>: 0/1
+# ADD this field: male <int>: 0/1
+patient_cohort <- patient_cohort %>%
+  mutate(male = if_else(female == 0, 1, 0))
+
+# 3. The 6 subgroup combinations: 
+# c(white_male, black_male, other_male, white_female, black_female, other_female)
+
+# Note that all 6 are mutually exclusive here.
+patient_cohort <- patient_cohort %>%
+  mutate(white_male = if_else(white == 1 & female == 0, 1, 0))
+patient_cohort <- patient_cohort %>%
+  mutate(black_male = if_else((black == 1 & female == 0), 1, 0))
+patient_cohort <- patient_cohort %>%
+  mutate(other_male = if_else(other == 1 & female == 0, 1, 0))
+patient_cohort <- patient_cohort %>%
+  mutate(white_female = if_else(white == 1 & female == 1, 1, 0))
+patient_cohort <- patient_cohort %>%
+  mutate(black_female = if_else(black == 1 & female == 1, 1, 0))
+patient_cohort <- patient_cohort %>%
+  mutate(other_female = if_else(other == 1 & female == 1, 1, 0))
+
+#######################
+# Hypertension
+patient_cohort <- patient_cohort %>%
+  mutate(no_htn = if_else(htn == 0, 1, 0))
+
+#######################
+# Coronary Artery Disease
+patient_cohort <- patient_cohort %>%
+  mutate(no_cad = if_else(cad == 0, 1, 0))
+
+#######################
+# Chronic Kidney Disease
+patient_cohort <- patient_cohort %>%
+  mutate(no_ckd = if_else(ckd == 0, 1, 0))
+
+
+
+
+```
+
+# Re-usable function for each of the 4 DF below:
+```{r}
+
+
+prepare_inputDF <- function(total_df) {
+    
+  #######################
+  # SUBGROUP FOR AGEs: 
+
+  quarts <- quantile(total_df$age_current, probs = seq(0, 1, 0.25))
+  upper_Q1_age <- quarts[2]
+  upper_Q2_age <- quarts[3]
+  upper_Q3_age <- quarts[4]
+  upper_Q4_age <- quarts[5]
+  
+  total_df <- total_df %>%
+    mutate(age_Q1 = if_else(age_current <= upper_Q1_age, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(age_Q2 = if_else(age_current <= upper_Q2_age & age_current > upper_Q1_age, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(age_Q3 = if_else(age_current <= upper_Q3_age & age_current > upper_Q2_age, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(age_Q4 = if_else(age_current <= upper_Q4_age & age_current > upper_Q3_age, 1, 0))
+  
+  # Charlson Comorbidity Index
+  # Theoretical Max CCI: 24 (updated version) or 29 (older version).
+  # Our dataset: Max CCI = 22.
+  CCI_quarts <- quantile(total_df$cci, probs = seq(0, 1, 0.25))
+  
+  
+  total_df <- total_df %>%
+    mutate(CCI_0 = if_else(cci == 0, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(CCI_1 = if_else(cci == 1, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(CCI_2 = if_else(cci == 2, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(CCI_3 = if_else(cci == 3, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(CCI_4 = if_else(cci == 4, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(CCI_5 = if_else(cci == 5, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(CCI_6 = if_else(cci == 6, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(CCI_7up = if_else(cci >= 7, 1, 0))
+  
+  # 2.) CCI quartiles (second way to evaluate CCI)
+  upper_Q1_CCI <- CCI_quarts[2]
+  upper_Q2_CCI <- CCI_quarts[3]
+  upper_Q3_CCI <- CCI_quarts[4]
+  upper_Q4_CCI <- CCI_quarts[5]
+  
+  
+  total_df <- total_df %>%
+    mutate(CCI_Q1 = if_else(cci <= upper_Q1_CCI, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(CCI_Q2 = if_else(cci <= upper_Q2_CCI & cci > upper_Q1_CCI, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(CCI_Q3 = if_else(cci <= upper_Q3_CCI & cci > upper_Q2_CCI, 1, 0))
+  
+  total_df <- total_df %>%
+    mutate(CCI_Q4 = if_else(cci > upper_Q3_CCI, 1, 0))
+  
+  # Create 10 folds.
+  endpoints <- c("readmit30bin", "death30bin", "composite30")
+  total_df <- create_folds(as.data.frame(total_df), endpoints) # NOTE: For nested k-fold CV.
+  
+  return(total_df)
+}
+
+
+
+# FUNCTION: Calculate missing rates for DF 1, DF 3 (where cols are not removed, we retain cols even if they have patients with misisng vals).
+# Define the function to calculate missing rates and save to CSV
+calculate_missing_rates <- function(input_df, cty_features_and_metadata, trct_features_and_metadata, output_file) {
+  
+  # Define lists of variable names and domains from cty_features_and_metadata and trct_features_and_metadata
+  cty_var_names <- cty_features_and_metadata$`Variable Name`
+  cty_domains <- cty_features_and_metadata$Domain
+  trct_var_names <- trct_features_and_metadata$`Variable Name`
+  trct_domains <- trct_features_and_metadata$Domain
+  
+  # Combine the lists of variable names and their corresponding domains into a data frame
+  all_var_info <- data.frame(
+    Variable = c(cty_var_names, trct_var_names),
+    Domain = c(cty_domains, trct_domains)
+  )
+  
+  # Calculate the missingness rates for each specified column
+  missing_non_numeric_rates <- sapply(all_var_info$Variable, function(col) {
+    if (col %in% names(input_df)) {
+      # Calculate the rate of missing or non-numeric values
+      mean(is.na(input_df[[col]]) | !is.numeric(as.numeric(as.character(input_df[[col]])))) * 100
+    } else {
+      NA
+    }
+  })
+  
+  # Add the missingness rates to the all_var_info data frame
+  all_var_info$MissingRate <- missing_non_numeric_rates
+  
+  # Remove rows with NA rates (for variables not found in input_df)
+  all_var_info <- all_var_info[!is.na(all_var_info$MissingRate), ]
+  
+  # Save the data frame with missingness rates and domain info to a CSV file
+  write.csv(all_var_info, output_file, row.names = FALSE)
+  
+  # Print confirmation message and return all_var_info
+  print(paste("Missing rates with domain information saved to", output_file))
+  return(all_var_info)
+}
+
+
+#################
+
+# Function to convert non-numeric to NA
+convert_nonnumeric_to_na <- function(df, columns) {
+  # Loop through specified columns
+  for(col in columns) {
+    if(col %in% names(df)) {
+      # Convert column to numeric, non-numeric values will become NA
+      df[[col]] <- suppressWarnings(as.numeric(df[[col]]))
+    }
+  }
+  return(df)
+}
+
+# Define deprivation columns
+deprivation_cols_total <- c("percnt_ltfpl100", "percnt_singlparntfly", "percnt_dropout", 
+                           "percnt_hhnocar", "percnt_rentoccup", "percnt_crowding", 
+                           "percnt_nonemp", "percnt_unemp", "percnt_highneeds", 
+                           "percnt_hispanic", "percnt_frgnborn", "percnt_black", 
+                           "sdi", "ADI_state_rank", "ADI_national_rank")
+
+# Apply the conversion to patient_cohort
+patient_cohort <- convert_nonnumeric_to_na(patient_cohort, deprivation_cols_total)
+
+
+```
+
+# Final DF (ignore DF1-4 below.) 
+[This is equivalent to DF1_nm]
+- Across nation: 35964 (we choose this)
+- GA only: 33579.
+```{r}
+
+patient_cohort_final <- prepare_inputDF(patient_cohort)
+
+# Continue with your existing code
+missing_rates_df <- calculate_missing_rates(patient_cohort_final, 
+                                          cty_features_and_metadata, 
+                                          trct_features_and_metadata, 
+                                          "missing_rates_Circ_final_allstates_modelinput.csv")
+
+write.csv(patient_cohort_final, 
+          file = "./Circ_final_allstates_modelinput.csv", 
+          row.names = FALSE)
+
+nrow(patient_cohort_final)
+
+patient_cohort_final$Encounter
+
+# Find patients not in the final cohort
+patients_excluded = patient_cohort[~patient_cohort['Encounter'].isin(patient_cohort_final['Encounter'])]
+
+```
+
+
+
+Circ_final_allstates_modelinput.csv ****
+vs. 
+Circ_allstates_includemissing_modelinput_DF1.csv
+
+
+
+# DF 1 [all states]: our final approach matches this above.
+
+[Keeping missing deprivation, Y/N keep missing AHRQ.] produces 2 identical patient cohorts.
+```{r}
+
+
+# TODO: Save column names (tract, county).
+# TODO: get missingness rates for each variable.
+
+patient_cohort_A <- prepare_inputDF(patient_cohort)
+
+
+# Continue with your existing code
+missing_rates_df <- calculate_missing_rates(patient_cohort_A, 
+                                          cty_features_and_metadata, 
+                                          trct_features_and_metadata, 
+                                          "missing_rates_Circ_allstates_includemissing_modelinput_DF1.csv")
+
+write.csv(patient_cohort_A, 
+          file = "./Circ_allstates_includemissing_modelinput_DF1.csv", 
+          row.names = FALSE)
+
+
+table(patient_cohort_A$readmit30bin_folds)
+table(patient_cohort_A$death30bin_folds)
+table(patient_cohort_A$composite30_folds)
+nrow(patient_cohort_A)
+
+
+# sum(is.na(patient_cohort_A$ADI_state_rank))/nrow(patient_cohort_A)
+
+nrow(patient_cohort_A)
+
+```
+# DF 2 [all states]: 
+[DROP missing deprivation, (Y/N) Don't use missing AHRQ columns.] -- produces 2 identical patient cohorts.
+
+```{r}
+
+
+# TODO: Save column names (tract, county).
+# TODO: get missingness rates for each variable.
+
+# 1. Only select patients (rows) with non-missing deprivation index vars (ADI, SDI, SVI).
+# Drop row if there is a non-numerical or NA value for ANY of the following columns: 
+# No column: "CensusTract_population", in patient_cohort...
+# Define the deprivation columns as before
+#complete_deprivation_cols_total <- c("ADI_national_rank", "ADI_state_rank", "sdi_score", "PovertyLT100_FPL_score", 
+#                            "Single_Parent_Fam_score", "Education_LT12years_score", "HHNo_Vehicle_score", 
+#                            "HHRenter_Occupied_score", "HHCrowding_score", "Nonemployed_score", "sdi", 
+#                            "pct_Poverty_LT100", "pct_Single_Parent_Fam", "pct_Education_LT12years", 
+#                            "pct_NonEmployed", "pctHH_No_Vehicle", "pctHH_Renter_Occupied", "pctHH_Crowding", 
+#                            "SPL_THEMES", "EPL_POV", "EPL_UNEMP", "EPL_PCI", "EPL_NOHSDP", "EPL_AGE65", 
+#                            "EPL_AGE17", "EPL_DISABL", "EPL_SNGPNT", "EPL_MINRTY", "EPL_LIMENG", "EPL_MUNIT", 
+#                            "EPL_MOBILE", "EPL_CROWD", "EPL_NOVEH", "EPL_GROUPQ", "RPL_THEME1", "RPL_THEME2", 
+#                            "RPL_THEME3", "RPL_THEME4", "RPL_THEMES", "F_TOTAL", "E_HU", "E_HH", "E_POV", 
+#                            "E_UNEMP", "E_PCI", "E_NOHSDP", "E_AGE65", "E_AGE17", "E_DISABL", "E_SNGPNT", 
+#                            "E_MINRTY", "E_LIMENG", "E_MUNIT", "E_MOBILE", "E_CROWD", "E_NOVEH", "E_GROUPQ", 
+#                            "EP_POV", "EP_UNEMP", "EP_PCI", "EP_NOHSDP", "EP_AGE65", "EP_AGE17", "EP_DISABL", 
+#                            "EP_SNGPNT", "EP_MINRTY", "EP_LIMENG", "EP_MUNIT", "EP_MOBILE", "EP_CROWD", 
+#                            "EP_NOVEH", "EP_GROUPQ")
+
+
+# Only drop patients if they have missing/non-numerical values for any of the the 15 "Limited SDOH" variables from Circ.
+deprivation_cols_total <- c("percnt_ltfpl100", "percnt_singlparntfly", "percnt_dropout", "percnt_hhnocar", "percnt_rentoccup", 
+                            "percnt_crowding", "percnt_nonemp", "percnt_unemp", "percnt_highneeds", "percnt_hispanic", "percnt_frgnborn",
+                            "percnt_black", "sdi", "ADI_state_rank", "ADI_national_rank")
+
+
+
+# Define variable names from cty_features_and_metadata and trct_features_and_metadata
+cty_var_names <- cty_features_and_metadata$`Variable Name`
+trct_var_names <- trct_features_and_metadata$`Variable Name`
+
+# Combine lists of variable names and keep only columns present in patient_cohort
+all_var_names <- union(cty_var_names, trct_var_names)
+all_var_names_in_df <- all_var_names[all_var_names %in% names(patient_cohort)]
+
+
+
+# Part 1: Filter patient_cohort_B based on deprivation columns with non-numerical or NA values
+deprivation_cols_in_df <- deprivation_cols_total[deprivation_cols_total %in% names(patient_cohort)]
+patient_cohort_B <- patient_cohort %>%
+  filter(across(all_of(deprivation_cols_in_df), ~ !is.na(.) & !is.na(as.numeric(as.character(.)))))
+
+cat("Number of rows dropped due to missing deprivation variables: ", (nrow(patient_cohort) - nrow(patient_cohort_B)), "\n")
+cat("Rows before: ", nrow(patient_cohort), "\n")
+cat("Rows after: ", nrow(patient_cohort_B), "\n")
+
+
+# Part 2: Calculate missingness rates for each column in all_var_names
+missing_non_numeric_rates <- sapply(all_var_names_in_df, function(col) {
+  mean(is.na(patient_cohort_B[[col]]) | !is.numeric(as.numeric(as.character(patient_cohort_B[[col]])))) * 100
+})
+
+# Convert the results to a data frame
+missing_rates_df <- data.frame(
+  Variable = names(missing_non_numeric_rates),
+  MissingRate = missing_non_numeric_rates
+)
+
+# Add the "Domain" column from the metadata
+missing_rates_df <- merge(missing_rates_df, 
+                          rbind(cty_features_and_metadata[, c("Variable Name", "Domain")], 
+                                trct_features_and_metadata[, c("Variable Name", "Domain")]),
+                          by.x = "Variable", by.y = "Variable Name", all.x = TRUE)
+
+# Save the missing rates data frame to a CSV file
+write.csv(missing_rates_df, "missing_rates_Circ_allstates_EXCLUDEmissing_modelinput_DF2.csv", row.names = FALSE)
+
+# Confirm the file is saved
+print("Initial missing rates with domain information saved to missing_rates_Circ_allstates_initial.csv")
+
+
+
+
+
+
+# 3. To prepare subgroup quartile vars, & create folds:
+patient_cohort_B <- prepare_inputDF(patient_cohort_B)
+
+
+# ML4H_Circ_Nonmissing_Cohort
+write.csv(patient_cohort_B, file="./Circ_allstates_EXCLUDEmissing_modelinput_DF2.csv", row.names=FALSE) 
+
+table(patient_cohort_B$readmit30bin_folds)
+table(patient_cohort_B$death30bin_folds)
+table(patient_cohort_B$composite30_folds)
+nrow(patient_cohort_B)
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+OLD CODE BELOW -- restricts to GA, 1st keeps patients w missing deprivation, 2nd drops patients w missing deprivation.
+#
+# DF 3 [GA only]: include all columns (regardless of how many patients have values missing).
+```{r}
+
+
+# TODO: Save column names (tract, county).
+# TODO: get missingness rates for each variable.
+patient_cohort_C <- patient_cohort[patient_cohort$STATEFIPS == 13, ]
+
+# table(patient_cohort_C$STATEFIPS, useNA = "ifany") # Patient count in Georgia (FIPS "13"): 33579
+
+missing_rates_df <- calculate_missing_rates(patient_cohort_A, cty_features_and_metadata, trct_features_and_metadata, "missing_rates_Circ_GA_only_includemissing_modelinput_DF3.csv")
+
+patient_cohort_C <- prepare_inputDF(patient_cohort_C)
+
+
+# ML4H_Circ_Nonmissing_Cohort
+write.csv(patient_cohort_C, file="./Circ_GA_only_includemissing_modelinput_DF3.csv", row.names=FALSE) 
+
+table(patient_cohort_C$readmit30bin_folds)
+table(patient_cohort_C$death30bin_folds)
+table(patient_cohort_C$composite30_folds)
+nrow(patient_cohort_C)
+
+
+```
+
+# DF 4 [GA only]: only include columns with 0% missing across patients. 
+```{r}
+
+
+# TODO: Save column names (tract, county).
+# TODO: get missingness rates for each variable.
+patient_cohort_D <- patient_cohort[patient_cohort$STATEFIPS == 13, ]
+
+# table(patient_cohort_D$STATEFIPS, useNA = "ifany") # Patient count in Georgia (FIPS "13"): 33579
+# 1. Only select pat ients (rows) with non-missing deprivation index vars (ADI, SDI, SVI).
+# 2. Only selct AHRQ cols with 0% missing patients..
+
+
+# Only drop patients if they have missing/non-numerical values for any of the the 15 "Limited SDOH" variables from Circ.
+deprivation_cols_total <- c("percnt_ltfpl100", "percnt_singlparntfly", "percnt_dropout", "percnt_hhnocar", "percnt_rentoccup", 
+                            "percnt_crowding", "percnt_nonemp", "percnt_unemp", "percnt_highneeds", "percnt_hispanic", "percnt_frgnborn",
+                            "percnt_black", "sdi", "ADI_state_rank", "ADI_national_rank")
+
+
+
+# Define variable names from cty_features_and_metadata and trct_features_and_metadata
+cty_var_names <- cty_features_and_metadata$`Variable Name`
+trct_var_names <- trct_features_and_metadata$`Variable Name`
+
+# Combine lists of variable names and keep only columns present in patient_cohort
+all_var_names <- union(cty_var_names, trct_var_names)
+all_var_names_in_df <- all_var_names[all_var_names %in% names(patient_cohort)]
+
+
+
+# Part 1: Filter patient_cohort_D based on deprivation columns with non-numerical or NA values
+deprivation_cols_in_df <- deprivation_cols_total[deprivation_cols_total %in% names(patient_cohort)]
+patient_cohort_D <- patient_cohort %>%
+  filter(across(all_of(deprivation_cols_in_df), ~ !is.na(.) & !is.na(as.numeric(as.character(.)))))
+
+cat("Number of rows dropped due to missing deprivation variables: ", (nrow(patient_cohort) - nrow(patient_cohort_D)), "\n")
+cat("Rows before: ", nrow(patient_cohort), "\n")
+cat("Rows after: ", nrow(patient_cohort_D), "\n")
+
+
+# Part 2: Calculate missingness rates for each column in all_var_names
+missing_non_numeric_rates <- sapply(all_var_names_in_df, function(col) {
+  mean(is.na(patient_cohort_D[[col]]) | !is.numeric(as.numeric(as.character(patient_cohort_D[[col]])))) * 100
+})
+
+# Convert the results to a data frame
+missing_rates_df <- data.frame(
+  Variable = names(missing_non_numeric_rates),
+  MissingRate = missing_non_numeric_rates
+)
+
+# Add the "Domain" column from the metadata
+missing_rates_df <- merge(missing_rates_df, 
+                          rbind(cty_features_and_metadata[, c("Variable Name", "Domain")], 
+                                trct_features_and_metadata[, c("Variable Name", "Domain")]),
+                          by.x = "Variable", by.y = "Variable Name", all.x = TRUE)
+
+# Save the missing rates data frame to a CSV file
+write.csv(missing_rates_df, "missing_rates_Circ_GA_only_EXCLUDEmissing_modelinput_DF4.csv", row.names = FALSE)
+
+# Confirm the file is saved
+print("Initial missing rates with domain information saved to missing_rates_Circ_allstates_initial.csv")
+
+
+
+
+
+
+
+
+# 3. To prepare subgroup quartile vars, & create folds:
+patient_cohort_D <- prepare_inputDF(patient_cohort_D)
+
+
+# ML4H_Circ_Nonmissing_Cohort
+write.csv(patient_cohort_D, file="./Circ_GA_only_EXCLUDEmissing_modelinput_DF4.csv", row.names=FALSE) 
+
+table(patient_cohort_D$readmit30bin_folds)
+table(patient_cohort_D$death30bin_folds)
+table(patient_cohort_D$composite30_folds)
+nrow(patient_cohort_D)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+## Save all AHRQ feat names (County level, Tract level.)
+```{r}
+
+```
+
+
+# 2.) County level: Save AHRQ feature names which are non-missing wrt ALL patient rows 
+```{r}
+
+```
+
+# 2.) Tract level: Save AHRQ feature names which are non-missing wrt ALL patient rows 
+```{r}
+
+```
+
+
+
+
+# AHRQ+EHR Missingness Calculation (Tract) : 
+- EHR + Tract AHRQ : (given AHRQ features from 2010-2018 across all tract feats)
+- across all counties, years. Not stratified at all.
+- INTERPRETATION: for each AHRQ feature, "Number_Missing" describes the number of subjects in the dataset which do not have a value for that feature.
+- INTERPRETATION: for each AHRQ feature, "Percent_Missing" describes the percent of subjects (out of n= 30702) with a missing value for that feature.
+```{r}
+# ahrq_baseline_tract
+
+# Calculate missing values
+
+# Num AHRQ county-level features we're interested in
+# print(length(colnames(ga_cty_total)))
+
+missing_values <- sapply(ahrq_baseline_tract, function(x) sum(is.na(x)))
+percent_missing <- (missing_values / nrow(ahrq_baseline_tract)) * 100
+
+# Combine the summary and missing value information
+summary_info <- data.frame(
+  Variable = names(ahrq_baseline_tract),
+  Type = sapply(ahrq_baseline_tract, class),
+  Number_Subjects_Missing_Feature = missing_values,
+  Percent_Subjects_Missing_Feature = percent_missing
+)
+
+# Rename vars in 'summary_info'
+
+
+# Merge summary_info with feature metadata. So we have variable descriptions.
+
+composite_summary_info <- merge(summary_info, trct_features_and_metadata, by.x="Variable", by.y="Variable Name")
+
+# composite_summary_info$Percent_Subjects_Missing_Feature <- format(composite_summary_info$Percent_Subjects_Missing_Feature, scientific = # FALSE)
+
+trct_features_and_metadata
+
+# Print the summary information
+print(composite_summary_info) 
+
+# OF 1267 features, at county-level, 506 have 0% missingness, 526 have <= 20% missingness
+filter(composite_summary_info , Percent_Subjects_Missing_Feature <= 0) # %>% count(Domain)
+
+hist(filter(composite_summary_info, Percent_Subjects_Missing_Feature <= 0.2)$Percent_Subjects_Missing_Feature)
+
+hist(composite_summary_info$Percent_Subjects_Missing_Feature)
+
+
+# Feats that have 0% of patients missing.
+tract_non_missing_feats <- filter(composite_summary_info, Percent_Subjects_Missing_Feature <= 0)[ , c("Variable", "Domain")] 
+tract_somepatients_missing_feats <- filter(composite_summary_info, Percent_Subjects_Missing_Feature > 0)$Variable 
+
+
+write.csv(composite_summary_info, "./HF_patients_AHRQ_tractlevel_missingness.csv")
+
+
+```
+
+# AHRQ+EHR Missingness Calculation (County): 
+- EHR + County AHRQ : (given AHRQ features from 2010-2018 across all county feats)
+- across all counties, years. Not stratified at all.
+- INTERPRETATION: for each AHRQ feature, "Number_Missing" describes the number of subjects in the dataset which do not have a value for that feature.
+- INTERPRETATION: for each AHRQ feature, "Percent_Missing" describes the percent of subjects (out of n= 30702) with a missing value for that feature.
+```{r}
+# Calculate missing values
+
+# Num AHRQ county-level features we're interested in
+# print(length(colnames(ga_cty_total)))
+
+missing_values <- sapply(ahrq_baseline, function(x) sum(is.na(x)))
+percent_missing <- (missing_values / nrow(ahrq_baseline)) * 100
+
+# Combine the summary and missing value information
+summary_info <- data.frame(
+  Variable = names(ahrq_baseline),
+  Type = sapply(ahrq_baseline, class),
+  Number_Subjects_Missing_Feature = missing_values,
+  Percent_Subjects_Missing_Feature = percent_missing
+)
+
+# Merge summary_info with feature metadata. So we have variable descriptions.
+composite_summary_info <- merge(summary_info, cty_features_and_metadata, by.x="Variable", by.y="Variable Name")
+
+#composite_summary_info$Percent_Subjects_Missing_Feature <- format(composite_summary_info$Percent_Subjects_Missing_Feature, scientific = # FALSE)
+
+# Print the summary information
+print(composite_summary_info)
+
+
+# OF 1267 features, at county-level, 506 have 0% missingness, 526 have <= 20% missingness
+filter(composite_summary_info, Percent_Subjects_Missing_Feature <= 0) # %>% count(Domain)
+
+hist(filter(composite_summary_info, Percent_Subjects_Missing_Feature <= 0.2)$Percent_Subjects_Missing_Feature )
+
+hist(composite_summary_info$Percent_Subjects_Missing_Feature)
+
+
+# Feats that have 0% of patients missing.
+county_non_missing_feats <- filter(composite_summary_info, Percent_Subjects_Missing_Feature <= 0)[ , c("Variable", "Domain")] 
+county_somepatients_missing_feats <- filter(composite_summary_info, Percent_Subjects_Missing_Feature > 0)$Variable 
+
+write.csv(composite_summary_info, "./HF_patients_AHRQ_countylevel_missingness.csv")
+
+
+```
+
+
+# From 'county_non_missing_feats', 'tract_non_missing_feats', drop AHRQ features from category 6 (geography).
+These are not relevant variables to prediction.
+```{r}
+
+# Tract feats non-missing:
+nrow(tract_non_missing_feats)
+tract_non_missing_feats <- subset(tract_non_missing_feats, Domain != '6. geography')
+nrow(tract_non_missing_feats)
+
+
+# County feats non-missing:
+nrow(county_non_missing_feats)
+county_non_missing_feats <- subset(county_non_missing_feats, Domain != '6. geography')
+nrow(county_non_missing_feats)
+
+
+```
+
+
+# Remove AHRQ feats with >0% of patients missing them ("county_somepatients_missing_feats")
+- can adjust to keep different feats here. 
+- Then, feed "county_non_missing_feats" as model AHRQ feats in JSON feature file.
+```{r}
+
+# keep all AHRQ feats here. Can choose in python which ones to keep.
+# ahrq_baseline <- ahrq_baseline[, !(names(ahrq_baseline) %in% county_non_missing_feats)]
+
+
+# Domain column: shows domain each feat belongs to.
+# AHRQ county-level feats we KEPT:
+write.csv(county_non_missing_feats, "./AHRQ_featlist_county_nonmissing.csv", row.names=FALSE)
+# AHRQ tract-level feats we KEPT:
+write.csv(tract_non_missing_feats, "./AHRQ_featlist_tract_nonmissing.csv", row.names=FALSE)
+
+```
+
+
+- add feats to json file (diff domains, then all domains total)
+- adjust MongoCol. 
+- preprocess/scale feats!!
+
+
+# Build subgroup variables.
+```{r}
+###################################
+# Merge: ahrq_baseline + baseline_AQI_imp_1 (both already imputed on orig datasets. Possible issue is high missingness for several features.)
+###################################
+
+
+# First, match types of merge columns
+
+#ahrq_baseline # COUNTYFIPS: <int>, 'YEAR' <int> here is baselineyear from orig_df (i.e. tractmlm)
+#baseline_AQI_imp_1 # County_FIPS: <int>, YEAR: <chr>... cast year to <int>
+#original_df <- original_df %>%
+#  mutate(YEAR = as.numeric(YEAR), na.rm=FALSE)
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(baselineyear = as.numeric(baselineyear), na.rm=FALSE)
+
+# Then merge
+# ahrq_AQI_baseline_final <- merge(ahrq_baseline, original_df, by.x=c("COUNTYFIPS", "YEAR"), by.y=c("COUNTY_FIPS", "YEAR"))
+#sum(is.na(ahrq_baseline$ACS_PCT_PUB_COMMT_59MIN)) # Should be 0 for all columns.
+
+
+############ Prepare subgroup flags:
+# Subgroups to eval on: 
+# 1. Race
+# white <int>: 0/1
+# black <int>: 0/1
+# other <int>: 0/1
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(blackorwhite = if_else(black == 1 | white == 1, 1, 0))
+
+# 2. Sex (or binary gender)
+# female <int>: 0/1
+# ADD this field: male <int>: 0/1
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(male = if_else(female == 0, 1, 0))
+
+# 3. The 6 subgroup combinations: 
+# c(white_male, black_male, other_male, white_female, black_female, other_female)
+
+# Note that all 6 are mutually exclusive here.
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(white_male = if_else(white == 1 & female == 0, 1, 0))
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(black_male = if_else((black == 1 & female == 0), 1, 0))
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(other_male = if_else(other == 1 & female == 0, 1, 0))
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(white_female = if_else(white == 1 & female == 1, 1, 0))
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(black_female = if_else(black == 1 & female == 1, 1, 0))
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(other_female = if_else(other == 1 & female == 1, 1, 0))
+
+
+
+#######################
+# SUBGROUP FOR AGEs: 
+
+quarts <- quantile(ahrq_baseline$age_current, probs = seq(0, 1, 0.25))
+upper_Q1_age <- quarts[2]
+upper_Q2_age <- quarts[3]
+upper_Q3_age <- quarts[4]
+upper_Q4_age <- quarts[5]
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(age_Q1 = if_else(age_current <= upper_Q1_age, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(age_Q2 = if_else(age_current <= upper_Q2_age & age_current > upper_Q1_age, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(age_Q3 = if_else(age_current <= upper_Q3_age & age_current > upper_Q2_age, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(age_Q4 = if_else(age_current <= upper_Q4_age & age_current > upper_Q3_age, 1, 0))
+
+
+
+#######################
+# HF: Sex & age quartiles
+
+#######################
+# Hypertension
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(no_htn = if_else(htn == 0, 1, 0))
+
+#######################
+# Coronary Artery Disease
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(no_cad = if_else(cad == 0, 1, 0))
+
+#######################
+# Chronic Kidney Disease
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(no_ckd = if_else(ckd == 0, 1, 0))
+
+
+#######################
+# Charlson Comorbidity Index
+  # Theoretical Max CCI: 24 (updated version) or 29 (older version).
+  # Our dataset: Max CCI = 22.
+CCI_quarts <- quantile(ahrq_baseline$cci, probs = seq(0, 1, 0.25))
+
+# 1.) CCI steps 0-6, 7+ groups.
+# 
+
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_0 = if_else(cci == 0, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_1 = if_else(cci == 1, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_2 = if_else(cci == 2, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_3 = if_else(cci == 3, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_4 = if_else(cci == 4, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_5 = if_else(cci == 5, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_6 = if_else(cci == 6, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_7up = if_else(cci >= 7, 1, 0))
+
+
+
+
+
+# 2.) CCI quartiles (second way to evaluate CCI)
+upper_Q1_CCI <- CCI_quarts[2]
+upper_Q2_CCI <- CCI_quarts[3]
+upper_Q3_CCI <- CCI_quarts[4]
+upper_Q4_CCI <- CCI_quarts[5]
+
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_Q1 = if_else(cci <= upper_Q1_CCI, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_Q2 = if_else(cci <= upper_Q2_CCI & cci > upper_Q1_CCI, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_Q3 = if_else(cci <= upper_Q3_CCI & cci > upper_Q2_CCI, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_Q4 = if_else(cci > upper_Q3_CCI, 1, 0))
+  
+
+nrow(ahrq_baseline) # Sample size: 30702
+############
+
+endpoints <- c("readmit30bin", "death30bin", "composite30")
+ahrq_baseline <- create_folds(as.data.frame(ahrq_baseline), endpoints) # NOTE: For nested k-fold CV.
+
+hist(ahrq_baseline$sdi)
+
+
+ahrq_baseline
+
+
+# ML4H_Circ_Nonmissing_Cohort
+write.csv(ahrq_baseline, file="./ahrq_ML4H_Circ_Nonmissing_Cohort.csv", row.names=FALSE) 
+# Old: CHIL_no_missingfeats_county_ahrq_HF_modelinputs.csv
+
+table(ahrq_baseline$readmit30bin_folds)
+
+table(ahrq_baseline$death30bin_folds)
+table(ahrq_baseline$composite30_folds)
+
+# Ex run: 80-20 train-test split --> then k-fold s
+#set.seed(42)
+#sample <- sample(c(TRUE, FALSE), nrow(ahrq_baseline), replace=TRUE, prob=c(0.8,0.2))
+#train  <- ahrq_baseline[sample, ]
+#test   <- ahrq_baseline[!sample, ]
+
+```
+
+# ###############################
+# Read in model input data
+```{r}
+
+input_ahrq_patient_feats <- read.csv(file="./ahrq_ML4H_Circ_Nonmissing_Cohort.csv") # CHIL_no_missingfeats_county_ahrq_HF_modelinputs.csv
+
+# ML4H_Circ_Nonmissing_Cohort
+
+# Check readmit30bin positive rates by "race" subgroup, fold.
+
+input_ahrq_patient_feats %>% group_by(Race, readmit30bin_folds) %>% summarize(newvar = mean(readmit30bin, na.rm = TRUE))
+
+
+########################
+
+# What races are there?
+table(input_ahrq_patient_feats$Race)
+
+
+# All: should be ONLY black or white patients.
+table(input_ahrq_patient_feats$blackorwhite)
+
+# Count black vs. white.
+table(input_ahrq_patient_feats$white)
+table(input_ahrq_patient_feats$black)
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# County: GA state missing calculations
+- across all counties, years. Not stratifed at all.
+```{r}
+# Calculate missing values
+missing_values <- sapply(ga_cty_total, function(x) sum(is.na(x)))
+percent_missing <- missing_values / nrow(ga_cty_total) * 100
+
+# Combine the summary and missing value information
+summary_info <- data.frame(
+  Variable = names(ga_cty_total),
+  Type = sapply(ga_cty_total, class),
+  Number_Missing = missing_values,
+  Percent_Missing = percent_missing
+)
+
+# Merge summary_info with feature metadata. So we have variable descriptions.
+composite_summary_info <- merge(summary_info, cty_features_and_metadata, by.x="Variable", by.y="Variable Name")
+
+# Print the summary information
+print(composite_summary_info)
+
+write.csv(composite_summary_info, "./AHRQ_GA_countylevel_missingness_composite2010-2018.csv")
+
+```
+# Feats missingness: by year (2010-2018).
+- Note: there are 159 counties in Georgia.
+```{r}
+# Num counties in Georgia:
+# length(unique(ga_cty_total$COUNTYFIPS))
+GA_num_counties <- length(unique(ga_cty_total$COUNTYFIPS))
+
+# Calculate missing values stratified by year
+summary_info <- ga_cty_total %>%
+  group_by(YEAR) %>%
+  summarize(
+    across(everything(), ~sum(is.na(.))),
+    .groups = "drop"
+  ) %>%
+  pivot_longer(cols = -YEAR, names_to = "Variable", values_to = "Number_GA_Ctys_Missing") %>%
+  mutate(
+    Percent_GA_Ctys_Missing = Number_GA_Ctys_Missing / GA_num_counties * 100
+  )
+
+# Print the modified summary information
+print(summary_info) 
+
+
+```
+
+# Feats missingness: by year (in wide format)
+```{r}
+
+# Calculate missing values stratified by YEAR
+summary_info <- ga_cty_total %>%
+  group_by(YEAR) %>%
+  summarize(
+    across(everything(), ~sum(is.na(.))),
+    .groups = "drop"
+  ) %>%
+  pivot_longer(cols = -YEAR, names_to = "Variable", values_to = "Number_GA_Ctys_Missing") %>%
+  mutate(
+    Percent_GA_Ctys_Missing = Number_GA_Ctys_Missing / GA_num_counties * 100
+  ) %>%
+  pivot_wider(names_from = YEAR, values_from = c("Number_GA_Ctys_Missing", "Percent_GA_Ctys_Missing"), names_glue = "{.value}_{YEAR}")
+
+
+
+# Merge summary_info with feature metadata. So we have variable descriptions.
+yr_composite_summary_info <- merge(summary_info, cty_features_and_metadata, by.x="Variable", by.y="Variable Name")
+
+# Print 
+print(yr_composite_summary_info)
+
+write.csv(yr_composite_summary_info, "./AHRQ_GA_countylevel_missingness_yearly2010-2018.csv")
+
+
+```
+
+# AHRQ missigness by Domain: 
+- Hypothesis: some AHRQ domains (1-5) have much larger missingness rates than other AHRQ domains.
+- NOTE: These missing counts & rates are still JUST for Georgia.
+```{r}
+# For colors scheme
+library(ggsci)
+
+
+# First, count num variables in each domain. 
+
+
+domain_counts <- yr_composite_summary_info %>%
+  group_by(Domain) %>%
+  summarize(Num_Variables = n_distinct(Variable))
+
+table(domain_counts)
+
+
+#ggplot(domain_counts, aes(x = Domain, y = Num_Variables)) +
+#  geom_bar(stat = "identity", color = "black", fill = "#BA5C4E") +  # Set fill to gray for no coloring
+#  labs(title = "Number of Features in Each AHRQ Domain (Georgia, County)",
+#       x = "AHRQ Domain",
+#       y = "Number of Variables") +
+#  theme_minimal() +
+#  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels
+
+
+# * GA_Ctys
+
+# Select relevant columns for 2010 through 2018
+missing_columns <- colnames(yr_composite_summary_info)[grep("^Number_GA_Ctys_Missing_201[0-9]{1}$", colnames(yr_composite_summary_info))]
+
+# Calculate the number of missing values for each Domain
+missing_by_domain <- yr_composite_summary_info %>%
+  group_by(Domain) %>%
+  summarize(
+    across(all_of(missing_columns), ~sum(.)),
+    .groups = "drop"
+  )
+
+
+# Calculate the percentage of missing values for each Domain
+missing_percentage_by_domain <- yr_composite_summary_info %>%
+  group_by(Domain) %>%
+  summarize(
+    across(all_of(missing_columns), ~ round(sum(.))),
+    .groups = "drop"
+  ) %>%
+  rename_with(~ gsub("^Number_GA_Ctys_Missing_(\\d{4})$", "Percent_GA_Ctys_Missing_\\1", .), .cols = contains("Number_GA_Ctys_Missing"))
+
+
+# Create missing proportions from missing counts.
+numeric_missing_percentage_by_domain <- sweep(missing_percentage_by_domain[, -1], MARGIN = 1, STATS = domain_counts$Num_Variables * GA_num_counties, FUN = "/")
+
+# Create percentages from missing proportions.
+numeric_missing_percentage_by_domain <- numeric_missing_percentage_by_domain * 100
+
+# Prepend domain names back in.
+final_missing_percentage_by_domain <- cbind(missing_percentage_by_domain[1], numeric_missing_percentage_by_domain)
+
+# ----> IN DEMO WHEN CALCULATING compositie precentage of counties missing features values per domain: domain_counts$Domain
+# .... check on this calculation. What do we want the percent to show?
+
+# Print the result
+print(missing_by_domain)
+print(final_missing_percentage_by_domain)
+
+
+```
+
+# Dummy figure: self-calculated data for AHRQ domain dims.
+```{r}
+library(ggplot2)
+
+dum_dims <- data.frame(
+  AHRQ_dim_name = c("1. Social Context", "2. Economic Context", "3. Education", "4. Physical Infrastructure", "5. Healthcare Context"),
+  Var_Count = c(109, 62, 11, 106, 207)
+)
+
+barplot(dum_dims$Var_Count, names.arg = dum_dims$AHRQ_dim_name, col = "#BA5C4E", xlab = "AHRQ Domain", ylab = "Number of Features", las=3)
+
+
+# Create a ggplot bar chart with slanted x-axis labels
+ggplot(dum_dims, aes(x = AHRQ_dim_name, y = Var_Count, fill = AHRQ_dim_name)) +
+  geom_bar(stat = "identity", position = "dodge",  fill = "#BA5C4E", color = "white") +
+  labs(x = "AHRQ Domain",
+       y = "Number of Features") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size=11),
+        axis.text.y = element_text(size = 11))
+
+```
+
+
+# ##########################################
+# TRACT CALCULATIONS (Geogia): 
+# ##########################################
+
+```{r}
+# (b) GA Level: census tracts
+
+```
+
+
+
+# (1) MISSING ANALYSIS: Total AHRQ data (2010-2018)
+```{r}
+#library(naniar)
+
+# -- For each, plot missing for (i) each year 2010-2018
+# Col 1: var name, Col 2: ahrq dimension of 5 (& orig data source), 
+
+# (a) GA Level: counties
+ga_tract_total <-  tr_ahrq_total[tr_ahrq_total$STATEFIPS == 13, ]
+
+```
+
+# Tract: GA state missing calculations
+- across all tracts, years. Not stratifed at all.
+```{r}
+# Calculate missing values
+missing_values <- sapply(ga_tract_total, function(x) sum(is.na(x)))
+percent_missing <- missing_values / nrow(ga_tract_total) * 100
+
+# Combine the summary and missing value information
+summary_info <- data.frame(
+  Variable = names(ga_tract_total),
+  Type = sapply(ga_tract_total, class),
+  Number_Missing = missing_values,
+  Percent_Missing = percent_missing
+)
+
+# Merge summary_info with feature metadata. So we have variable descriptions.
+composite_summary_info <- merge(summary_info, trct_features_and_metadata, by.x="Variable", by.y="Variable Name")
+
+# Print the summary information
+print(composite_summary_info)
+
+write.csv(composite_summary_info, "./AHRQ_GA_tractlevel_missingness_composite2010-2018.csv")
+
+```
+
+
+# Feats missingness (count, % of GA tracts): by year (2010-2018).
+- Note: there are 1969 census tracts in Georgia. 
+```{r}
+# Num counties in Georgia:
+# length(unique(ga_cty_total$COUNTYFIPS))
+GA_num_tracts <- length(unique(ga_tract_total$TRACTFIPS ))
+
+# Calculate missing values stratified by year
+summary_info <- ga_tract_total %>%
+  group_by(YEAR) %>%
+  summarize(
+    across(everything(), ~sum(is.na(.))),
+    .groups = "drop"
+  ) %>%
+  pivot_longer(cols = -YEAR, names_to = "Variable", values_to = "Number_GA_Tracts_Missing") %>%
+  mutate(
+    Percent_GA_Tracts_Missing = Number_GA_Tracts_Missing / GA_num_tracts * 100
+  )
+
+# Print the modified summary information
+print(summary_info)
+
+```
+
+
+
+# Feats missingness: by year (in wide format)
+```{r}
+
+# Calculate missing values stratified by YEAR
+summary_info <- ga_tract_total %>%
+  group_by(YEAR) %>%
+  summarize(
+    across(everything(), ~sum(is.na(.))),
+    .groups = "drop"
+  ) %>%
+  pivot_longer(cols = -YEAR, names_to = "Variable", values_to = "Number_GA_Tracts_Missing") %>%
+  mutate(
+    Percent_GA_Tracts_Missing = Number_GA_Tracts_Missing / GA_num_tracts * 100
+  ) %>%
+  pivot_wider(names_from = YEAR, values_from = c("Number_GA_Tracts_Missing", "Percent_GA_Tracts_Missing"), names_glue = "{.value}_{YEAR}")
+
+
+
+# Merge summary_info with feature metadata. So we have variable descriptions.
+yr_composite_summary_info <- merge(summary_info, trct_features_and_metadata, by.x="Variable", by.y="Variable Name")
+
+# Print 
+print(yr_composite_summary_info)
+
+write.csv(yr_composite_summary_info, "./AHRQ_GA_tractlevel_missingness_yearly2010-2018.csv")
+
+
+```
+
+
+
+# AHRQ missigness by Domain: 
+- Hypothesis: some AHRQ domains (1-5) have much larger missingness rates than other AHRQ domains.
+- NOTE: These missing counts & rates are still JUST for Georgia.
+```{r}
+# For colors scheme
+library(ggsci)
+
+
+# First, count num variables in each domain. 
+
+
+domain_counts <- yr_composite_summary_info %>%
+  group_by(Domain) %>%
+  summarize(Num_Variables = n_distinct(Variable))
+
+
+
+
+ggplot(domain_counts, aes(x = Domain, y = Num_Variables)) +
+  geom_bar(stat = "identity", color = "black", fill = "#BA5C4E") +  # Set fill to gray for no coloring
+  labs(title = "Number of Features in Each AHRQ Domain (Georgia, Tract)",
+       x = "AHRQ Domain",
+       y = "Number of Variables") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels
+
+
+# * GA_Ctys
+
+# Select relevant columns for 2010 through 2018
+missing_columns <- colnames(yr_composite_summary_info)[grep("^Number_GA_Tracts_Missing_201[0-9]{1}$", colnames(yr_composite_summary_info))]
+
+# Calculate the number of missing values for each Domain
+missing_by_domain <- yr_composite_summary_info %>%
+  group_by(Domain) %>%
+  summarize(
+    across(all_of(missing_columns), ~sum(.)),
+    .groups = "drop"
+  )
+
+
+# Calculate the percentage of missing values for each Domain
+missing_percentage_by_domain <- yr_composite_summary_info %>%
+  group_by(Domain) %>%
+  summarize(
+    across(all_of(missing_columns), ~ round(sum(.))),
+    .groups = "drop"
+  ) %>%
+  rename_with(~ gsub("^Number_GA_Tracts_Missing_(\\d{4})$", "Percent_GA_Tracts_Missing_\\1", .), .cols = contains("Number_GA_Tracts_Missing"))
+
+
+# Create missing proportions from missing counts.
+numeric_missing_percentage_by_domain <- sweep(missing_percentage_by_domain[, -1], MARGIN = 1, STATS = domain_counts$Num_Variables * GA_num_tracts, FUN = "/")
+
+# Create percentages from missing proportions.
+numeric_missing_percentage_by_domain <- numeric_missing_percentage_by_domain * 100
+
+# Prepend domain names back in.
+final_missing_percentage_by_domain <- cbind(missing_percentage_by_domain[1], numeric_missing_percentage_by_domain)
+
+# ----> IN DEMO WHEN CALCULATING compositie precentage of counties missing features values per domain: domain_counts$Domain
+# .... check on this calculation. What do we want the percent to show?
+
+# Print the result
+print(missing_by_domain)
+print(final_missing_percentage_by_domain)
+
+
+```
+
+
+
+
+
+
+# ####################
+# EHR data below
+# ####################
+
+
+# Merge: sectry_orig_df <> (cty_ahrq_total & tr_ahrq_total)
+
+```{r}
+final_df <- sectry_orig_df
+
+# Variables for Census block groups:
+# Not included in this analysis
+# Entire 15 digit number: final_df$censusblock, 
+# Substrings of that number: final_df$blockgroup, final_df$blocknum, final_df$cxy_block_id, final_df$censusblockgroup
+
+# First, remove rows in final_df with an NA for any of the above: censustract, countynum, OR statenum
+# --- TODO - also in other Rmd
+final_df <- final_df %>% drop_na(censustract)
+final_df <- final_df %>% drop_na(tractnum)
+
+final_df <- final_df %>% drop_na(countynum)
+final_df <- final_df %>% drop_na(statenum)
+
+
+### 1.) CHECK COUNTY FIPS value consistency
+# Note: 35 subjects have different "county FIPS" values (countynum) from orig tractmlm values vs. newer (cxy_county_id) queried values.
+nrow(final_df)
+#final_df$cxy_county_id[final_df$countynum != final_df$cxy_county_id]
+#final_df$countynum[final_df$countynum != final_df$cxy_county_id]
+
+
+### 2.) CHECK TRACT FIPS value consistency
+```
+
+# Cast Census Tract (i.e., censustract variable), County Fips (i.e., fips variable) to proper length for merge with AHRQ (keep these 2 cols as type *chr*)
+```{r}
+#
+#final_df$tractnum # 6 dig: str: just tract 
+#final_df$censustract # Full number (must be 11 characters long)
+#final_df$cxy_tract_id # 6 dig: Newer queried values: just tract
+# final_df$cxy_tract_id[final_df$tractnum != final_df$cxy_tract_id]
+
+# County: to 5 chars. Note: 'fips' has state[2 chr]+county[3 chr]
+#final_df$fips
+final_df$fips <- sprintf("%05s", final_df$fips)
+
+# Tract: to 11 chars
+#final_df$censustract
+final_df$censustract <- sprintf("%011s", final_df$censustract)
+
+
+
+head(final_df )
+```
+
+
+```{r}
+# Prepare AHRQ join keys (county, tract datasets):
+# cty_ahrq_total$COUNTYFIPS # 4-5 digit int (e.g., 4 digit min: 1001, 5 digit max: 78030)
+# Coerce to 5 digit *chr*: 
+ga_cty_total$COUNTYFIPS_padded <- sprintf("%05s", ga_cty_total$COUNTYFIPS)
+
+# TRACT: state + county + tract
+# tr_ahrq_total$TRACTFIPS # 10-11 digit *double* (e.g., 10 digit min: 1001020100, 11 digit max: 78030990000). Do NOT coerce to int, numbers will overflow.
+# Coerce to 11 digit *chr*:
+ga_tract_total$TRACTFIPS_padded <- sprintf("%011s", ga_tract_total$TRACTFIPS)
+
+
+# 2. Rename feats suffix in ga_cty_total, ga_tract_total (_countylevel, _census_tractlevel):
+
+
+
+#ga_cty_total <- ga_cty_total %>%
+#  rename_at(vars(-one_of(c("COUNTY", "COUNTYFIPS_padded", "REGION", "STATE", "STATEFIPS", "TERRITORY", "YEAR"))), ~paste0(., #"_countylevel"))
+
+
+# Tract:
+#exclude_columns_trct <- c("COUNTY", "COUNTYFIPS", "REGION", "STATE", "STATEFIPS", "TERRITORY", "TRACTFIPS_padded", "YEAR")
+
+
+#ga_tract_total <- ga_tract_total %>%
+#  rename_at(vars(-one_of(exclude_columns_trct)), ~paste0(., "_census_tractlevel"))
+
+
+# MERGE: both on subject's 'baselineyear' (admission year)
+# Bring in County AHRQ:
+
+ahrq_baseline_cty <- merge(final_df, ga_cty_total, by.x=c("fips", "baselineyear"), by.y=c("COUNTYFIPS_padded", "YEAR"))
+# TODO: -- use "ga_tract_total"
+# Tract AHRQ baseline: use later for patient-level cenus tract missingness calculations. 
+ahrq_baseline_tract <- merge(final_df, ga_tract_total, by.x=c("censustract", "baselineyear"), by.y=c("TRACTFIPS_padded", "YEAR"))
+
+# both_ahrq_baseline <- merge(ga_tract_total, ga_cty_total, by.x=c("TRACTFIPS_padded", "YEAR"), by.y=c("censustract", "YEAR"))
+
+ahrq_baseline <- merge(ahrq_baseline_cty, ga_tract_total, by.x=c("censustract", "baselineyear"), by.y=c("TRACTFIPS_padded", "YEAR"))
+
+# Finally, merge in SVI 2014 data:
+# use cty code: ahrq_baseline ++ SVI_2014_US (by 'censustract', 'FIPS')
+
+ahrq_baseline <- merge(ahrq_baseline, SVI_2014_US  , by.x="censustract", by.y="FIPS" )
+
+head(ahrq_baseline) # Patient data + matched county & tract. Names: _countlevel, _census_tractlevel
+
+```
+# Before feeding to classifiers, drop potential PHI from ahrq_baseline
+```{r}
+
+drop_vars <- c("Lon__Lat", "cxy_address", "cxy_matched_address", "cxy_tiger_line_id", "cxy_tract_id", "cxy_block_id")
+ncol(ahrq_baseline)
+
+# Remove drop_vars
+ahrq_baseline <- ahrq_baseline[, !(names(ahrq_baseline) %in% drop_vars)]
+
+ncol(ahrq_baseline)
+
+```
+
+
+
+# AHRQ+EHR Missingness Calculation (Tract) : 
+- EHR + Tract AHRQ : (given AHRQ features from 2010-2018 across all tract feats)
+- across all counties, years. Not stratified at all.
+- INTERPRETATION: for each AHRQ feature, "Number_Missing" describes the number of subjects in the dataset which do not have a value for that feature.
+- INTERPRETATION: for each AHRQ feature, "Percent_Missing" describes the percent of subjects (out of n= 30702) with a missing value for that feature.
+```{r}
+# ahrq_baseline_tract
+
+# Calculate missing values
+
+# Num AHRQ county-level features we're interested in
+# print(length(colnames(ga_cty_total)))
+
+missing_values <- sapply(ahrq_baseline_tract, function(x) sum(is.na(x)))
+percent_missing <- (missing_values / nrow(ahrq_baseline_tract)) * 100
+
+# Combine the summary and missing value information
+summary_info <- data.frame(
+  Variable = names(ahrq_baseline_tract),
+  Type = sapply(ahrq_baseline_tract, class),
+  Number_Subjects_Missing_Feature = missing_values,
+  Percent_Subjects_Missing_Feature = percent_missing
+)
+
+# Rename vars in 'summary_info'
+
+
+# Merge summary_info with feature metadata. So we have variable descriptions.
+
+composite_summary_info <- merge(summary_info, trct_features_and_metadata, by.x="Variable", by.y="Variable Name")
+
+# composite_summary_info$Percent_Subjects_Missing_Feature <- format(composite_summary_info$Percent_Subjects_Missing_Feature, scientific = # FALSE)
+
+trct_features_and_metadata
+
+# Print the summary information
+print(composite_summary_info) 
+
+# OF 1267 features, at county-level, 506 have 0% missingness, 526 have <= 20% missingness
+filter(composite_summary_info , Percent_Subjects_Missing_Feature <= 0) # %>% count(Domain)
+
+hist(filter(composite_summary_info, Percent_Subjects_Missing_Feature <= 0.2)$Percent_Subjects_Missing_Feature)
+
+hist(composite_summary_info$Percent_Subjects_Missing_Feature)
+
+
+# Feats that have 0% of patients missing.
+tract_non_missing_feats <- filter(composite_summary_info, Percent_Subjects_Missing_Feature <= 0)[ , c("Variable", "Domain")] 
+tract_somepatients_missing_feats <- filter(composite_summary_info, Percent_Subjects_Missing_Feature > 0)$Variable 
+
+
+write.csv(composite_summary_info, "./HF_patients_AHRQ_tractlevel_missingness.csv")
+
+
+```
+
+# AHRQ+EHR Missingness Calculation (County): 
+- EHR + County AHRQ : (given AHRQ features from 2010-2018 across all county feats)
+- across all counties, years. Not stratified at all.
+- INTERPRETATION: for each AHRQ feature, "Number_Missing" describes the number of subjects in the dataset which do not have a value for that feature.
+- INTERPRETATION: for each AHRQ feature, "Percent_Missing" describes the percent of subjects (out of n= 30702) with a missing value for that feature.
+```{r}
+# Calculate missing values
+
+# Num AHRQ county-level features we're interested in
+# print(length(colnames(ga_cty_total)))
+
+missing_values <- sapply(ahrq_baseline, function(x) sum(is.na(x)))
+percent_missing <- (missing_values / nrow(ahrq_baseline)) * 100
+
+# Combine the summary and missing value information
+summary_info <- data.frame(
+  Variable = names(ahrq_baseline),
+  Type = sapply(ahrq_baseline, class),
+  Number_Subjects_Missing_Feature = missing_values,
+  Percent_Subjects_Missing_Feature = percent_missing
+)
+
+# Merge summary_info with feature metadata. So we have variable descriptions.
+composite_summary_info <- merge(summary_info, cty_features_and_metadata, by.x="Variable", by.y="Variable Name")
+
+#composite_summary_info$Percent_Subjects_Missing_Feature <- format(composite_summary_info$Percent_Subjects_Missing_Feature, scientific = # FALSE)
+
+# Print the summary information
+print(composite_summary_info)
+
+
+# OF 1267 features, at county-level, 506 have 0% missingness, 526 have <= 20% missingness
+filter(composite_summary_info, Percent_Subjects_Missing_Feature <= 0) # %>% count(Domain)
+
+hist(filter(composite_summary_info, Percent_Subjects_Missing_Feature <= 0.2)$Percent_Subjects_Missing_Feature )
+
+hist(composite_summary_info$Percent_Subjects_Missing_Feature)
+
+
+# Feats that have 0% of patients missing.
+county_non_missing_feats <- filter(composite_summary_info, Percent_Subjects_Missing_Feature <= 0)[ , c("Variable", "Domain")] 
+county_somepatients_missing_feats <- filter(composite_summary_info, Percent_Subjects_Missing_Feature > 0)$Variable 
+
+write.csv(composite_summary_info, "./HF_patients_AHRQ_countylevel_missingness.csv")
+
+
+```
+
+# Mutate metadata's AHRQ feature names: ..._countylevel, ..._census_tractlevel. 
+```{r}
+
+head(county_non_missing_feats)
+length(trct_features_and_metadata$`Variable Name`)
+length(cty_features_and_metadata$`Variable Name`)
+length(set_intersection(trct_features_and_metadata$`Variable Name`, cty_features_and_metadata$`Variable Name`))
+#####
+# Mutate:
+# County:
+# Create new columns for county-level features with a suffix
+
+# Columns to exclude from renaming
+#exclude_columns_cty <- c("COUNTY", "COUNTYFIPS", "REGION", "STATE", "STATEFIPS", "TERRITORY", "YEAR")
+
+
+#cty_features_and_metadata <- cty_features_and_metadata %>%
+#  mutate(`Variable Name` = case_when(
+#    `Variable Name` %in% c("COUNTY", "COUNTYFIPS", "REGION", "STATE", "STATEFIPS", "TERRITORY", "YEAR") ~ `Variable Name`,
+#    TRUE ~ paste0(`Variable Name`, "_countylevel")
+#  ))
+
+# Tract:
+#exclude_columns_trct <- c("COUNTY", "COUNTYFIPS", "REGION", "STATE", "STATEFIPS", "TERRITORY", "TRACTFIPS", "YEAR")
+
+#trct_features_and_metadata <- trct_features_and_metadata %>%
+#  mutate(`Variable Name` = case_when(
+#    `Variable Name` %in% c("COUNTY", "COUNTYFIPS", "REGION", "STATE", "STATEFIPS", "TERRITORY", "TRACTFIPS", "YEAR") ~ `Variable Name`,
+#    TRUE ~ paste0(`Variable Name`, "_census_tractlevel")
+#  ))
+
+```
+# From 'county_non_missing_feats', 'tract_non_missing_feats', drop AHRQ features from category 6 (geography).
+These are not relevant variables to prediction.
+```{r}
+
+# Tract feats non-missing:
+nrow(tract_non_missing_feats)
+tract_non_missing_feats <- subset(tract_non_missing_feats, Domain != '6. geography')
+nrow(tract_non_missing_feats)
+
+
+# County feats non-missing:
+nrow(county_non_missing_feats)
+county_non_missing_feats <- subset(county_non_missing_feats, Domain != '6. geography')
+nrow(county_non_missing_feats)
+
+
+```
+
+
+# Remove AHRQ feats with >0% of patients missing them ("county_somepatients_missing_feats")
+- can adjust to keep different feats here. 
+- Then, feed "county_non_missing_feats" as model AHRQ feats in JSON feature file.
+```{r}
+
+# keep all AHRQ feats here. Can choose in python which ones to keep.
+# ahrq_baseline <- ahrq_baseline[, !(names(ahrq_baseline) %in% county_non_missing_feats)]
+
+
+# Domain column: shows domain each feat belongs to.
+# AHRQ county-level feats we KEPT:
+write.csv(county_non_missing_feats, "./AHRQ_featlist_county_nonmissing.csv", row.names=FALSE)
+# AHRQ tract-level feats we KEPT:
+write.csv(tract_non_missing_feats, "./AHRQ_featlist_tract_nonmissing.csv", row.names=FALSE)
+
+```
+
+
+- add feats to json file (diff domains, then all domains total)
+- adjust MongoCol. 
+- preprocess/scale feats!!
+
+
+# Build subgroup variables.
+```{r}
+###################################
+# Merge: ahrq_baseline + baseline_AQI_imp_1 (both already imputed on orig datasets. Possible issue is high missingness for several features.)
+###################################
+
+
+# First, match types of merge columns
+
+#ahrq_baseline # COUNTYFIPS: <int>, 'YEAR' <int> here is baselineyear from orig_df (i.e. tractmlm)
+#baseline_AQI_imp_1 # County_FIPS: <int>, YEAR: <chr>... cast year to <int>
+#original_df <- original_df %>%
+#  mutate(YEAR = as.numeric(YEAR), na.rm=FALSE)
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(baselineyear = as.numeric(baselineyear), na.rm=FALSE)
+
+# Then merge
+# ahrq_AQI_baseline_final <- merge(ahrq_baseline, original_df, by.x=c("COUNTYFIPS", "YEAR"), by.y=c("COUNTY_FIPS", "YEAR"))
+#sum(is.na(ahrq_baseline$ACS_PCT_PUB_COMMT_59MIN)) # Should be 0 for all columns.
+
+
+############ Prepare subgroup flags:
+# Subgroups to eval on: 
+# 1. Race
+# white <int>: 0/1
+# black <int>: 0/1
+# other <int>: 0/1
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(blackorwhite = if_else(black == 1 | white == 1, 1, 0))
+
+# 2. Sex (or binary gender)
+# female <int>: 0/1
+# ADD this field: male <int>: 0/1
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(male = if_else(female == 0, 1, 0))
+
+# 3. The 6 subgroup combinations: 
+# c(white_male, black_male, other_male, white_female, black_female, other_female)
+
+# Note that all 6 are mutually exclusive here.
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(white_male = if_else(white == 1 & female == 0, 1, 0))
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(black_male = if_else((black == 1 & female == 0), 1, 0))
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(other_male = if_else(other == 1 & female == 0, 1, 0))
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(white_female = if_else(white == 1 & female == 1, 1, 0))
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(black_female = if_else(black == 1 & female == 1, 1, 0))
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(other_female = if_else(other == 1 & female == 1, 1, 0))
+
+
+
+#######################
+# SUBGROUP FOR AGEs: 
+
+quarts <- quantile(ahrq_baseline$age_current, probs = seq(0, 1, 0.25))
+upper_Q1_age <- quarts[2]
+upper_Q2_age <- quarts[3]
+upper_Q3_age <- quarts[4]
+upper_Q4_age <- quarts[5]
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(age_Q1 = if_else(age_current <= upper_Q1_age, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(age_Q2 = if_else(age_current <= upper_Q2_age & age_current > upper_Q1_age, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(age_Q3 = if_else(age_current <= upper_Q3_age & age_current > upper_Q2_age, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(age_Q4 = if_else(age_current <= upper_Q4_age & age_current > upper_Q3_age, 1, 0))
+
+
+
+#######################
+# HF: Sex & age quartiles
+
+#######################
+# Hypertension
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(no_htn = if_else(htn == 0, 1, 0))
+
+#######################
+# Coronary Artery Disease
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(no_cad = if_else(cad == 0, 1, 0))
+
+#######################
+# Chronic Kidney Disease
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(no_ckd = if_else(ckd == 0, 1, 0))
+
+
+#######################
+# Charlson Comorbidity Index
+  # Theoretical Max CCI: 24 (updated version) or 29 (older version).
+  # Our dataset: Max CCI = 22.
+CCI_quarts <- quantile(ahrq_baseline$cci, probs = seq(0, 1, 0.25))
+
+# 1.) CCI steps 0-6, 7+ groups.
+# 
+
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_0 = if_else(cci == 0, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_1 = if_else(cci == 1, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_2 = if_else(cci == 2, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_3 = if_else(cci == 3, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_4 = if_else(cci == 4, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_5 = if_else(cci == 5, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_6 = if_else(cci == 6, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_7up = if_else(cci >= 7, 1, 0))
+
+
+
+
+
+# 2.) CCI quartiles (second way to evaluate CCI)
+upper_Q1_CCI <- CCI_quarts[2]
+upper_Q2_CCI <- CCI_quarts[3]
+upper_Q3_CCI <- CCI_quarts[4]
+upper_Q4_CCI <- CCI_quarts[5]
+
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_Q1 = if_else(cci <= upper_Q1_CCI, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_Q2 = if_else(cci <= upper_Q2_CCI & cci > upper_Q1_CCI, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_Q3 = if_else(cci <= upper_Q3_CCI & cci > upper_Q2_CCI, 1, 0))
+
+ahrq_baseline <- ahrq_baseline %>%
+  mutate(CCI_Q4 = if_else(cci > upper_Q3_CCI, 1, 0))
+  
+
+nrow(ahrq_baseline) # Sample size: 30702
+############
+
+endpoints <- c("readmit30bin", "death30bin", "composite30")
+ahrq_baseline <- create_folds(as.data.frame(ahrq_baseline), endpoints) # NOTE: For nested k-fold CV.
+
+hist(ahrq_baseline$sdi)
+
+
+ahrq_baseline
+
+
+# ML4H_Circ_Nonmissing_Cohort
+write.csv(ahrq_baseline, file="./ahrq_ML4H_Circ_Nonmissing_Cohort.csv", row.names=FALSE) 
+# Old: CHIL_no_missingfeats_county_ahrq_HF_modelinputs.csv
+
+table(ahrq_baseline$readmit30bin_folds)
+
+table(ahrq_baseline$death30bin_folds)
+table(ahrq_baseline$composite30_folds)
+
+# Ex run: 80-20 train-test split --> then k-fold s
+#set.seed(42)
+#sample <- sample(c(TRUE, FALSE), nrow(ahrq_baseline), replace=TRUE, prob=c(0.8,0.2))
+#train  <- ahrq_baseline[sample, ]
+#test   <- ahrq_baseline[!sample, ]
+
+```
+
+# ###############################
+# Read in model input data
+```{r}
+# setwd('/Users/chasefensore/Documents/Emory/Ho Lab/SU23 Rotation/sdoh_summer/aequitus/data/CHIL Total/')
+
+
+input_ahrq_patient_feats <- read.csv(file="./ahrq_ML4H_Circ_Nonmissing_Cohort.csv") # CHIL_no_missingfeats_county_ahrq_HF_modelinputs.csv
+
+# ML4H_Circ_Nonmissing_Cohort
+
+# Check readmit30bin positive rates by "race" subgroup, fold.
+
+input_ahrq_patient_feats %>% group_by(Race, readmit30bin_folds) %>% summarize(newvar = mean(readmit30bin, na.rm = TRUE))
+
+
+########################
+
+# What races are there?
+table(input_ahrq_patient_feats$Race)
+
+
+# All: should be ONLY black or white patients.
+table(input_ahrq_patient_feats$blackorwhite)
+
+# Count black vs. white.
+table(input_ahrq_patient_feats$white)
+table(input_ahrq_patient_feats$black)
+
+
+
+
+```
+
+
+
+
+
+```{r}
+nrow(input_ahrq_patient_feats)
+
+
+
+
+
+
+
+
+
+```
+
+
+
+# Table 1: WIHOUT "other"
+
+--> TODO: 
+- Col 1: "Subgroups"
+- Col 2: "# of Subjects"
+- Col 3: "% of Subjects"
+- Col 4: % of Subjects in Positive Class
+
+```{r}
+## tableone package itself
+library(tableone)
+library(kableExtra)
+
+# Make strata column: white, black, other (1,2,3)
+# make using cols:
+# Drop "Race" == "other"
+
+
+# ahrq_ML4H_Circ_Nonmissing_Cohort.csv
+input_ahrq_patient_feats <- read.csv(file="./ahrq_ML4H_Circ_Nonmissing_Cohort.csv") # CHIL_no_missingfeats_county_ahrq_HF_modelinputs.csv
+
+input_feats <- input_ahrq_patient_feats
+trans_input_feats <- input_feats[! (input_feats$Race == "other"), ]
+
+
+trans_input_feats <- trans_input_feats <- transform(
+  input_feats, "Race"= ifelse(white==1, "White", ifelse(black==1, "Black", NA)))
+  
+
+# Make insurance column: "privinsurance","Medicare", "Medicaid",
+trans_input_feats <- data_frame <- transform(
+  trans_input_feats, "Insurance_type"= ifelse(privinsurance==1, "Private", ifelse(Medicare==1, "Medicare", ifelse(Medicaid==1, "Medicaid", "Not recorded"))))
+  
+
+# Make HF type: hfsystolic, hfdiastolic, hfother
+trans_input_feats <- data_frame <- transform(
+  trans_input_feats, "HF_classification"= ifelse(hfsystolic==1, "Systolic (HFrEF)", ifelse(hfdiastolic==1, "Diastolic (HFpEF)", ifelse(hfother==1, "Other", "Not recorded"))))
+
+
+
+# vars to summarize (i.e demographics)
+# htn: Hypertension
+# diabetes: ___not available___
+# cad: Coronary Artery Disease
+# ckd: Chronic Kidney Disease
+# sdi: Social deprivation index score
+# ADI_national_rank: 
+# ADI_state_rank: 
+# svi: i.e. RPL_THEMES
+# cci: Charlson Comorbidity Index
+# Systolic_BP: Systolic blood pressure, mm Hg
+# Heart_Rate: Heart Rate, beats per minute
+# Resp: Respiratory rate, breaths per minute
+
+# Rename feats not needing spaces: 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "age_current"] ="Age, years"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "age_Q1"] ="Age, Q1"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "age_Q2"] ="Age, Q2"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "age_Q3"] ="Age, Q3"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "age_Q4"] ="Age, Q4"
+
+colnames(trans_input_feats)[colnames(trans_input_feats) == "female"] = "Female"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "male"] = "Male"
+
+colnames(trans_input_feats)[colnames(trans_input_feats) == "black"] = "Black"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "white"] = "White"
+
+colnames(trans_input_feats)[colnames(trans_input_feats) == "htn"] = "Hypertension"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "cad"] = "Coronary Artery Disease"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "ckd"] = "Chronic Kidney Disease"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "cci"] = "Charlson Comorbidity Index"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "Systolic_BP"] = "Systolic blood pressure, mm Hg"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "Heart_Rate"] = "Heart Rate, beats per minute"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "Resp"] = "Respiratory rate, breaths per minute"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "sdi"] = "Social deprivation index (percentile)"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "ADI_national_rank"] = "Area deprivation index, national rank (percentile)"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "ADI_state_rank"] = "Area deprivation index, state rank (percentile)"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "RPL_THEMES"] = "Social vulnerability index score (composite score)"
+
+# New feats:
+#colnames(trans_input_feats)[colnames(trans_input_feats) == "readmit30bin"] = "30-day Binary HF Readmission"
+#colnames(trans_input_feats)[colnames(trans_input_feats) == "death30bin"] = "30-day Binary HF Death"
+
+# Referring specialties: 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "specialcvd"] = "CVD Specialist" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "specialint"] = "Int. Med. Specialist"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "specialeme"] = "EME Specialist"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "specialoth"] = "Other Specialist"
+
+# Location treated: 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "loceuhfloor"] = "UH Floor" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "loceclhicu"] = "CLH ICU"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "loceclhfloor"] = "CLH Floor"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "loceuhicu"] = "UH ICU"
+
+# SDOH feats (comp -- other Circulation HF paper)
+
+colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_ltfpl100"] = "percnt_ltfpl100" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_singlparntfly"] = "percnt_singlparntfly" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_dropout"] = "percnt_dropout" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_rentoccup"] = "percnt_rentoccup" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_crowding"] = "percnt_crowding" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_nonemp"] = "percnt_nonemp" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_unemp"] = "percnt_unemp" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_highneeds"] = "percnt_highneeds" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_hispanic"] = "percnt_hispanic" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_frgnborn"] = "percnt_frgnborn" 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_black"] = "percnt_black" 
+# sdi
+# ADI_state_rank
+# ADI_national_rank
+
+
+# Rename feats with spaces: 
+colnames(trans_input_feats)[colnames(trans_input_feats) == "Insurance_type"] = "Insurance type"
+colnames(trans_input_feats)[colnames(trans_input_feats) == "HF_classification"] = "HF classification"
+
+
+
+
+# Length of stay, days: LOScheck
+#myVars <- c("Age, years", "female", "Insurance type", "HF classification", "htn", "cad", "ckd", "cci", 
+#            "Systolic_BP", "Heart_Rate", "Resp", 
+#            "LOScheck", "sdi", "ADI_national_rank", "ADI_state_rank", "RPL_THEMES")
+
+myVars <- c("Age, years","Age, Q1","Age, Q2","Age, Q3","Age, Q4", "Male", "Female", "Black", "White",
+            "CVD Specialist", "Int. Med. Specialist", "EME Specialist", "Other Specialist",
+            "UH Floor", "CLH ICU", "CLH Floor", "UH ICU",
+            
+            "Insurance type", "HF classification", "Hypertension", "Coronary Artery Disease", "Chronic Kidney Disease", 
+            "Charlson Comorbidity Index", 
+            "Systolic blood pressure, mm Hg", "Heart Rate, beats per minute", "Respiratory rate, breaths per minute", 
+            "LOScheck", "Social deprivation index (percentile)", "Area deprivation index, national rank (percentile)", "Area deprivation index, state rank (percentile)", "Social vulnerability index score (composite score)",
+            "percnt_ltfpl100", "percnt_singlparntfly", "percnt_dropout", "percnt_rentoccup", "percnt_crowding", "percnt_nonemp", "percnt_unemp", "percnt_highneeds", "percnt_hispanic", "percnt_frgnborn", "percnt_black"
+            
+            )
+
+
+## Vector of categorical variables that need transformation
+catVars <- c("Women", "Insurance type", "HF classification", "Hypertension", "Coronary Artery Disease", "Chronic Kidney Disease")
+
+tab1 <- CreateTableOne(vars = myVars, strata = "readmit30bin", data = trans_input_feats, addOverall = TRUE) 
+# For race strata instead of outcome strata: strata = "Race"
+# For p-values: test=TRUE, smd = TRUE
+
+# typeof(tab1["test"])
+
+
+
+# If you just say nonnormal = TRUE, all variables are summarized the “nonnormal” way.
+#print(tab1, formatOptions = list(big.mark = ","))
+# kable(p, format = "latex")
+p <- print(tab1, printToggle = FALSE, noSpaces = TRUE)
+p <- p[,1:3] # Remove "test" column.
+
+kable(p, format = "markdown", booktabs = TRUE)
+```
+
+
+
+# For tableone missingness:
+```{r}
+summary(tab1)
+```
+
+
+
+
+

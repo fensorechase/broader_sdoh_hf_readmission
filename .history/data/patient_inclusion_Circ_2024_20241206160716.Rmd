@@ -1,0 +1,546 @@
+---
+title: "patient_inclusion_Circ_2024"
+author: "Chase Fensore"
+date: "2024-10-30"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tibble)
+library(dplyr)
+library(caret)
+
+library(censusxy)
+library(tidygeocoder)
+
+```
+
+# Read in tractmlm
+```{r}
+source('data_cleaners.R')
+
+orig_df <- read.csv("./tractmlm.csv") # Input file of patients with HF with their encounters.
+# Before restricting with inclusion criteria.
+cat("Raw from tractmlm: \n")
+nrow(orig_df)
+
+```
+
+
+# Inclusion criteria:
+```{r}
+# 1.) Clean up the end-point related columns.
+# Restrict to endpoints: 
+endpoints <- c("readmit30bin", "death30bin", "composite30")
+for (colx in endpoints) {
+	filtered_df <- remove_na(orig_df, colx)
+}
+cat("After endpoints inclusion: ", nrow(filtered_df), "\n") # After endpoints inclusion:  41614 
+
+
+
+# 2.) Street address
+# Useful columns: Patient_Home_Street_Address, Patient_Address (less full), fips, censustract, 
+# Drop if: no value/missing/empty string like NA,"", ".", "..", "..." for *ALL* of the useful columns. Keep if at least 1 column is valid.
+# Note: Patient_Home_Street_Address (listed in EHR) vs. Patient_Address (from matching)
+# Define a vector of invalid values
+invalid_values <- c(NA, "", ".", "..", "...")
+
+# Filter rows where at least one of the useful columns has a valid value to describe patient address.
+filtered_df <- filtered_df %>%
+  filter(
+    !(Patient_Home_Street_Address %in% invalid_values &
+      Patient_Address %in% invalid_values &
+      fips %in% invalid_values &
+      censustract %in% invalid_values)
+  )
+
+# To find bad values: head(sort(table(orig_df$Patient_Home_Street_Address), decreasing = TRUE), 10)
+
+# View the filtered data
+cat("After invalid address exclusion: ", nrow(filtered_df), "\n") # After: 
+
+
+# [Do not restrict to GA] 3.) Next, include only patients where "Patient_Home_State" == "GA". Excluded because (i) lived in another state, (ii) had "??" or has (iii) "NOT". 62 patients had "??" and 33 had "NOT"
+# filtered_df <- filtered_df[filtered_df$Patient_Home_State == "GA", ]
+# cat("After home state exclusion: ", nrow(filtered_df), "\n") # After: 38449
+
+
+# 4.) Keep black or white patients only:
+filtered_df <- filtered_df[(filtered_df$black == 1 | filtered_df$white == 1),]
+cat("After keeping only Black or White patients: ", nrow(filtered_df), "\n") # After:
+
+# 5.) Keep only adults aged >= 18
+filtered_df <- filtered_df[(filtered_df$age_current >= 18), ]
+cat("After adult inclusion: ", nrow(filtered_df), "\n") # After:
+
+# Write out:
+write.csv(filtered_df$Encounter, "encouterIDs_validaddress.csv", row.names = FALSE )
+
+# After endpoints inclusion:  41614 [44442 - 41614: 2828 did not have endpoint data.]
+# After invalid address exclusion:  41614 [all 44442 had some form of address... not necessarily able to be geocoded.]
+# After keeping only Black or White patients:  39067 
+# After adult inclusion:  39066 
+
+
+
+```
+
+# Among these 39066, how many have a valid "censustract" or "fips" value?
+```{r}
+
+invalid_values <- c(NA, "", ".", "..", "...")
+
+
+# strict_filtered_df: Filter rows where at least one of the useful columns has a valid value to describe patient address.
+strict_filtered_df <- filtered_df %>%
+  filter(
+    !(fips %in% invalid_values &
+      censustract %in% invalid_values)
+  )
+
+cat("After we exclude patients who do not have at least 1 valid value between fips or censustract: ", nrow(strict_filtered_df)) 
+
+# Write out: 
+write.csv(strict_filtered_df$Encounter, "encouterIDs_nonmissingFIPS_censustract.csv", row.names = FALSE )
+nrow(strict_filtered_df)
+
+
+sum(is.na(strict_filtered_df$ADI_national_rank)) 
+```
+
+# Starting with n=39,066 patients across USA... how many geocodes are we missing? (censustract, fips, Patient_Home_Zip_Code)
+```{r}
+# Frequency of each "invalid value":
+invalid_values <- c(NA, "", ".", "..", "...")
+
+
+patient_cohort <- read.csv(file="./Circ_final_allstates_modelinput.csv") # Fully geocoded from patient_inclusion_Circ_2024.Rmd, Circ_Circ_Nonmissing_Cohort.csv
+cat("Number patients fully geocoded: ", nrow(patient_cohort), "\n")
+
+
+
+# Convert to numeric without scientific notation
+filtered_df$Encounter <- as.numeric(as.character(filtered_df$Encounter))
+patient_cohort$Encounter <- as.numeric(as.character(patient_cohort$Encounter))
+
+
+sum(duplicated(filtered_df$Encounter) | duplicated(filtered_df$Encounter, fromLast = TRUE))
+
+
+
+length(unique(patient_cohort$Encounter))  
+length(unique(filtered_df$Encounter)) 
+merged_df <- merge(filtered_df, patient_cohort, by = "Encounter")
+nrow(merged_df) 
+length(unique(merged_df$Encounter)) # 35890
+
+
+
+
+# Check merge conditions
+merged_df <- merge(filtered_df, patient_cohort, by = "Encounter")
+nrow(merged_df)  # Should show number of matching rows
+length(unique(filtered_df$Encounter))  # Unique Encounters in filtered_df
+length(unique(patient_cohort$Encounter))  # Unique Encounters in patient_cohort
+
+
+# Find Encounters in filtered_df not in patient_cohort
+unmatched_encounters <- filtered_df$Encounter[!filtered_df$Encounter %in% patient_cohort$Encounter]
+length(unmatched_encounters)
+head(unmatched_encounters)
+
+
+# Detailed investigation of unmatched Encounters
+unmatched_df <- filtered_df[filtered_df$Encounter %in% unmatched_encounters, ]
+unmatched_df
+
+
+```
+
+
+
+
+```{r}
+# Now, select ONLY the patients without geocodes.
+missing_geocode_df <- filtered_df %>%
+  filter(
+    (fips %in% invalid_values |
+      censustract %in% invalid_values)
+  )
+cat("Select all patients with INVALID fips or censustract values... but VALID addresses: ", nrow(missing_geocode_df), "\n") 
+
+
+# Here, get the rows that are SUCCESSFULLY geocoded previously.
+# Filter out rows in filtered_df that are in missing_geocode_df based on the "Encounter" column
+non_missing_geocode_df <- anti_join(filtered_df, missing_geocode_df, by = "Encounter")
+cat("Filtered df is before final geocoding attempt: ", nrow(filtered_df), "\n")
+missing_geocode_df <- anti_join(filtered_df, patient_cohort, by = "Encounter")
+cat("Missing geocode df is patients who met inclusion criteria (i.e., in filtered_df) but could not be geocoded after final attempt (i.e., not in patient_cohort): ", nrow(missing_geocode_df), "\n")
+cat("Patient cohort is after all final patients are selected: ", nrow(patient_cohort), "\n")
+
+
+# Adds up to 39066. 
+# Among  7262 (from 39066),  4160  were correctly geocoded from address. 
+# We want to select 7262 - 4160 = 3102 to analyze in our "missing geocode" study.
+
+
+
+
+cat("Had successful geocodes previously: ", nrow(non_missing_geocode_df), "\n") # 31,804
+cat("Missing geocode i.e., fips or censustract: ", nrow(missing_geocode_df), "\n") # 7,262
+
+# Save patients with unsuccessful geocodes (but who meet all rest of inclusion criteria):
+fname <- paste0("./odd-nonmissing_geocodedf_n-",  nrow(missing_geocode_df), ".csv")
+drop_vars <- c("Patient", "patient_name", "Lon__Lat", "cxy_address", "cxy_matched_address", "cxy_tiger_line_id", "cxy_tract_id", "cxy_block_id")
+# Remove drop_vars
+missing_geocode_df <- missing_geocode_df[, !(names(missing_geocode_df) %in% drop_vars)]
+
+write.csv(missing_geocode_df, fname)
+cat("Printed patients with missing geocode (n=", nrow(missing_geocode_df), ") to csv.\n")
+
+
+```
+
+
+# ######################################################################
+
+# Geocode the extra patients:
+start with "missing_geocode_df" (n=7262)
+```{r}
+library(tibble)
+library(dplyr)
+library(tidygeocoder)
+library(censusxy)
+library(tidyr)
+library(tidycensus) # For getting FIPS codes
+library(purrr) # For mapping functions
+
+
+cat("Select all patients with INVALID fips or censustract values... but VALID addresses: ", nrow(missing_geocode_df)) 
+# Baseline year: use "baselineyear" to decide census boundary.
+```
+
+
+```{r}
+# If needed
+# census_api_key("insert-your-key-here")
+
+```
+
+# To geocode more patients, use the code below to directly interface with the Census API.
+# Helper functions: using full address -> get tract, county FIPS values.
+```{r}
+library(httr)
+library(jsonlite)
+
+# API Docs: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html
+get_fips_from_address <- function(address) {
+  # Build the API URL
+  base_url <- "https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress"
+  params <- list(
+    address = address,
+    benchmark = 4,# Uses "Public_AR_Current". To get 2020 values only, use benchmark "2020". Summary here: https://geocoding.geo.census.gov/geocoder/benchmarks
+    vintage = 4 # Uses "Public_AR_Current"
+  )
+  
+  # Make the API request
+  response <- GET(base_url, query = params)
+  
+  # Check if the request was successful
+  if (response$status_code == 200) {
+    # Parse the response
+    result <- fromJSON(content(response, "text"), flatten = TRUE)
+    
+    # Extract the address matches
+    address_matches <- result$result$addressMatches
+    
+    # Check if there are any address matches
+    if (length(address_matches) > 0) {
+      # Extract the geographies
+      geographies <- address_matches$geographies$`Census Tracts` # [["Census Tracts"]] #.Census.Tracts
+      county_fips <- address_matches$geographies.Counties
+      
+      
+      # Extract FIPS codes from the geographies
+      # tract_fips <- ifelse(!is.null(geographies), sub("^(\\d{1,3})\\d*", "\\1", geographies), NA)
+      county_fips <- ifelse(!is.null(county_fips), sub("^(\\d{1,3})\\d*", "\\1", county_fips), NA)
+
+      # Get County FIPS list: 
+      # tract_fips <- sub('^".*?([^"]+)".*$', '\\1', tract_fips[0]) # [["Census Tracts"]]
+      # tract_fips <- sub(".*\\s(\\d{11})[,].*", "\\1", tract_fips)
+      county_fips <- sub(".*GEOID = \"([^\"]+)\".*", "\\1", county_fips)
+      
+      # Get Tract fips:
+      # Use sub to extract the 11-digit GEOID value
+      tract_fips <- sub('.*GEOID = "(\\d{11})".*', '\\1', paste(address_matches, collapse = ", "))
+      
+
+        
+      return(list(tract_fips = tract_fips, county_fips = county_fips))
+    } else {
+      return(list(tract_fips = NA, county_fips = NA))
+    }
+  } else {
+    stop("Error in API request: ", response$status_code)
+  }
+}
+
+# Example usage
+#address <- "_Some one-line address string here_"
+#fips_codes <- get_fips_from_address(address)
+
+#print(paste("Tract FIPS:", fips_codes$tract_fips))
+#print(paste("County FIPS:", fips_codes$county_fips))
+
+```
+
+# Run function for all rows with lat, lon.
+```{r}
+# Set initial values for results of geocoding.
+fips_w_geocoded_data$tract_fips <- NA
+fips_w_geocoded_data$county_fips <- NA
+
+
+for (i in 1:nrow(fips_w_geocoded_data)) {
+  
+  # Use raw address: "Patient_Address"
+  # Run geocode funct.
+  tractcounty_both <- get_fips_from_address(fips_w_geocoded_data$Patient_Address[i])
+  tract_result <- tractcounty_both$tract_fips
+  county_result <- tractcounty_both$county_fips
+  
+  cat("Row: ", i, " of ", nrow(fips_w_geocoded_data), "\n")
+  cat("Tract FIPS: ", tract_result, "\n")
+  cat("County FIPS: ", county_result, "\n")
+  
+  fips_w_geocoded_data$tract_fips[i] <- as.character(tract_result) # Assign value for column
+  fips_w_geocoded_data$county_fips[i] <-as.character(county_result) # Assign value for column
+}
+
+# Write out this new round of geocoded patients.
+write.csv(fips_w_geocoded_data, "ViaAddresses_FIPS_DONE_allstates_geocoded_patient_data.csv", row.names = FALSE)
+
+```
+
+
+# Check results of re-coding:
+```{r}
+
+fips_w_geocoded_data <- read.csv("ViaAddresses_FIPS_DONE_allstates_geocoded_patient_data.csv")
+
+
+# Frequency of each "invalid value":
+invalid_values <- c(NA, "", ".", "..", "...")
+
+# table(fips_w_geocoded_data$tract_fips)
+
+# table(fips_w_geocoded_data$county_fips) 
+
+# Now, select ONLY the patients WITH geocodes.
+nonmissing_fips_w_geocoded_data <- fips_w_geocoded_data %>%
+  filter(
+    !(tract_fips %in% invalid_values |
+      county_fips %in% invalid_values)
+  )
+
+
+table(nonmissing_fips_w_geocoded_data$tract_fips)
+table(nonmissing_fips_w_geocoded_data$county_fips)
+
+nrow(nonmissing_fips_w_geocoded_data) # 4160 correctly geocoded
+
+
+# HANDLE COLUMN NAMING: 
+# First, enforce "nonmissing_fips_w_geocoded_data" columns to be named like the bigger df.
+# Copy values from tract_fips to censustract, then remove tract_fips column
+nonmissing_fips_w_geocoded_data$censustract <- nonmissing_fips_w_geocoded_data$tract_fips
+nonmissing_fips_w_geocoded_data$tract_fips <- NULL
+nonmissing_fips_w_geocoded_data$fips <- nonmissing_fips_w_geocoded_data$county_fips
+nonmissing_fips_w_geocoded_data$county_fips <- NULL
+
+# Rename columns to match
+# Select the common columns between both data frames
+common_columns <- intersect(names(non_missing_geocode_df), names(nonmissing_fips_w_geocoded_data))
+
+# Rename corresponding columns in nonmissing_fips_w_geocoded_data to match non_missing_geocode_df
+names(nonmissing_fips_w_geocoded_data)[names(nonmissing_fips_w_geocoded_data) == "tract_fips"] <- "censustract"
+names(nonmissing_fips_w_geocoded_data)[names(nonmissing_fips_w_geocoded_data) == "county_fips"] <- "fips"
+
+
+nrow(nonmissing_fips_w_geocoded_data$censustract) 
+nrow(non_missing_geocode_df$censustract) 
+
+```
+
+
+
+# Merge "nonmissing_fips_w_geocoded_data" (newly completed correctly; 4160) and "non_missing_geocode_df" (orig completed: ~31k)
+```{r}
+# Originally geocoded ~31k: non_missing_geocode_df
+# Geocoded via address ~4k: nonmissing_fips_w_geocoded_data
+
+table(fips_w_geocoded_data$Patient_Home_State)
+
+# Above we read 7k address geocoded back in: some geocoded, some not.
+cat("Among ", nrow(fips_w_geocoded_data), ", ", nrow(nonmissing_fips_w_geocoded_data), " were correctly geocoded from address. \n")
+
+
+# 1. Use our 31k df of nonmissing patients from above called 
+
+# 2. For joining on VALID address-coded rows, Remove rows with NA in county_fips or tract_fips
+ # Use: "nonmissing_fips_w_geocoded_data"
+
+# ###########################
+# Originally geocoded ~31k: non_missing_geocode_df
+# Geocoded via address ~4k: nonmissing_fips_w_geocoded_data
+
+
+# Keep only the common columns in both dataframes 
+non_missing_geocode_df <- non_missing_geocode_df[, common_columns]
+nonmissing_fips_w_geocoded_data <- nonmissing_fips_w_geocoded_data[, common_columns]
+
+# Stack the dataframes
+# final_merged_df <- rbind(non_missing_geocode_df, nonmissing_fips_w_geocoded_data)
+
+
+# Merge dataframes, keeping all unique Encounter values
+# Merge dataframes without suffixes
+final_merged_df <- merge(non_missing_geocode_df, nonmissing_fips_w_geocoded_data, 
+                         by = "Encounter", 
+                         all = TRUE,
+                         suffixes = c("", "_y"))
+
+# Identify columns to coalesce (excluding Encounter)
+cols_to_coalesce <- names(final_merged_df)[grep("_y$", names(final_merged_df))]
+orig_cols <- sub("_y$", "", cols_to_coalesce)
+
+# Coalesce columns
+for (i in seq_along(orig_cols)) {
+  final_merged_df[[orig_cols[i]]] <- ifelse(is.na(final_merged_df[[orig_cols[i]]]), 
+                                             final_merged_df[[cols_to_coalesce[i]]], 
+                                             final_merged_df[[orig_cols[i]]])
+  final_merged_df[[cols_to_coalesce[i]]] <- NULL
+}
+
+nrow(final_merged_df)
+
+
+
+# Optional: Check for any remaining duplicates
+sum(duplicated(final_merged_df$Encounter))
+
+# View the result
+final_merged_df
+
+
+cat("Total final patients geocoded: ", nrow(final_merged_df))
+
+final_merged_df[final_merged_df$censustract == "..", ]
+final_merged_df[final_merged_df$fips == "..", ]
+
+# Among  7262 ,  4160  were correctly geocoded from address. 
+# Total final patients geocoded:  35964
+
+```
+
+
+
+
+# Compare: final_merged_df (35964) vs. nonmissing_fips_w_geocoded_data (4160)
+```{r}
+cat("To begin, we had ", nrow(filtered_df), "patients meeting inclusion criteria (Black/White, have endpoints, adults). But not all have been geocoded from their address string. \n")
+cat("Originally, among these we had ", nrow(non_missing_geocode_df), " correctly geocoded.\n")
+cat("Among ", nrow(fips_w_geocoded_data), ", ", nrow(nonmissing_fips_w_geocoded_data), "extra were correctly geocoded from address. \n")
+cat(">>>> Finally, we have ", nrow(final_merged_df), " correctly geocoded.\n")
+
+
+#fips_w_geocoded_data$Encounter # Double.
+#nonmissing_fips_w_geocoded_data$Encounter # Double.
+
+# To find patients who failed at all geocoding: Take all values in fips_w_geocoded_data but NOT in nonmissing_fips_w_geocoded_data
+#fips_w_geocoded_data
+#nonmissing_fips_w_geocoded_data
+
+# Find rows in fips_w_geocoded_data not in nonmissing_fips_w_geocoded_data
+failed_second_geocoding <- fips_w_geocoded_data[!fips_w_geocoded_data$Encounter %in% nonmissing_fips_w_geocoded_data$Encounter, ]
+cat(">>>> We can explore the patients which were never able to be geocoded: ", nrow(failed_second_geocoding), ".\n")
+
+
+# Saved for analysis in table1.Rmd
+filename_failed_second_geocoding <- paste0("nonmissing_geocodedf_n-", nrow(failed_second_geocoding), ".csv")
+write.csv(failed_second_geocoding, filename_failed_second_geocoding)
+cat("Saved for analysis in table1.Rmd for ", nrow(failed_second_geocoding), "patients. [Filename: ", filename_failed_second_geocoding, "]\n")
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Remove PHI columns
+```{r}
+
+remove_cols <- c("patient_name", "Patient", "Match_Address", "Patient_Address",
+                 "Patient_Birth_Date", "Patient_Home_Street_Address", "Patient_Home_City", "Patient_Home_State", "dob",
+                 "Patient_Death_Day")
+                 
+
+final_merged_df = final_merged_df[,!(names(final_merged_df) %in% remove_cols)]
+
+nrow(final_merged_df)
+```
+
+# Fill in corresponding "STATE" column for newly geocoded patients.
+```{r}
+
+# Ensure 'censustract' column is a character type to allow substring operations
+final_merged_df$censustract <- as.character(final_merged_df$censustract)
+final_merged_df$censustract <- str_pad(final_merged_df$censustract, width = 11, pad = "0")
+final_merged_df$fips <- str_pad(final_merged_df$fips, width = 5, pad = "0")
+
+
+# Extract the first two digits from 'censustract' and assign to 'statenum' column
+final_merged_df$statenum <- substr(final_merged_df$censustract, 1, 2)
+
+table(final_merged_df$statenum, useNA = "ifany")
+
+```
+
+# Finally, write final result
+```{r}
+
+write.csv(final_merged_df, "Circ_Circ_Nonmissing_Cohort.csv", row.names = FALSE)
+
+
+
+# For quick checks.
+ck_df <- read.csv("Circ_Circ_Nonmissing_Cohort.csv")
+
+ck_df[ck_df$Encounter == 8033890056, ]$censustract
+
+```
+
+
+
+
+
+
+

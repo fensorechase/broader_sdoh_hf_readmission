@@ -1,0 +1,466 @@
+---
+title: "SHAP Feature Importance Plot"
+output: html_document
+---
+
+---
+title: "plot_Circ_HF_SHAP"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidyr)
+library(ggplot2)
+library(rjson)
+library(stringr)
+
+```
+
+
+```{r}
+# Read in the CSV file
+shap_values_total <- read_csv("../scripts/Circ_HF_results_XGB_SHAP_final.csv") # Circ_HF_results_XGB_SHAP.csv
+
+# Display the first few rows of the data
+View(shap_values_total)
+
+```
+# ############################
+# Plot: XGBoost feature importances:
+    Black vs. White (sg_key = "race")
+    
+    
+M1:
+        "Systolic_BP",
+        "Creat",
+        "Diastolic_BP",
+        "age_current",
+        "Heart_Rate",
+        "Na",
+        "BUN",
+        "Hb",
+        "K",
+        "ALB",
+        "BNP",
+        "Resp"
+        
+   
+     
+ "competition_SDOH_vars":
+ 
+ 
+ 
+- E_expanded:
+        "charlson":
+              "mi",
+              "chf",
+              "pvd",
+              "cvd",
+              "dementia",
+              "cpd",
+              "rheum",
+              "pud",
+              "mliverdz",
+              "dm",
+              "dmcomp",
+              "hemipleg",
+              "renal",
+              "malig",
+              "sliverdz",
+              "mettumor",
+              "aids",
+              "afib",
+              "htn",
+              "cad",
+              "ckd",
+              "dmany"
+        
+        
+        "vitals":
+              "Systolic_BP",
+            	"Heart_Rate",
+            	"Resp"
+        
+        "hf_vars":
+              "hfsystolic",
+            	"hfdiastolic",
+            	"hfother"
+        
+```{r}
+
+race_shap_values <- shap_values_total[shap_values_total$sg_key == "race", ]
+head(race_shap_values)
+
+
+# Remove duplicate feat:         "total_ahrq_cty_nomissing"
+total_feats_used <- c("M1",
+        "M2",
+        "M3_county_DF1_nm",
+        "M4_DF1_nm_demo",
+        "M5_and_demo",
+        "M6_total_ahrq_cty_DF1_nm",
+        
+        "DF1_nm_county_AHRQ_domain1",
+        "DF1_nm_county_AHRQ_domain2",
+        "DF1_nm_county_AHRQ_domain3",
+        "DF1_nm_county_AHRQ_domain4",
+        "DF1_nm_county_AHRQ_domain5",
+        
+        "DF1_nm_tract_AHRQ_domain1",
+        "DF1_nm_tract_AHRQ_domain2",
+        "DF1_nm_tract_AHRQ_domain3",
+        "DF1_nm_tract_AHRQ_domain4",
+        "DF1_nm_tract_AHRQ_domain5",
+        "total_ahrq_trct_nomissing"
+        )
+
+race_shap_values <- race_shap_values[race_shap_values$feat == "M4_DF1_nm_demo", ]
+
+# charlson, "vitals", "demo", "hf_vars"
+# NOTE: not clinical: "percnt_highneeds",
+clinical_feat_list <- c(
+  "Systolic_BP", "Creat", "Diastolic_BP", "age_current", "Heart_Rate",  
+  "Na", "BUN", "Hb", "K", "ALB", "BNP", "Resp", 
+        "mi",
+        "chf",
+        "pvd",
+        "cvd",
+        "dementia",
+        "cpd",
+        "rheum",
+        "pud",
+        "mliverdz",
+        "dm",
+        "dmcomp",
+        "hemipleg",
+        "renal",
+        "malig",
+        "sliverdz",
+        "mettumor",
+        "aids",
+        "afib",
+        "htn",
+        "cad",
+        "ckd",
+        "dmany", 
+  
+        "Systolic_BP",
+    	  "Heart_Rate",
+    	  "Resp", 
+  
+        "hfsystolic",
+      	"hfdiastolic",
+      	"hfother",
+  
+        "age_current",
+        "privinsurance",
+        "Medicare",
+        "Medicaid",
+        "female",
+        "white",
+        "black")
+
+```
+
+# Plot: black - white.
+```{r}
+
+# Calculate mean and standard error of shap_ordered_importance across folds, grouped by shap_ordered_name and subgroup
+shap_summary <- race_shap_values %>%
+  group_by(shap_ordered_name, subgroup) %>%
+  summarise(
+    mean_importance = mean(shap_ordered_importance, na.rm = TRUE),
+    se_importance = sd(shap_ordered_importance, na.rm = TRUE) / sqrt(n()),
+    .groups = 'drop'
+  )
+
+# Combine mean_importance across subgroups to find the top 15 unique features based on absolute values
+shap_summary_combined <- shap_summary %>%
+  group_by(shap_ordered_name) %>%
+  summarise(
+    combined_importance = sum(abs(mean_importance), na.rm = TRUE),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(combined_importance)) %>%
+  slice(1:15) %>%
+  select(shap_ordered_name)
+
+# Filter the original summary data to include only the top 15 features
+shap_summary_filtered <- shap_summary %>%
+  filter(shap_ordered_name %in% shap_summary_combined$shap_ordered_name)
+
+# Spread the data to have separate columns for black and white subgroup importance
+shap_summary_spread <- shap_summary_filtered %>%
+  pivot_wider(names_from = subgroup, values_from = c(mean_importance, se_importance), names_sep = "_")
+
+# Calculate the difference in mean_importance between black and white subgroups for these top features
+shap_summary_diff <- shap_summary_spread %>%
+  mutate(
+    importance_diff = mean_importance_black - mean_importance_white,
+    se_diff = sqrt(se_importance_black^2 + se_importance_white^2)
+  )
+
+# Add a column to indicate whether each feature is clinical or non-clinical
+top_filtered_data <- shap_summary_diff %>%
+  mutate(clinical = if_else(shap_ordered_name %in% clinical_feat_list, "Clinical", "Non-clinical"))
+
+
+# Create the plot
+p <- ggplot(top_filtered_data, aes(y = reorder(shap_ordered_name, importance_diff), x = importance_diff, fill = clinical)) +
+  geom_col() +
+  geom_errorbar(aes(xmin = importance_diff - se_diff, xmax = importance_diff + se_diff), width = 0.2) +
+  scale_fill_manual(values = c("Clinical" = "#0072B2", "Non-clinical" = "#E69F00")) +
+  theme_minimal() +
+  theme(axis.text.y = element_text(angle = 0, hjust = 1)) +
+  labs(title = "Top 15 SHAP Feature Importance Differences (Black vs. White)",
+       y = "Feature",
+       x = "Difference in Mean SHAP Importance (Black - White)",
+       fill = "Feature Type")
+
+# Print the plot
+print(p)
+
+
+```
+
+
+
+
+
+```{r}
+
+# Calculate mean and standard error of shap_ordered_importance across folds, grouped by shap_ordered_name and subgroup
+shap_summary <- race_shap_values %>%
+  group_by(shap_ordered_name, subgroup) %>%
+  summarise(
+    mean_importance = mean(shap_ordered_importance, na.rm = TRUE),
+    se_importance = sd(shap_ordered_importance, na.rm = TRUE) / sqrt(n()),
+    .groups = 'drop'
+  )
+
+# Spread the data to have separate columns for black and white subgroup importance
+shap_summary_spread <- shap_summary %>%
+  pivot_wider(names_from = subgroup, values_from = c(mean_importance, se_importance), names_sep = "_")
+
+# Filter out rows with NA values in mean_importance columns for black and white subgroups
+shap_summary_spread <- shap_summary_spread %>%
+  filter(!is.na(mean_importance_black) & !is.na(mean_importance_white))
+
+# Calculate the combined importance (sum of absolute importance) for Black and White subgroups
+shap_summary_spread <- shap_summary_spread %>%
+  mutate(
+    combined_importance = abs(mean_importance_black) + abs(mean_importance_white)
+  )
+
+# Select the top 15 most important unique features based on the combined importance
+top_features <- shap_summary_spread %>%
+  arrange(desc(combined_importance)) %>%
+  slice(1:15)
+
+# Calculate the difference in mean_importance between black and white subgroups for these top features
+top_filtered_data <- top_features %>%
+  mutate(
+    importance_diff = mean_importance_black - mean_importance_white,
+    se_diff = sqrt(se_importance_black^2 + se_importance_white^2)
+  )
+
+
+# Add a column to indicate whether each feature is clinical or non-clinical
+top_filtered_data <- top_filtered_data %>%
+  mutate(clinical = if_else(shap_ordered_name %in% clinical_feat_list, "Clinical", "Non-clinical"))
+
+# Create the plot
+p <- ggplot(top_filtered_data, aes(y = reorder(shap_ordered_name, importance_diff), x = importance_diff, fill = clinical)) +
+  geom_col() +
+  geom_errorbar(aes(xmin = importance_diff - se_diff, xmax = importance_diff + se_diff), width = 0.2) +
+  scale_fill_manual(values = c("Clinical" = "#0072B2", "Non-clinical" = "#E69F00")) +
+  theme_minimal() +
+  theme(axis.text.y = element_text(angle = 0, hjust = 1)) +
+  labs(title = "Top 15 SHAP Feature Importance Differences (Black vs. White)",
+       y = "Feature",
+       x = "Difference in Mean SHAP Importance (Black - White)",
+       fill = "Feature Type")
+
+# Print the plot
+print(p)
+
+```
+
+
+# ############################
+# Plots below: TOTAL PATIENTS:
+# ############################
+
+# Filter for current sg_key.
+```{r}
+
+shap_values <- shap_values_total[shap_values_total$sg_key == "race", ]
+
+```
+
+```{r}
+
+# Calculate mean and standard error of shap_ordered_importance across folds, holding sg_key and feat constant
+shap_summary <- shap_values %>%
+  group_by(sg_key, feat, shap_ordered_name) %>%
+  summarise(
+    mean_importance = mean(shap_ordered_importance, na.rm = TRUE),
+    se_importance = sd(shap_ordered_importance, na.rm = TRUE) / sqrt(n()),
+    .groups = 'drop'
+  )
+
+
+```
+
+# Domain breakdown.
+```{r}
+json_data <- fromJSON(file = "../scripts/domains_lists.json")
+
+county_domain_contents <- c("DF1_nm_county_AHRQ_domain1",
+        "DF1_nm_county_AHRQ_domain2",
+        "DF1_nm_county_AHRQ_domain3",
+        "DF1_nm_county_AHRQ_domain4",
+        "DF1_nm_county_AHRQ_domain5")
+
+tract_domain_contents <- c(  "DF1_nm_tract_AHRQ_domain1",
+        "DF1_nm_tract_AHRQ_domain2",
+        "DF1_nm_tract_AHRQ_domain3",
+        "DF1_nm_tract_AHRQ_domain4",
+        "DF1_nm_tract_AHRQ_domain5")
+        
+# json_data$ahrq1_social_cty_nomissing
+```
+
+# Plot: County, Tract domains 1-5.
+```{r}
+
+# Name map for top 15 of each county & Tract.
+
+##################################
+# Create a plot for each unique feat and sg_key combination
+unique_combinations <- shap_summary %>%
+  select(feat, sg_key) %>%
+  distinct()
+##################################
+
+# Loop through each unique combination and create a separate plot
+for (i in 1:nrow(unique_combinations)) {
+  # Extract the current feat and sg_key
+  current_feat <- unique_combinations$feat[i]
+  
+  # Filter data for the current feat and sg_key
+  filtered_data <- shap_summary %>%
+    filter(feat == current_feat)
+  
+  # Select the top 15 most important features
+  top_filtered_data <- filtered_data %>%
+    arrange(desc(mean_importance)) %>%
+    slice(1:15)
+  
+  # Add a column to indicate whether each feature is in each domain list
+  top_filtered_data <- top_filtered_data %>%
+    mutate(
+      Social = shap_ordered_name %in% json_data$DF1_nm_county_AHRQ_domain1 | shap_ordered_name %in% json_data$DF1_nm_tract_AHRQ_domain1,
+      Economic = shap_ordered_name %in% json_data$DF1_nm_county_AHRQ_domain2 | shap_ordered_name %in% json_data$DF1_nm_tract_AHRQ_domain2,
+      Education = shap_ordered_name %in% json_data$DF1_nm_county_AHRQ_domain3 | shap_ordered_name %in% json_data$DF1_nm_tract_AHRQ_domain3,
+      Physical_Infrastructure = shap_ordered_name %in% json_data$DF1_nm_county_AHRQ_domain4 | shap_ordered_name %in% json_data$DF1_nm_tract_AHRQ_domain4,
+      Healthcare_Quality = shap_ordered_name %in% json_data$DF1_nm_county_AHRQ_domain5 | shap_ordered_name %in% json_data$DF1_nm_tract_AHRQ_domain5
+    )
+  
+  # Remove suffixes from shap_ordered_name
+  top_filtered_data <- top_filtered_data %>%
+    mutate(shap_ordered_name = str_remove(shap_ordered_name, "_countylevel|_census_tractlevel"))
+
+  
+  # Create the plot
+  p <- ggplot(top_filtered_data, aes(y = reorder(shap_ordered_name, mean_importance), x = mean_importance)) +
+    geom_col(aes(fill = factor(
+      case_when(
+        Social ~ "Social Context",
+        Economic ~ "Economic Context",
+        Education ~ "Education",
+        Physical_Infrastructure ~ "Physical Infrastructure",
+        Healthcare_Quality ~ "Healthcare Quality",
+        TRUE ~ "Other"
+      ),
+      levels = c("Social Context", "Economic Context", "Education", "Physical Infrastructure", "Healthcare Quality", "Other")
+    ))) +
+    geom_errorbar(aes(xmin = mean_importance - se_importance, xmax = mean_importance + se_importance), width = 0.2) +
+    scale_fill_manual(values = c(
+      "Social Context" = "#0072B2",                # Blue
+      "Economic Context" = "#E69F00",              # Orange
+      "Education" = "#009E73",             # Green
+      "Physical Infrastructure" = "#CC79A7",  # Pink
+      "Healthcare Quality" = "#56B4E9",    # Sky Blue
+      "Other" = "#D3D3D3"                  # Light Gray for other features
+    )) +
+    theme_minimal() +
+    theme(axis.text.y = element_text(angle = 0, hjust = 1)) +
+    labs(title = paste("Top 15 SHAP Feature Importance for", current_feat),
+         y = "Feature",
+         x = "Mean SHAP Importance",
+         fill = "Domain")
+  
+  # Print the plot
+  print(p)
+}
+
+```
+
+
+# Plot: feat sets M1-M6 (i.e., Model 1 - Model 6, with respect to Table 1 in the manuscript.)
+```{r}
+
+# Create a plot for each unique feat and sg_key combination
+unique_combinations <- shap_summary %>%
+  select(feat, sg_key) %>%
+  distinct()
+
+# Loop through each unique combination and create a separate plot
+for (i in 1:nrow(unique_combinations)) {
+  # Extract the current feat and sg_key
+  current_feat <- unique_combinations$feat[i]
+  current_subgroup <- unique_combinations$sg_key[i]
+  
+  # Filter data for the current feat and sg_key
+  filtered_data <- shap_summary %>%
+    filter(feat == current_feat & sg_key == current_subgroup)
+  
+  
+  # NOTE: adjust percnt_highneeds to be non-clinical. 
+  if("M5" %in% filtered_data$feat || "M1" %in% filtered_data$feat){
+    # Remove percnt_highneeds from feat.
+    filtered_data <- filtered_data[filtered_data$shap_ordered_name != "percnt_highneeds", ]
+  }
+  
+  # Select the top 30 most important features
+  top_filtered_data <- filtered_data %>%
+    arrange(desc(mean_importance)) %>%
+    slice(1:15)
+  
+  
+  
+  # Add a column to indicate whether each feature is clinical or non-clinical
+  top_filtered_data <- top_filtered_data %>%
+    mutate(clinical = if_else(shap_ordered_name %in% clinical_feat_list, "Clinical", "Non-clinical"))
+  
+  # Create the plot
+  p <- ggplot(top_filtered_data, aes(y = reorder(shap_ordered_name, mean_importance), x = mean_importance, fill = clinical)) +
+    geom_bar(stat = "identity") +
+    geom_errorbar(aes(xmin = mean_importance - se_importance, xmax = mean_importance + se_importance), width = 0.2) +
+    scale_fill_manual(values = c("Clinical" = "#0072B2", "Non-clinical" = "#E69F00")) +
+    theme_minimal() +
+    theme(axis.text.y = element_text(angle = 0, hjust = 1)) +
+    labs(title = paste("Top 15 SHAP Feature Importance for", current_feat, "-", current_subgroup),
+         y = "Feature",
+         x = "Mean SHAP Importance",
+         fill = "Feature Type")
+  
+  # Print the plot
+  print(p)
+}
+
+
+```

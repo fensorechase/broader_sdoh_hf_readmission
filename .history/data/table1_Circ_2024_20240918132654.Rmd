@@ -1,0 +1,40 @@
+---
+title: "table1"
+output: html_notebook
+---
+
+# Load libraries
+```{r}
+library(caret)
+library(data.table)
+library(dplyr)
+library(sets)
+library(scales)
+library(tidyr)
+library(stringr)
+library(tibble)
+library(tidygeocoder)
+library(stringi)
+library(ggplot2)
+
+
+library(psych)
+library(tidyverse)
+library(irr)
+
+
+library(readr) # For read_tsv
+```
+
+# #######################################################################
+
+# TODO: Circ HF results: 
+- input file: Circulation_HF/MLHC_modelinputs.csv
+- train file: private_CHIL_repo/scripts/Circulation_HF/bal_allfeats_MLHC_nosmote_sgs_evaluate_baselines_nestKfold.py
+- output file: private_CHIL_repo/scripts/3-21-ACC/Circulation_HF/Circ_HF_results_individualfolds.csv
+
+```{r}
+
+hf_results <- read.csv("./Circ_HF_results_individualfolds.csv")
+hf_results
+```

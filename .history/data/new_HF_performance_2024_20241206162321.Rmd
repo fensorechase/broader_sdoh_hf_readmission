@@ -1,0 +1,1046 @@
+---
+title: "new_HF_performance_2024"
+output: html_notebook
+---
+
+# Load libraries
+```{r}
+library(caret)
+library(data.table)
+library(dplyr)
+library(sets)
+library(scales)
+library(tidyr)
+library(stringr)
+library(tibble)
+library(stringi)
+library(ggplot2)
+
+library(psych)
+library(tidyverse)
+library(irr)
+library(RColorBrewer)
+
+library(readr) # For read_tsv
+
+```
+
+
+# Model input files: 
+- input file:  
+    - Circ_allstates_includemissing_modelinput_DF1.csv
+- output file:
+
+
+
+# Model Circ HF results: 
+- input file: DF1_results_individualfolds_Circ_2024.csv
+- 
+
+- train file: private_CHIL_repo/scripts/bal_allfeats_MLHC_nosmote_sgs_evaluate_baselines_nestKfold.py
+- output file: private_CHIL_repo/scripts/3-21-ACC/Circ_HF_results_individualfolds.csv
+
+```{r}
+
+fairness_full_hf_results <- read.csv("../scripts/individualfolds_Circ_HF_results_fairness_final.csv") # individualfolds_Circ_HF_results_fairness_final
+
+full_hf_results <- read.csv("../scripts/final_results_individualfolds_Circ_2024.csv") # 
+
+```
+
+# Subset results: 
+```{r}
+
+logr_hf_results <- full_hf_results[full_hf_results$model == "logr", ]
+xgb_hf_results <- full_hf_results[full_hf_results$model == "xgb", ]
+rf_hf_results <- full_hf_results[full_hf_results$model == "rf", ]
+
+
+
+fairness_full_hf_results <- fairness_full_hf_results[fairness_full_hf_results$sg_key == "race", ]
+
+fair_logr_hf_results <- fairness_full_hf_results[fairness_full_hf_results$model == "logr", ]
+fair_xgb_hf_results <- fairness_full_hf_results[fairness_full_hf_results$model == "xgb", ]
+fair_rf_hf_results <- fairness_full_hf_results[fairness_full_hf_results$model == "rf", ]
+
+
+
+full_hf_results
+fairness_full_hf_results
+```
+
+# Print md table of all feature set results: 
+- AUC
+- F1
+# Subgroups: blackorwhite, black, white.
+```{r}
+# Required library for markdown tables
+
+#curr_model_results <- xgb_hf_results # logr_hf_results, xgb_hf_results
+
+library(dplyr)
+library(tidyr)
+library(knitr)
+
+#     "M1",
+#        "M2",
+#        "M3_county_DF1_nm",
+#        "M4_DF1_nm",
+#        "M5",
+#        "M6_total_ahrq_cty_DF1_nm", "M6_total_ahrq_trct_DF1_nm",
+#    
+#        "DF1_nm_county_AHRQ_domain1",
+#        "DF1_nm_county_AHRQ_domain2",
+#        "DF1_nm_county_AHRQ_domain3",
+#        "DF1_nm_county_AHRQ_domain4",
+#        "DF1_nm_county_AHRQ_domain5",
+#
+#        "DF1_nm_tract_AHRQ_domain1",
+#        "DF1_nm_tract_AHRQ_domain2",
+#        "DF1_nm_tract_AHRQ_domain3",
+#        "DF1_nm_tract_AHRQ_domain4",
+#        "DF1_nm_tract_AHRQ_domain5"
+
+feat_sets <- c(
+   "M1",
+        "M2",
+        "M3_county_DF1_nm",
+        "M4_DF1_nm",
+        "M5",
+        "M6_total_ahrq_cty_DF1_nm")
+
+
+sdoh_feat_sets <- c(
+    "M6_total_ahrq_cty_DF1_nm", "M6_total_ahrq_trct_DF1_nm",
+    
+        "DF1_nm_county_AHRQ_domain1",
+        "DF1_nm_county_AHRQ_domain2",
+        "DF1_nm_county_AHRQ_domain3",
+        "DF1_nm_county_AHRQ_domain4",
+        "DF1_nm_county_AHRQ_domain5",
+
+        "DF1_nm_tract_AHRQ_domain1",
+        "DF1_nm_tract_AHRQ_domain2",
+        "DF1_nm_tract_AHRQ_domain3",
+        "DF1_nm_tract_AHRQ_domain4",
+        "DF1_nm_tract_AHRQ_domain5")
+
+
+# Ensure all required subgroups are present in the data
+grouped_results <- curr_model_results %>%
+  filter(feat %in% sdoh_feat_sets, subgroup %in% c("blackorwhite", "black", "white")) %>%
+  group_by(feat, subgroup) %>%
+  summarize(
+    auc = mean(auc, na.rm = TRUE),
+    f1 = mean(f1, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  pivot_wider(
+    names_from = subgroup,
+    values_from = c(auc, f1),
+    names_glue = "{subgroup}_{.value}"
+  )
+
+# Reorder columns in grouped_results
+grouped_results <- grouped_results %>%
+  select(
+    feat, 
+    blackorwhite_auc, black_auc, white_auc, 
+    blackorwhite_f1, black_f1, white_f1
+  )
+
+# Format numeric columns to three decimal places
+grouped_results <- grouped_results %>%
+  mutate(
+    across(
+      starts_with(c("blackorwhite_", "black_", "white_")),
+      ~ sprintf("%.3f", .) # Format as a string with 3 decimal places
+    )
+  )
+
+# Create the markdown table
+kable(
+  grouped_results,
+  col.names = c(
+    "Feature Set", 
+    "AUROC (All Patients)", "AUROC (Black)", "AUROC (White)", 
+    "F1 (All Patients)", "F1 (Black)", "F1 (White)"
+  ),
+  caption = "Summary of AUROC and F1 Score by Feature Set for Each Subgroup"
+)
+
+
+colnames(logr_hf_results)
+```
+
+
+
+
+# Print with Wilcoxon test results:
+```{r}
+library(dplyr)
+library(tidyr)
+library(knitr)
+
+# Prepare the results dataframe
+curr_model_results <- xgb_hf_results # or logr_hf_results
+
+feat_sets <- c(
+   "M1",
+        "M2",
+        "M3_county_DF1_nm",
+        "M4_DF1_nm_demo",
+        "M5_and_demo",
+        "M6_total_ahrq_cty_DF1_nm")
+
+
+county_only_feats <- c("M6_total_ahrq_cty_DF1_nm",
+        "DF1_nm_county_AHRQ_domain1",
+        "DF1_nm_county_AHRQ_domain2",
+        "DF1_nm_county_AHRQ_domain3",
+        "DF1_nm_county_AHRQ_domain4",
+        "DF1_nm_county_AHRQ_domain5")
+
+tract_only_feats <- c( "M6_total_ahrq_trct_DF1_nm",
+        "DF1_nm_tract_AHRQ_domain1",
+        "DF1_nm_tract_AHRQ_domain2",
+        "DF1_nm_tract_AHRQ_domain3",
+        "DF1_nm_tract_AHRQ_domain4",
+        "DF1_nm_tract_AHRQ_domain5")
+
+# Prepare a dataframe to store Wilcoxon test results
+wilcoxon_results <- data.frame(
+  feature_set = character(),
+  subgroup = character(),
+  metric = character(),
+  p_value = numeric(),
+  stringsAsFactors = FALSE
+)
+
+# Perform Wilcoxon signed-rank test for each feature set compared to baseline
+for (current_feat in county_only_feats[-1]) {  # Skip the baseline feature set
+  # Prepare baseline data (M1)
+  baseline_data <- curr_model_results %>%
+    filter(feat == "M1")
+  
+  # Prepare current feature set data
+  current_data <- curr_model_results %>%
+    filter(feat == current_feat)
+  
+  # Subgroups to analyze
+  subgroups <- c("blackorwhite", "black", "white")
+  
+  # Metrics to test
+  metrics <- c("auc", "f1")
+  
+  # Perform Wilcoxon signed-rank test for each subgroup and metric
+  for (subgroup in subgroups) {
+    for (metric in metrics) {
+      # Ensure data is properly matched by fold
+      baseline_fold_metrics <- baseline_data %>%
+        filter(subgroup == !!subgroup) %>%
+        arrange(fold) %>%
+        pull(!!metric)
+      
+      current_fold_metrics <- current_data %>%
+        filter(subgroup == !!subgroup) %>%
+        arrange(fold) %>%
+        pull(!!metric)
+      
+      # Perform Wilcoxon signed-rank test
+      wilcox_test <- wilcox.test(
+        baseline_fold_metrics, 
+        current_fold_metrics, 
+        paired = TRUE, 
+        alternative = "two.sided"
+      )
+      
+      # Store results
+      wilcoxon_results <- rbind(wilcoxon_results, data.frame(
+        feature_set = current_feat,
+        subgroup = subgroup,
+        metric = metric,
+        p_value = wilcox_test$p.value
+      ))
+    }
+  }
+}
+
+# Prepare the table of Wilcoxon test results
+wilcoxon_table <- wilcoxon_results %>%
+  pivot_wider(
+    names_from = c(subgroup, metric),
+    values_from = p_value,
+    names_glue = "{subgroup}_{metric}_p"
+  ) %>%
+  mutate(across(where(is.numeric), ~ sprintf("%.3f", .)))
+
+# Print the Wilcoxon signed-rank test results
+kable(
+  wilcoxon_table,
+  col.names = c(
+    "Feature Set", 
+    "All Patients AUROC p", "All Patients F1 p",
+    "Black AUROC p", "Black F1 p",
+    "White AUROC p", "White F1 p"
+  ),
+  caption = "Wilcoxon Signed-Rank Test P-values Comparing Feature Sets to Baseline"
+)
+```
+
+
+
+
+
+
+# [PERFORMANCE] Print md table: for all 3 models:
+```{r}
+# Combine the logr, rf, and xgb results
+curr_model_results <- bind_rows(
+  logr_hf_results %>% mutate(model = "logr"),
+  rf_hf_results %>% mutate(model = "rf"),
+  xgb_hf_results %>% mutate(model = "xgb")
+)
+
+
+feat_sets <- c(
+   "M1",
+        "M2",
+        "M3_county_DF1_nm",
+        "M4_DF1_nm",
+        "M5",
+        "M6_total_ahrq_cty_DF1_nm")
+
+sdoh_feat_sets <- c(
+  "M6_total_ahrq_cty_DF1_nm", "M6_total_ahrq_trct_DF1_nm",
+  "DF1_nm_county_AHRQ_domain1", "DF1_nm_county_AHRQ_domain2", "DF1_nm_county_AHRQ_domain3",
+  "DF1_nm_county_AHRQ_domain4", "DF1_nm_county_AHRQ_domain5", "DF1_nm_tract_AHRQ_domain1",
+  "DF1_nm_tract_AHRQ_domain2", "DF1_nm_tract_AHRQ_domain3", "DF1_nm_tract_AHRQ_domain4",
+  "DF1_nm_tract_AHRQ_domain5"
+)
+
+# Ensure all required subgroups are present in the data
+grouped_results <- curr_model_results %>%
+  filter(feat %in% sdoh_feat_sets, subgroup %in% c("blackorwhite", "black", "white")) %>%
+  group_by(feat, model) %>%
+  summarize(
+    auroc_all = mean(auc[subgroup == "blackorwhite"], na.rm = TRUE),
+    auroc_black = mean(auc[subgroup == "black"], na.rm = TRUE), 
+    auroc_white = mean(auc[subgroup == "white"], na.rm = TRUE),
+    f1_all = mean(f1[subgroup == "blackorwhite"], na.rm = TRUE),
+    f1_black = mean(f1[subgroup == "black"], na.rm = TRUE),
+    f1_white = mean(f1[subgroup == "white"], na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Format numeric columns to three decimal places
+grouped_results <- grouped_results %>%
+  mutate(
+    across(
+      starts_with(c("auroc_", "f1_")),
+      ~ sprintf("%.3f", .)
+    )
+  )
+
+# Create the markdown table
+kable(
+  grouped_results,
+  col.names = c(
+    "Feature Set", "Model",
+    "AUROC (All Patients)", "AUROC (Black)", "AUROC (White)",
+    "F1 (All Patients)", "F1 (Black)", "F1 (White)"
+  ),
+  caption = "Summary of AUROC and F1 Score by Feature Set for Each Subgroup", format = "markdown"
+)
+
+```
+
+# Fairness results:
+```{r}
+# Required libraries
+library(dplyr)
+library(tidyr)
+library(knitr)
+
+# Define feature sets
+feat_sets <- c(
+    "M1",
+    "M2",
+    "M3_county_DF1_nm",
+    "M4_DF1_nm",
+    "M5",
+    "M6_total_ahrq_cty_DF1_nm"
+)
+
+sdoh_feat_sets <- c(
+    "M6_total_ahrq_cty_DF1_nm", "M6_total_ahrq_trct_DF1_nm",
+    "DF1_nm_county_AHRQ_domain1",
+    "DF1_nm_county_AHRQ_domain2",
+    "DF1_nm_county_AHRQ_domain3",
+    "DF1_nm_county_AHRQ_domain4",
+    "DF1_nm_county_AHRQ_domain5",
+    "DF1_nm_tract_AHRQ_domain1",
+    "DF1_nm_tract_AHRQ_domain2",
+    "DF1_nm_tract_AHRQ_domain3",
+    "DF1_nm_tract_AHRQ_domain4",
+    "DF1_nm_tract_AHRQ_domain5"
+)
+
+# Filter, group, and summarize results
+grouped_results <- curr_model_results %>%
+  filter(feat %in% sdoh_feat_sets) %>%
+  group_by(feat, fold) %>%
+  summarize(
+    eo_ratio = mean(eo_ratio, na.rm = TRUE),
+    fpr_parity = mean(fpr_parity, na.rm = TRUE),
+    tpr_parity = mean(tpr_parity, na.rm = TRUE),
+    fnr_parity = mean(fnr_parity, na.rm = TRUE),
+    dp_ratio = mean(dp_ratio, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  group_by(feat) %>%
+  summarize(
+    eo_ratio = round(mean(eo_ratio, na.rm = TRUE), 3),
+    fpr_parity = round(mean(fpr_parity, na.rm = TRUE), 3),
+    tpr_parity = round(mean(tpr_parity, na.rm = TRUE), 3),
+    fnr_parity = round(mean(fnr_parity, na.rm = TRUE), 3),
+    dp_ratio = round(mean(dp_ratio, na.rm = TRUE), 3),
+    .groups = "drop"
+  ) %>%
+  select(feat, eo_ratio, fpr_parity, tpr_parity, fnr_parity, dp_ratio) # Reorder columns
+
+# Create the markdown table
+kable(
+  grouped_results,
+  col.names = c(
+    "Feature Set", 
+    "EO Ratio", "FPR Parity", "TPR Parity", 
+    "FNR Parity", "DP Ratio"
+  ),
+  caption = "Summary of fairness by Feature Set for all patients (Black vs. White)"
+)
+
+
+```
+
+# [FAIRNESS] Print md table: for all 3 models:
+```{r}
+
+
+fairness_full_hf_results <- fairness_full_hf_results[fairness_full_hf_results$sg_key == "race", ]
+
+fair_logr_hf_results <- fairness_full_hf_results[fairness_full_hf_results$model == "logr", ]
+fair_xgb_hf_results <- fairness_full_hf_results[fairness_full_hf_results$model == "xgb", ]
+fair_rf_hf_results <- fairness_full_hf_results[fairness_full_hf_results$model == "rf", ]
+
+
+# Combine the logr, rf, and xgb results
+curr_model_results_fair <- bind_rows(
+  fair_logr_hf_results %>% mutate(model = "logr"),
+  fair_xgb_hf_results %>% mutate(model = "rf"),
+  fair_rf_hf_results %>% mutate(model = "xgb")
+)
+
+
+feat_sets <- c(
+   "M1",
+        "M2",
+        "M3_county_DF1_nm",
+        "M4_DF1_nm",
+        "M5",
+        "M6_total_ahrq_cty_DF1_nm")
+
+sdoh_feat_sets <- c(
+  "M6_total_ahrq_cty_DF1_nm", "M6_total_ahrq_trct_DF1_nm",
+  "DF1_nm_county_AHRQ_domain1", "DF1_nm_county_AHRQ_domain2", "DF1_nm_county_AHRQ_domain3",
+  "DF1_nm_county_AHRQ_domain4", "DF1_nm_county_AHRQ_domain5", "DF1_nm_tract_AHRQ_domain1",
+  "DF1_nm_tract_AHRQ_domain2", "DF1_nm_tract_AHRQ_domain3", "DF1_nm_tract_AHRQ_domain4",
+  "DF1_nm_tract_AHRQ_domain5"
+)
+
+fairness_full_hf_results$dp_ratio
+
+# Ensure all required subgroups are present in the data
+grouped_results <- curr_model_results_fair %>%
+  filter(feat %in% sdoh_feat_sets) %>%
+  group_by(feat, model) %>%
+  summarize(
+    eo_ratio = mean(eo_ratio[sg_key == "race"], na.rm = TRUE),
+    fpr_parity = mean(fpr_parity[sg_key == "race"], na.rm = TRUE), 
+    tpr_parity = mean(tpr_parity[sg_key == "race"], na.rm = TRUE), 
+    fnr_ratio = mean(fnr_parity[sg_key == "race"], na.rm = TRUE), 
+    dp_ratio = mean(dp_ratio[sg_key == "race"], na.rm = TRUE), 
+    .groups = "drop"
+  )
+
+# Format numeric columns to three decimal places
+grouped_results <- grouped_results %>%
+  mutate(
+    across(
+      starts_with(c("eo_", "fpr_", "tpr_", "fnr_", "dp_")),
+      ~ sprintf("%.3f", .)
+    )
+  )
+
+# Create the markdown table
+kable(
+  grouped_results,
+  col.names = c(
+    "Feature Set", "Model",
+    "EO Ratio", "FPR Ratio", "TPR Ratio", "FNR Ratio",
+    "DP Ratio"
+  ),
+  caption = "Summary of fairness metrics by model and feature set.", format = "markdown"
+)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Below, create plots of fairness vs. predictive performance.
+
+```{r}
+
+fair_hf_results <- read.csv("../scripts/individualfolds_Circ_HF_results_fairness_final.csv") # "../v3_fairness_circulation_results.csv"
+fair_hf_results
+
+```
+
+# 1.) Fairness:
+
+sk_key: 
+- race ** Main focus (self-reported race of Black vs. White)
+- sex
+- combos
+- age_quartile
+- hf_types
+- insur_groups
+- CCI_groups
+- CCI_quartile
+
+- Hypertension_groups
+- CAD_groups
+- CKD_groups
+
+```{r}
+
+# Filter out sg_key == "all_patients".
+fair_hf_results <- fair_hf_results[fair_hf_results$sg_key != "all_patients", ]
+#### perf_hf_results: Our main analysis df.
+perf_hf_results <- fair_hf_results[fair_hf_results$sg_key == "race", ]
+
+
+# M1: M1
+# total_ahrq_cty_nomissing: M6
+county_feat_sets <- c("M1",
+        "M2",
+        "M3_county_DF1_nm",
+        "M4_DF1_nm_demo",
+        "M5_and_demo",
+        "M6_total_ahrq_cty_DF1_nm")
+county_only_feats <- c( "DF1_nm_county_AHRQ_domain1",
+        "DF1_nm_county_AHRQ_domain2",
+        "DF1_nm_county_AHRQ_domain3",
+        "DF1_nm_county_AHRQ_domain4",
+        "DF1_nm_county_AHRQ_domain5")
+tract_only_feats <- c( "DF1_nm_tract_AHRQ_domain1",
+        "DF1_nm_tract_AHRQ_domain2",
+        "DF1_nm_tract_AHRQ_domain3",
+        "DF1_nm_tract_AHRQ_domain4",
+        "DF1_nm_tract_AHRQ_domain5", "M6_total_ahrq_trct_DF1_nm")
+
+
+model_order <- c("logr", "rf", "xgb")
+
+# ACROSS ALL folds. paired t-test for XGBoost vs. Logr.
+
+curr_feat <- tract_only_feats
+
+# 1.) EO Ratio: eo_ratio
+eo_ratio_avg <- fair_hf_results[fair_hf_results$feat %in% curr_feat, ] %>% group_by(feat, model) %>% summarise(mean_eo_ratio = mean(eo_ratio)) %>% mutate(mean_eo_ratio = round(mean_eo_ratio, 3)) %>% mutate(model = factor(model, levels = model_order)) %>%  mutate(
+    feat = factor(feat, levels = curr_feat),
+    model = factor(model, levels = model_order)
+  ) %>% arrange(feat, model)
+# Print total df:
+eo_ratio_avg
+# Print results column for Excel:
+cat("EO Ratio: \n")
+cat(paste(eo_ratio_avg %>% pull(mean_eo_ratio), collapse = "\n"))
+
+
+# 2.) FPR Parity: fpr_parity
+fpr_parity_avg <- fair_hf_results[fair_hf_results$feat %in% curr_feat, ] %>% group_by(feat, model) %>% summarise(mean_fpr_parity = mean(fpr_parity)) %>% mutate(mean_fpr_parity = round(mean_fpr_parity, 3)) %>% mutate(model = factor(model, levels = model_order)) %>%  mutate(
+    feat = factor(feat, levels = curr_feat),
+    model = factor(model, levels = model_order)
+  ) %>% arrange(feat, model)
+# Print total df:
+fpr_parity_avg
+# Print results column for Excel:
+cat("FPR Parity: \n")
+cat(paste(fpr_parity_avg %>% pull(mean_fpr_parity), collapse = "\n"))
+
+
+
+# 3.) TPR Parity: tpr_parity
+tpr_parity_avg <- fair_hf_results[fair_hf_results$feat %in% curr_feat, ] %>% group_by(feat, model) %>% summarise(mean_tpr_parity = mean(tpr_parity)) %>% mutate(mean_tpr_parity = round(mean_tpr_parity, 3)) %>% mutate(model = factor(model, levels = model_order)) %>%  mutate(
+    feat = factor(feat, levels = curr_feat),
+    model = factor(model, levels = model_order)
+  ) %>% arrange(feat, model)
+# Print total df:
+tpr_parity_avg
+# Print results column for Excel:
+cat("TPR Parity: \n")
+cat(paste(tpr_parity_avg %>% pull(mean_tpr_parity), collapse = "\n"))
+
+
+# 4.) FNR Parity: fnr_parity
+fnr_parity_avg <- fair_hf_results[fair_hf_results$feat %in% curr_feat, ] %>% group_by(feat, model) %>% summarise(mean_fnr_parity = mean(fnr_parity)) %>% mutate(mean_fnr_parity = round(mean_fnr_parity, 3)) %>% mutate(model = factor(model, levels = model_order)) %>%  mutate(
+    feat = factor(feat, levels = curr_feat),
+    model = factor(model, levels = model_order)
+  ) %>% arrange(feat, model)
+# Print total df:
+fnr_parity_avg
+# Print results column for Excel:
+cat("FNR Parity: \n")
+cat(paste(fnr_parity_avg %>% pull(mean_fnr_parity), collapse = "\n"))
+
+# 5.) Demographic Parity ratio: dp_ratio
+dp_ratio_avg <- fair_hf_results[fair_hf_results$feat %in% curr_feat, ] %>% group_by(feat, model) %>% summarise(mean_dp_ratio = mean(dp_ratio)) %>% mutate(mean_dp_ratio = round(mean_dp_ratio, 3)) %>% mutate(model = factor(model, levels = model_order)) %>%  mutate(
+    feat = factor(feat, levels = curr_feat),
+    model = factor(model, levels = model_order)
+  ) %>% arrange(feat, model)
+# Print total df:
+dp_ratio_avg
+# Print results column for Excel:
+cat("DP Ratio: \n")
+cat(paste(dp_ratio_avg %>% pull(mean_dp_ratio), collapse = "\n"))
+
+
+```
+
+# COMPARE: performance vs. fairness. 
+```{r}
+# PREDICTION PERFORMANCE:
+pred_hf_results <- full_hf_results <- read.csv("../scripts/final_results_individualfolds_Circ_2024.csv")# "../Circ_HF_results_individualfolds.csv"
+pred_hf_results <- pred_hf_results[pred_hf_results$subgroup == "blackorwhite", ] # blackorwhite, black, white
+
+# FAIRNESS: 
+# Filter out sg_key == "all_patients". 
+total_fair_hf_results <- read.csv("../scripts/individualfolds_Circ_HF_results_fairness_final.csv") #"../v3_fairness_circulation_results.csv"
+
+fair_hf_results <- total_fair_hf_results[total_fair_hf_results$sg_key != "all_patients", ]
+fair_hf_results <- fair_hf_results[fair_hf_results$sg_key == "race", ] # TODO: 
+
+# Restrict to XGBoost
+pred_hf_results <- pred_hf_results[pred_hf_results$model == "xgb", ] # xgb
+fair_hf_results <- fair_hf_results[fair_hf_results$model == "xgb", ] # xgb
+```
+# PLOT comparison (line plot): AUROC vs. EO ratio.
+
+
+(ONLY FOR XGBoost)
+- Show scatter plot of 
+    AUROC vs. EO ratio for:
+  *all* sets (county_feat_sets, county_only_feats, tract_only_feats). XGB models.
+
+county_feat_sets <- c("M1", 
+        "M2",
+        "M3_county",
+        "M4",
+        "M5",
+        "total_ahrq_cty_nomissing")
+county_only_feats <- c( "ahrq1_social_cty_nomissing",
+        "ahrq2_economic_cty_nomissing",
+        "ahrq3_education_cty_nomissing",
+        "ahrq4_physicalinfrastructure_cty_nomissing",
+        "ahrq5_healthcarequality_cty_nomissing",
+        "total_ahrq_cty_nomissing")
+tract_only_feats <- c("ahrq1_social_trct_nomissing",
+        "ahrq2_economic_trct_nomissing",
+        "ahrq3_education_trct_nomissing",
+        "ahrq4_physicalinfrastructure_trct_nomissing",
+        "ahrq5_healthcarequality_trct_nomissing",
+        "total_ahrq_trct_nomissing"
+        )
+
+```{r}
+# feat_sets <- c("Set 1", "Set 2", "Set 3", "Set 4", "Set 5", "Set 6")
+
+# Pred performance
+
+# M1: M1
+# total_ahrq_cty_nomissing: M6
+
+county_feat_sets <- c("M1",
+        "M2",
+        "M3_county_DF1_nm",
+        "M4_DF1_nm_demo",
+        "M5_and_demo",
+        "M6_total_ahrq_cty_DF1_nm")
+county_only_feats <- c("M6_total_ahrq_cty_DF1_nm",
+                       "DF1_nm_county_AHRQ_domain1",
+        "DF1_nm_county_AHRQ_domain2",
+        "DF1_nm_county_AHRQ_domain3",
+        "DF1_nm_county_AHRQ_domain4",
+        "DF1_nm_county_AHRQ_domain5"
+        )
+tract_only_feats <- c("M6_total_ahrq_trct_DF1_nm",
+                      "DF1_nm_tract_AHRQ_domain1",
+        "DF1_nm_tract_AHRQ_domain2",
+        "DF1_nm_tract_AHRQ_domain3",
+        "DF1_nm_tract_AHRQ_domain4",
+        "DF1_nm_tract_AHRQ_domain5"
+        )
+
+
+
+# Remove duplicate feat:         "total_ahrq_cty_nomissing"
+total_feats_used <- c("M1",
+        "M2",
+        "M3_county_DF1_nm",
+        "M4_DF1_nm_demo",
+        "M5_and_demo",
+        "M6_total_ahrq_cty_DF1_nm",
+        
+        "DF1_nm_county_AHRQ_domain1",
+        "DF1_nm_county_AHRQ_domain2",
+        "DF1_nm_county_AHRQ_domain3",
+        "DF1_nm_county_AHRQ_domain4",
+        "DF1_nm_county_AHRQ_domain5",
+        
+        "DF1_nm_tract_AHRQ_domain1",
+        "DF1_nm_tract_AHRQ_domain2",
+        "DF1_nm_tract_AHRQ_domain3",
+        "DF1_nm_tract_AHRQ_domain4",
+        "DF1_nm_tract_AHRQ_domain5",
+        "total_ahrq_trct_nomissing"
+        )
+
+long_names <- c("Set 1",
+                "Set 2",
+                "Set 3",
+                "Set 4",
+                "Set 5",
+                "Set 6",
+                
+                "County: Domain 1",
+                "County: Domain 2",
+                "County: Domain 3",
+                "County: Domain 4",
+                "County: Domain 5",
+                
+                "Tract: Domain 1",
+                "Tract: Domain 2",
+                "Tract: Domain 3",
+                "Tract: Domain 4",
+                "Tract: Domain 5",
+                "Tract: All"
+                )
+
+long_county_feat_sets <- c("Set 1", 
+        "Set 2",
+        "Set 3",
+        "Set 4",
+        "Set 5",
+        "Set 6")
+long_county_only_feats <- c( "County: Domain 1",
+        "County: Domain 2",
+        "County: Domain 3",
+        "County: Domain 4",
+        "County: Domain 5",
+        "County: All")
+long_tract_only_feats <- c("Tract: Domain 1",
+        "Tract: Domain 2",
+        "Tract: Domain 3",
+        "Tract: Domain 4",
+        "Tract: Domain 5",
+        "Tract: All"
+        )
+
+# F1: using feat 
+f1_avg <- pred_hf_results[pred_hf_results$feat %in% total_feats_used, ] %>% group_by(feat) %>% summarise(mean_f1 = mean(f1)) %>% mutate(mean_f1 = round(mean_f1, 3)) 
+f1_avg
+
+
+# AUC: using feat 
+auc_avg <- pred_hf_results[pred_hf_results$feat %in% total_feats_used, ]  %>% group_by(feat) %>% summarise(mean_auc = mean(auc)) %>% mutate(mean_auc = round(mean_auc, 3)) 
+auc_avg
+
+
+
+# Fairness
+eo_ratio_avg <- fair_hf_results[fair_hf_results$feat %in% total_feats_used, ]  %>% group_by(feat) %>% summarise(mean_eo_ratio = mean(eo_ratio)) %>% mutate(mean_eo_ratio = round(mean_eo_ratio, 3)) 
+eo_ratio_avg
+
+
+# Temp rename for plotting.
+# auc_avg <- f1_avg
+# names(auc_avg)[names(auc_avg) == "mean_f1"] <- "mean_auc"
+```
+
+# Run tests:
+```{r}
+library(dplyr)
+library(tidyr)
+library(knitr)
+
+
+fairness_feats_curr <- tract_only_feats # tract_only_feats, county_feat_sets
+
+# Function to perform Wilcoxon test safely
+perform_wilcoxon_test <- function(baseline_results, current_results, metric_col) {
+  # Ensure we're working with the correct columns
+  baseline_values <- baseline_results[[metric_col]]
+  current_values <- current_results[[metric_col]]
+  
+  # Perform Wilcoxon test if possible
+  if (length(baseline_values) == length(current_values)) {
+    wilcox_test <- wilcox.test(
+      baseline_values, 
+      current_values, 
+      paired = TRUE, 
+      alternative = "two.sided"
+    )
+    return(wilcox_test$p.value)
+  } else {
+    warning(paste("Unequal lengths for", metric_col, 
+                  "Baseline:", length(baseline_values), 
+                  "Current:", length(current_values)))
+    return(NA)
+  }
+}
+
+# Prepare a dataframe to store Wilcoxon test results
+wilcoxon_results <- data.frame(
+  metric = character(),
+  feature_set = character(),
+  p_value = numeric(),
+  stringsAsFactors = FALSE
+)
+
+# List of feature sets to compare
+feature_sets <- county_only_feats[-1]  # Exclude baseline
+baseline_feat <- "M6_total_ahrq_trct_DF1_nm" # M6_total_ahrq_trct_DF1_nm, M6_total_ahrq_cty_DF1_nm, M1
+
+# Metrics to test
+metrics_to_test <- c("auc", "f1", "eo_ratio")
+
+# Determine which results dataframe to use for each metric
+results_dfs <- list(
+  auc = pred_hf_results,
+  f1 = pred_hf_results,
+  eo_ratio = fair_hf_results
+)
+
+# Perform Wilcoxon signed-rank test for each metric
+for (metric_name in metrics_to_test) {
+  # Get the full results dataframe for this metric
+  full_results <- results_dfs[[metric_name]]
+  
+  # Baseline data
+  baseline_data <- full_results %>% 
+    filter(feat == baseline_feat)
+  
+  # Compare each feature set to baseline
+  for (current_feat in feature_sets) {
+    # Current feature set data
+    current_data <- full_results %>% 
+      filter(feat == current_feat)
+    
+    # Perform Wilcoxon test
+    p_value <- perform_wilcoxon_test(baseline_data, current_data, metric_name)
+    
+    # Store results
+    wilcoxon_results <- rbind(wilcoxon_results, data.frame(
+      metric = metric_name,
+      feature_set = current_feat,
+      p_value = p_value
+    ))
+  }
+}
+
+# Prepare the table of Wilcoxon test results
+wilcoxon_table <- wilcoxon_results %>%
+  pivot_wider(
+    names_from = metric,
+    values_from = p_value,
+    names_glue = "{metric}_p"
+  ) %>%
+  mutate(
+    across(where(is.numeric), ~ sprintf("%.3f", .)),
+    feature_set = fairness_feats_curr[-1]  # Use long names for readability
+  )
+
+# Print the Wilcoxon signed-rank test results
+kable(
+  wilcoxon_table,
+  col.names = c(
+    "Feature Set", 
+    "AUC p-value", 
+    "F1 p-value", 
+    "EO Ratio p-value"
+  ),
+  caption = "Wilcoxon Signed-Rank Test P-values Comparing Feature Sets to Baseline"
+)
+```
+
+
+
+
+
+
+# Change names.
+```{r}
+
+name_mapping <- setNames(long_names, total_feats_used)
+
+# Replace values in auc_avg$feat
+auc_avg$feat <- name_mapping[match(auc_avg$feat, total_feats_used)]
+f1_avg$feat <- name_mapping[match(f1_avg$feat, total_feats_used)]
+eo_ratio_avg$feat <- name_mapping[match(eo_ratio_avg$feat, total_feats_used)]
+
+```
+
+
+```{r}
+
+# Calculate the balance score (product of x and y values)
+balance_scores <- auc_avg$mean_auc * eo_ratio_avg$mean_eo_ratio
+
+# Find the index of the maximum balance score
+best_index <- which.max(balance_scores)
+
+# Get the best feature set and its corresponding values
+best_feat_set <- auc_avg$feat[best_index] # Order matches eo_ratio_avg$feat
+best_auroc <- auc_avg$mean_auc[best_index]
+best_eo <- eo_ratio_avg$mean_eo_ratio[best_index]
+
+# Print the best feature set and its values
+cat("Best feature set:", best_feat_set, "\n")
+cat("AUROC:", best_auroc, "\n")
+cat("EO ratio:", best_eo, "\n")
+
+############################
+# Plot the AUROC vs EO ratio
+# Define the three color palettes
+colors_county_feat_sets <- brewer.pal(length(long_county_feat_sets), "Set1")
+colors_county_only_feats <- brewer.pal(length(long_county_only_feats), "Set2")
+colors_tract_only_feats <- brewer.pal(length(long_tract_only_feats), "Set3")
+
+# Create a named vector for colors
+color_mapping <- c(setNames(colors_county_feat_sets, long_county_feat_sets),
+                   setNames(colors_county_only_feats, long_county_only_feats),
+                   setNames(colors_tract_only_feats, long_tract_only_feats))
+
+# Assign colors to each point based on the feature set
+point_colors <- color_mapping[auc_avg$feat]
+
+# Adjust margins to make space for the legend
+par(mar = c(5, 4, 4, 15) + 0.1)
+
+# Plot
+plot(eo_ratio_avg$mean_eo_ratio, auc_avg$mean_auc, type = "p", col = point_colors, pch = 19,
+     xlab = "EO Ratio", ylab = "AUROC", xlim = c(0, 1), ylim = c(0, 1))
+
+# Highlight the best point
+points(best_eo, best_auroc, col = "red", pch = 19, cex = 1.5)
+
+# Create a combined legend
+legend_labels <- c(long_county_feat_sets, long_county_only_feats, long_tract_only_feats)
+legend_colors <- color_mapping[legend_labels]
+
+# Add legend outside the plot area
+legend("topright", inset = c(-0.5, 0), legend = legend_labels, col = legend_colors, pch = 19, xpd = TRUE)
+
+
+
+
+```
+
+```{r}
+# Define the three color palettes
+colors_county_feat_sets <- brewer.pal(length(long_county_feat_sets), "Set1")
+colors_county_only_feats <- brewer.pal(length(long_county_only_feats), "Set2")
+colors_tract_only_feats <- brewer.pal(length(long_tract_only_feats), "Set3")
+
+# Define the three shapes
+shapes_county_feat_sets <- rep(19, length(long_county_feat_sets))  # circles
+shapes_county_only_feats <- rep(17, length(long_county_only_feats))  # triangles
+shapes_tract_only_feats <- rep(15, length(long_tract_only_feats))  # squares
+
+
+# Find the point with the highest AUROC and EO ratio
+max_auroc_index <- which.max(auc_avg$mean_auc)
+max_eo_index <- which.max(eo_ratio_avg$mean_eo_ratio)
+
+max_auroc <- auc_avg$mean_auc[max_auroc_index]
+max_eo <- eo_ratio_avg$mean_eo_ratio[max_eo_index]
+
+# Print the best feature set and its values
+cat("Best feature set:", best_feat_set, "\n")
+cat("AUROC:", best_auroc, "\n")
+cat("EO ratio:", best_eo, "\n")
+
+
+
+# Create named vectors for colors and shapes
+color_mapping <- c(setNames(colors_county_feat_sets, long_county_feat_sets),
+                   setNames(colors_county_only_feats, long_county_only_feats),
+                   setNames(colors_tract_only_feats, long_tract_only_feats))
+
+shape_mapping <- c(setNames(shapes_county_feat_sets, long_county_feat_sets),
+                   setNames(shapes_county_only_feats, long_county_only_feats),
+                   setNames(shapes_tract_only_feats, long_tract_only_feats))
+
+# Assign colors and shapes to each point based on the feature set
+point_colors <- color_mapping[auc_avg$feat]
+point_shapes <- shape_mapping[auc_avg$feat]
+
+# Adjust margins to make space for the legend
+par(mar = c(5, 4, 4, 15) + 0.1)
+
+# Plot
+plot(eo_ratio_avg$mean_eo_ratio, auc_avg$mean_auc, type = "p", col = point_colors, pch = point_shapes,
+     xlab = "EO Ratio", ylab = "AUROC", xlim = c(0, 1), ylim = c(0, 1))
+
+# Highlight the best point
+points(best_eo, best_auroc, col = "red", pch = 19, cex = 1.5)
+
+# Add dashed black lines at the points with the highest f1 and EO ratio
+abline(h = max_auroc, col = "black", lty = 2)  # Horizontal dashed line for max f1
+abline(v = max_eo, col = "black", lty = 2)     # Vertical dashed line for max EO ratio
+
+
+# Create a combined legend
+legend_labels <- c(long_county_feat_sets, long_county_only_feats, long_tract_only_feats)
+legend_colors <- color_mapping[legend_labels]
+legend_shapes <- shape_mapping[legend_labels]
+
+# Add legend outside the plot area
+legend("topright", inset = c(-0.5, 0), legend = legend_labels, col = legend_colors, pch = legend_shapes, xpd = TRUE)
+
+
+```
+
