@@ -1,0 +1,1785 @@
+"Variable","Domain","MissingRate"
+"ACS_AVG_HH_SIZE_countylevel","1. social context",0.00278055833611389
+"ACS_GINI_INDEX_countylevel","2. economic context",0.00278055833611389
+"ACS_MDN_GRNDPRNT_INC_countylevel","2. economic context",1.45701256812368
+"ACS_MDN_GRNDPRNT_NO_PRNT_INC_countylevel","2. economic context",4.29040151262373
+"ACS_MDN_OWNER_COST_MORTGAGE_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_MDN_OWNER_COST_NO_MORTG_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_MEDIAN_AGE_countylevel","1. social context",0.00278055833611389
+"ACS_MEDIAN_AGE_FEMALE_countylevel","1. social context",0.00278055833611389
+"ACS_MEDIAN_AGE_MALE_countylevel","1. social context",0.00278055833611389
+"ACS_MEDIAN_HH_INC_countylevel","2. economic context",0.00278055833611389
+"ACS_MEDIAN_HH_INC_AIAN_countylevel","2. economic context",13.7832276721166
+"ACS_MEDIAN_HH_INC_ASIAN_countylevel","2. economic context",7.17384050717384
+"ACS_MEDIAN_HH_INC_BLACK_countylevel","2. economic context",0.925925925925926
+"ACS_MEDIAN_HH_INC_HISP_countylevel","2. economic context",1.99644088532977
+"ACS_MEDIAN_HH_INC_MULTI_countylevel","2. economic context",3.45901457012568
+"ACS_MEDIAN_HH_INC_NHPI_countylevel","2. economic context",38.7081525970415
+"ACS_MEDIAN_HH_INC_OTHER_countylevel","2. economic context",7.02090979868758
+"ACS_MEDIAN_HH_INC_WHITE_countylevel","2. economic context",0.00278055833611389
+"ACS_MEDIAN_HOME_VALUE_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_MEDIAN_INC_F_countylevel","2. economic context",0.00278055833611389
+"ACS_MEDIAN_INC_M_countylevel","2. economic context",0.00278055833611389
+"ACS_MEDIAN_NONVET_INC_countylevel","2. economic context",0.497719942164387
+"ACS_MEDIAN_RENT_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_MEDIAN_VET_INC_countylevel","2. economic context",0.497719942164387
+"ACS_MEDIAN_YEAR_BUILT_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_10UNITS_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_1UP_OWNER_1ROOM_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_1UP_PERS_1ROOM_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_1UP_RENT_1ROOM_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_ADMIN_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_AGE_0_17_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AGE_0_4_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AGE_10_14_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AGE_15_17_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AGE_18_29_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AGE_18_44_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AGE_30_44_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AGE_45_64_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AGE_50_64_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AGE_5_9_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AGE_ABOVE65_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AGE_ABOVE80_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AIAN_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AIAN_COMB_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_AIAN_FEMALE_countylevel","1. social context",1.29017906795685
+"ACS_PCT_AIAN_MALE_countylevel","1. social context",1.29017906795685
+"ACS_PCT_AIAN_NONHISP_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_API_LANG_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_ARMED_FORCES_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_ART_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_ASIAN_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_ASIAN_COMB_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_ASIAN_FEMALE_countylevel","1. social context",0.461572683794906
+"ACS_PCT_ASIAN_MALE_countylevel","1. social context",0.461572683794906
+"ACS_PCT_ASIAN_NONHISP_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_BACHELOR_DGR_countylevel","3. education",0.00278055833611389
+"ACS_PCT_BLACK_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_BLACK_COMB_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_BLACK_FEMALE_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_BLACK_MALE_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_BLACK_NONHISP_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_CHILDREN_GRANDPARENT_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_CHILD_1FAM_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_CHILD_DISAB_countylevel","1. social context",25.1779557335113
+"ACS_PCT_COLLEGE_ASSOCIATE_DGR_countylevel","3. education",0.00278055833611389
+"ACS_PCT_COMMT_15MIN_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_COMMT_29MIN_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_COMMT_59MIN_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_COMMT_60MINUP_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_CONSTRUCT_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_CTZ_ABOVE18_countylevel","1. social context",88.769324880436
+"ACS_PCT_CTZ_NATURALIZED_countylevel","1. social context",0.00834167500834168
+"ACS_PCT_CTZ_NONUS_BORN_countylevel","1. social context",0.00834167500834168
+"ACS_PCT_CTZ_US_BORN_countylevel","1. social context",0.00834167500834168
+"ACS_PCT_DIF_STATE_countylevel","4. physical infrastructure",0.00834167500834168
+"ACS_PCT_DISABLE_countylevel","1. social context",25.1779557335113
+"ACS_PCT_DIVORCED_F_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_DIVORCED_M_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_DRIVE_2WORK_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_EDUC_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_EMPLOYED_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_ENGLISH_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_ENGL_NOT_ALL_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_ENGL_NOT_WELL_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_ENGL_VERY_WELL_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_ENGL_WELL_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_FEMALE_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_FINANCE_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_FOREIGN_BORN_countylevel","1. social context",0.00834167500834168
+"ACS_PCT_GOVT_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_GRADUATE_DGR_countylevel","3. education",0.00278055833611389
+"ACS_PCT_GRANDP_NO_RESPS_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_GRANDP_RESPS_NO_P_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_GRANDP_RESPS_P_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_GRP_QRT_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_GULFWAR_1990_2001_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_GULFWAR_2001_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_GULFWAR_VIETNAM_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HEALTH_INC_138_199_countylevel","2. economic context",35.7635413190969
+"ACS_PCT_HEALTH_INC_200_399_countylevel","2. economic context",35.7635413190969
+"ACS_PCT_HEALTH_INC_ABOVE400_countylevel","2. economic context",35.7635413190969
+"ACS_PCT_HEALTH_INC_BELOW137_countylevel","2. economic context",35.7635413190969
+"ACS_PCT_HH_1FAM_FOOD_STMP_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_HH_1PERS_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HH_ABOVE65_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HH_ALONE_ABOVE65_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HH_BROADBAND_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_BROADBAND_ANY_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_BROADBAND_ONLY_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_CELLULAR_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_CELLULAR_ONLY_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_DIAL_INTERNET_ONLY_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_FOOD_STMP_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_HH_FOOD_STMP_BLW_POV_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_HH_INC_10000_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_HH_INC_100000_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_HH_INC_14999_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_HH_INC_24999_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_HH_INC_49999_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_HH_INC_99999_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_HH_INTERNET_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_INTERNET_NO_SUBS_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_KID_1PRNT_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HH_LIMIT_ENGLISH_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HH_NO_COMP_DEV_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_NO_FD_STMP_BLW_POV_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_HH_NO_INTERNET_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_OTHER_COMP_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_OTHER_COMP_ONLY_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_PC_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_PC_ONLY_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_PUB_ASSIST_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_HH_SAT_INTERNET_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_SMARTPHONE_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_SMARTPHONE_ONLY_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_TABLET_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HH_TABLET_ONLY_countylevel","4. physical infrastructure",77.9918807696586
+"ACS_PCT_HISPANIC_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HISP_FEMALE_countylevel","1. social context",0.0222444666889111
+"ACS_PCT_HISP_MALE_countylevel","1. social context",0.0222444666889111
+"ACS_PCT_HOUSEHOLDER_AIAN_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HOUSEHOLDER_ASIAN_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HOUSEHOLDER_BLACK_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HOUSEHOLDER_MULT_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HOUSEHOLDER_NHPI_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HOUSEHOLDER_OTHER_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HOUSEHOLDER_WHITE_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_HS_GRADUATE_countylevel","3. education",0.00278055833611389
+"ACS_PCT_HU_BOT_TANK_LP_GAS_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_BUILT_1979_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_COAL_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_ELEC_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_KITCHEN_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_MOBILE_HOME_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_NO_FUEL_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_NO_VEH_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_OIL_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_OTHER_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_PLUMBING_countylevel","4. physical infrastructure",0.00556111667222778
+"ACS_PCT_HU_SOLAR_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_UTILITY_GAS_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_HU_WOOD_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_INC50_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_INC50_ABOVE65_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_INC50_BELOW17_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_INFORM_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_IN_COUNTY_MOVE_countylevel","4. physical infrastructure",0.00834167500834168
+"ACS_PCT_IN_STATE_MOVE_countylevel","4. physical infrastructure",0.00834167500834168
+"ACS_PCT_LT_HS_countylevel","3. education",0.00278055833611389
+"ACS_PCT_MALE_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_MANUFACT_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_MARRIED_SP_AB_F_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_MARRIED_SP_AB_M_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_MARRIED_SP_PR_F_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_MARRIED_SP_PR_M_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_MEDICAID_ANY_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_MEDICAID_ANY_BELOW64_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_MEDICARE_ONLY_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_MULT_RACE_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_MULT_RACE_FEMALE_countylevel","1. social context",0.0389278167055945
+"ACS_PCT_MULT_RACE_MALE_countylevel","1. social context",0.0389278167055945
+"ACS_PCT_MULT_RACE_NONHISP_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_NATURE_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_NHPI_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_NHPI_COMB_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_NHPI_FEMALE_countylevel","1. social context",13.5969302635969
+"ACS_PCT_NHPI_MALE_countylevel","1. social context",13.5969302635969
+"ACS_PCT_NHPI_NONHISP_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_NONCTN_1990_countylevel","1. social context",0.00834167500834168
+"ACS_PCT_NONCTN_1999_countylevel","1. social context",0.00834167500834168
+"ACS_PCT_NONCTN_2000_countylevel","1. social context",0.00834167500834168
+"ACS_PCT_NONCTN_2010_countylevel","1. social context",25.1835168501835
+"ACS_PCT_NONVET_DISABLE_18_64_countylevel","1. social context",25.1779557335113
+"ACS_PCT_NONVET_POV_18_64_countylevel","2. economic context",25.1779557335113
+"ACS_PCT_NON_CITIZEN_countylevel","1. social context",0.00834167500834168
+"ACS_PCT_NOT_LABOR_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_NO_WORK_NO_SCHL_16_19_countylevel","3. education",0.00278055833611389
+"ACS_PCT_NVR_MARRIED_F_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_NVR_MARRIED_M_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_OTHER_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_OTHER_FEMALE_countylevel","1. social context",0.378155933711489
+"ACS_PCT_OTHER_INS_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_OTHER_MALE_countylevel","1. social context",0.378155933711489
+"ACS_PCT_OTHER_NONHISP_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_OTHER_RACE_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_OTH_EURP_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_OTH_LANG_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_OWNER_HU_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_OWNER_HU_CHILD_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_OWNER_HU_COST_30PCT_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_OWNER_HU_COST_50PCT_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_PERSON_INC_100_124_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_PERSON_INC_125_199_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_PERSON_INC_ABOVE200_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_PERSON_INC_BELOW99_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_POSTHS_ED_countylevel","3. education",0.00278055833611389
+"ACS_PCT_POV_AIAN_countylevel","2. economic context",1.5404293182071
+"ACS_PCT_POV_ASIAN_countylevel","2. economic context",0.500500500500501
+"ACS_PCT_POV_BLACK_countylevel","2. economic context",0.0194639083527972
+"ACS_PCT_POV_HISPANIC_countylevel","2. economic context",0.0695139584028473
+"ACS_PCT_POV_MULTI_countylevel","2. economic context",0.05005005005005
+"ACS_PCT_POV_NHPI_countylevel","2. economic context",13.9250361472584
+"ACS_PCT_POV_OTHER_countylevel","2. economic context",0.525525525525526
+"ACS_PCT_POV_WHITE_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_PRIVATE_ANY_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PRIVATE_ANY_BELOW64_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PRIVATE_EMPL_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PRIVATE_EMPL_BELOW64_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PRIVATE_MDCR_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PRIVATE_MDCR_35_64_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PRIVATE_OTHER_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PRIVATE_OTHER_BELOW64_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PRIVATE_SELF_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PRIVATE_SELF_BELOW64_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PROFESS_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_PUBLIC_OTHER_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PUBLIC_ONLY_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PUBLIC_OTHER_BELOW64_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PUBL_TRANSIT_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_PUB_COMMT_15MIN_countylevel","4. physical infrastructure",2.07985763541319
+"ACS_PCT_PUB_COMMT_29MIN_countylevel","4. physical infrastructure",2.07985763541319
+"ACS_PCT_PUB_COMMT_59MIN_countylevel","4. physical infrastructure",2.07985763541319
+"ACS_PCT_PUB_COMMT_60MINUP_countylevel","4. physical infrastructure",2.07985763541319
+"ACS_PCT_PVT_EMPL_DRCT_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PVT_EMPL_DRCT_BELOW64_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_PVT_NONPROFIT_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_PVT_PROFIT_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_RENTER_HU_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_RENTER_HU_ABOVE65_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_RENTER_HU_CHILD_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_RENTER_HU_COST_30PCT_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_RENTER_HU_COST_50PCT_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_RETAIL_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_SAME_SEX_UNMRD_PRTNR_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_SELF_MDCR_ABOVE35_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_SPANISH_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_TAXICAB_2WORK_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_TRANSPORT_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_TRICARE_VA_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_TRICARE_VA_BELOW64_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_UNEMPLOY_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_UNINSURED_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_UNINSURED_BELOW64_countylevel","5. healthcare context",35.7635413190969
+"ACS_PCT_VACANT_HU_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_VET_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_VET_BACHELOR_countylevel","3. education",0.00278055833611389
+"ACS_PCT_VET_COLLEGE_countylevel","3. education",0.00278055833611389
+"ACS_PCT_VET_DISABLE_18_64_countylevel","1. social context",25.1779557335113
+"ACS_PCT_VET_HS_countylevel","3. education",0.00278055833611389
+"ACS_PCT_VET_LABOR_FORCE_18_64_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_VET_POV_18_64_countylevel","2. economic context",25.1779557335113
+"ACS_PCT_VET_UNEMPL_18_64_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_VIETNAM_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_WALK_2WORK_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_WHITE_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_WHITE_COMB_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_WHITE_FEMALE_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_WHITE_MALE_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_WHITE_NONHISP_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_WHOLESALE_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_WIDOWED_F_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_WIDOWED_M_countylevel","1. social context",0.00278055833611389
+"ACS_PCT_WORK_NO_CAR_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_PCT_WORK_RES_F_countylevel","2. economic context",0.00278055833611389
+"ACS_PCT_WORK_RES_M_countylevel","2. economic context",0.00278055833611389
+"ACS_PER_CAPITA_INC_countylevel","2. economic context",0.00278055833611389
+"ACS_TOT_CIVIL_EMPLOY_POP_countylevel","2. economic context",0.00278055833611389
+"ACS_TOT_CIVIL_NONINST_POP_countylevel","1. social context",25.1779557335113
+"ACS_TOT_CIVIL_NONINST_POP_POV_countylevel","2. economic context",25.1779557335113
+"ACS_TOT_CIVIL_POP_ABOVE18_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_CIVIL_POP_POV_countylevel","2. economic context",25.1779557335113
+"ACS_TOT_CIVIL_VET_POP_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_CIVIL_VET_POP_ABOVE25_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_GRANDCHILDREN_GP_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_HH_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_HU_countylevel","4. physical infrastructure",0.00278055833611389
+"ACS_TOT_OWN_CHILD_BELOW17_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_POP_16_19_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_POP_ABOVE15_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_POP_ABOVE16_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_POP_ABOVE25_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_POP_ABOVE5_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_POP_POV_countylevel","2. economic context",0.00278055833611389
+"ACS_TOT_POP_US_ABOVE1_countylevel","1. social context",0.00834167500834168
+"ACS_TOT_POP_WT_countylevel","1. social context",0.00278055833611389
+"ACS_TOT_CIVILIAN_LABOR_countylevel","2. economic context",0.00278055833611389
+"ACS_TOT_WORKER_HH_countylevel","2. economic context",0.00278055833611389
+"ACS_TOT_WORKER_NWFH_countylevel","2. economic context",0.00278055833611389
+"AHA_HHI_SHRTTRM_ACUTE_ADMSN_CBSA_countylevel","5. healthcare context",59.4789233678122
+"AHA_HHI_SHRTTRM_ACUTE_ADMSN_CTY_countylevel","5. healthcare context",58.2165498832166
+"AHA_HHI_SHRTTRM_ACUTE_DSCHR_CBSA_countylevel","5. healthcare context",59.4789233678122
+"AHA_HHI_SHRTTRM_ACUTE_DSCHR_CTY_countylevel","5. healthcare context",58.2499165832499
+"AHA_HHI_SHRTTRM_ACUTE_LOS_CBSA_countylevel","5. healthcare context",59.4789233678122
+"AHA_HHI_SHRTTRM_ACUTE_LOS_CTY_countylevel","5. healthcare context",58.2165498832166
+"AHRF_ADV_NURSES_RATE_countylevel","5. healthcare context",0.00556111667222778
+"AHRF_ALLERGY_IMM_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_ANESTH_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_ARBRNE_STNGLT_ISO_ROOM_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_ARBRNE_ST_G_ISO_HOSPS_RATE_countylevel","5. healthcare context",10.2991880769659
+"AHRF_ARBRNE_ST_G_ISO_ROOMS_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_CARDIAC_IC_BEDS_RATE_countylevel","5. healthcare context",10.2991880769659
+"AHRF_CARDIAC_IC_HOSP_RATE_countylevel","5. healthcare context",10.2991880769659
+"AHRF_CARDIOVAS_SPEC_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_CHLD_PSYCH_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_CLIN_NURSE_SPEC_RATE_countylevel","5. healthcare context",0.00556111667222778
+"AHRF_COLON_SRG_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_COM_HEALTH_GRANT_RATE_countylevel","5. healthcare context",35.7635413190969
+"AHRF_DAYS_AIR_QLT_countylevel","4. physical infrastructure",34.4622400177956
+"AHRF_DENTISTS_RATE_countylevel","5. healthcare context",0.00556111667222778
+"AHRF_DERMATOLOGY_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_DUAL_ELIG_countylevel","5. healthcare context",64.2503614725837
+"AHRF_ECO_DEP_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_ER_MED_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_FARM_DEP_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_GASTROENTEROLOGY_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_GENRL_SURG_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_GEN_INTERNAL_MED_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_GEN_PREV_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_GOV_DEP_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_HIGH_POV_USDA_countylevel","2. economic context",89.6563229896563
+"AHRF_HOSPS_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_HOSP_BEDS_LT_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_HOSP_BED_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_HOSP_MOBILE_RATE_countylevel","5. healthcare context",10.2991880769659
+"AHRF_HOSP_TEACHING_countylevel","5. healthcare context",10.2964075186297
+"AHRF_HOSP_TELE_ICU_RATE_countylevel","5. healthcare context",77.9918807696586
+"AHRF_HOSP_TELE_STROKE_RATE_countylevel","5. healthcare context",77.9918807696586
+"AHRF_HPSA_DENTIST_countylevel","5. healthcare context",10.3436770103437
+"AHRF_HPSA_MENTAL_countylevel","5. healthcare context",10.3436770103437
+"AHRF_HPSA_PRIM_countylevel","5. healthcare context",10.3436770103437
+"AHRF_IP_DAY_NH_HOSP_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_IP_DAY_STNG_LT_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_IP_DAY_ST_G_HOSP_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_LOW_EDUC_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_LOW_EMP_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_LT_HOSP_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_MANF_DEP_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_MARKET_ENROL_countylevel","5. healthcare context",56.6677788900011
+"AHRF_MARKET_ENROL_150_countylevel","5. healthcare context",56.6677788900011
+"AHRF_MARKET_ENROL_200_countylevel","5. healthcare context",56.6733400066733
+"AHRF_MARKET_ENROL_250_countylevel","5. healthcare context",56.6872427983539
+"AHRF_MARKET_ENROL_300_countylevel","5. healthcare context",56.8818818818819
+"AHRF_MARKET_ENROL_400_countylevel","5. healthcare context",56.9680791903014
+"AHRF_MARKET_ENROL_ACTIVE_countylevel","5. healthcare context",56.6705594483372
+"AHRF_MARKET_ENROL_AUTO_countylevel","5. healthcare context",56.6705594483372
+"AHRF_MARKET_ENROL_NEW_countylevel","5. healthcare context",56.6733400066733
+"AHRF_MARKET_ENROL_NO_ASST_countylevel","5. healthcare context",89.2197753308864
+"AHRF_MARKET_ENROL_OTHER_countylevel","5. healthcare context",89.2169947725503
+"AHRF_MCR_BN_READM_RATE_countylevel","5. healthcare context",0.0166833500166834
+"AHRF_MDS_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_MEDICAID_ELIG_countylevel","5. healthcare context",64.2503614725837
+"AHRF_MEDICAID_FEMALE_ELIG_countylevel","5. healthcare context",64.2503614725837
+"AHRF_MEDICAID_MALE_ELIG_countylevel","5. healthcare context",64.2503614725837
+"AHRF_MEDSURGIC_BEDS_RATE_countylevel","5. healthcare context",10.2991880769659
+"AHRF_MEDSURGIC_HOSP_RATE_countylevel","5. healthcare context",10.2991880769659
+"AHRF_MED_SPEC_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_MINE_DEP_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_NEONATALIC_BEDS_RATE_countylevel","5. healthcare context",10.2991880769659
+"AHRF_NEONATALIC_HOSP_RATE_countylevel","5. healthcare context",10.2991880769659
+"AHRF_NEUROLOGICAL_SURG_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_NHSC_ACTIVE_RATE_countylevel","5. healthcare context",56.495384273162
+"AHRF_NHSC_FTE_PROV_RATE_countylevel","5. healthcare context",35.7635413190969
+"AHRF_NH_BED_STNGH_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_NONSP_DEP_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_NURSE_ANESTH_RATE_countylevel","5. healthcare context",0.00556111667222778
+"AHRF_NURSE_MIDWIVES_RATE_countylevel","5. healthcare context",0.00556111667222778
+"AHRF_NURSE_PRACT_RATE_countylevel","5. healthcare context",0.00556111667222778
+"AHRF_OB_GYN_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_OPHTHALMOLOGY_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_OPRT_ROOM_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_OP_VST_LT_ER_OP_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_OP_VST_ST_G_ER_OP_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_OP_VST_ST_G_OTHR_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_ORTH_SURG_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_OTHER_SPEC_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_OTOLARYNGOLOGY_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_PCT_GOOD_AQ_countylevel","4. physical infrastructure",34.4622400177956
+"AHRF_PCT_PRESC_PEN_countylevel","5. healthcare context",0
+"AHRF_PEDIATRICS_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_PER_CHLD_POV_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_PER_POV_USDA_countylevel","2. economic context",89.6563229896563
+"AHRF_PHYSICIAN_ASSIST_RATE_countylevel","5. healthcare context",0.00556111667222778
+"AHRF_PHYS_PRIMARY_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_PLASTIC_SURG_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_POP_LOSS_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_PRESC_ENROLLMENT_countylevel","5. healthcare context",0
+"AHRF_PREV_HOSP_RATE_countylevel","5. healthcare context",25.1862974085196
+"AHRF_PSYCH_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_PULMONARY_SPEC_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_RADI_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_REC_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_RET_DEST_USDA_countylevel","2. economic context",89.7035924813703
+"AHRF_RURL_REFRRL_CNT_RATE_countylevel","5. healthcare context",10.2991880769659
+"AHRF_ST_COMM_HOSP_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_ST_G_HOSP_BED_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_ST_G_HOSP_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_ST_N_G_HOSP_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_SURG_OPRN_IP_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_SURG_OPRN_OP_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_SURG_SPECS_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_THORACIC_SURG_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_TOT_ADV_NURSES_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_TOT_ALLERGY_IMM_countylevel","5. healthcare context",0
+"AHRF_TOT_ANESTH_countylevel","5. healthcare context",0
+"AHRF_TOT_ARBRNE_STNGLT_ISO_ROOM_countylevel","5. healthcare context",0
+"AHRF_TOT_ARBRNE_ST_G_ISO_HOSPS_countylevel","5. healthcare context",10.2964075186297
+"AHRF_TOT_ARBRNE_ST_G_ISO_ROOMS_countylevel","5. healthcare context",0
+"AHRF_TOT_CARDIAC_IC_BEDS_countylevel","5. healthcare context",10.2964075186297
+"AHRF_TOT_CARDIAC_IC_HOSP_countylevel","5. healthcare context",10.2964075186297
+"AHRF_TOT_CARDIOVAS_SPEC_countylevel","5. healthcare context",0
+"AHRF_TOT_CHLD_PSYCH_countylevel","5. healthcare context",0
+"AHRF_TOT_CLIN_NURSE_SPEC_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_TOT_COLON_SRG_countylevel","5. healthcare context",0
+"AHRF_TOT_COM_HEALTH_GRANT_countylevel","5. healthcare context",35.7635413190969
+"AHRF_TOT_DENTISTS_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_TOT_DERMATOLOGY_countylevel","5. healthcare context",0
+"AHRF_TOT_ER_MED_countylevel","5. healthcare context",0
+"AHRF_TOT_ER_VST_ST_G_HOSP_countylevel","5. healthcare context",0
+"AHRF_TOT_GASTROENTEROLOGY_countylevel","5. healthcare context",0
+"AHRF_TOT_GENRL_SURG_countylevel","5. healthcare context",0
+"AHRF_TOT_GEN_INTERNAL_MED_countylevel","5. healthcare context",0
+"AHRF_TOT_GEN_PREV_countylevel","5. healthcare context",0
+"AHRF_TOT_HOSPS_countylevel","5. healthcare context",0
+"AHRF_TOT_HOSP_ADMISSIONS_countylevel","5. healthcare context",0
+"AHRF_TOT_HOSP_BED_countylevel","5. healthcare context",0
+"AHRF_TOT_HOSP_BEDS_LT_countylevel","5. healthcare context",0
+"AHRF_TOT_HOSP_MOBILE_countylevel","5. healthcare context",10.2964075186297
+"AHRF_TOT_HOSP_TELE_ICU_countylevel","5. healthcare context",77.9918807696586
+"AHRF_TOT_HOSP_TELE_STROKE_countylevel","5. healthcare context",77.9918807696586
+"AHRF_TOT_LT_HOSP_countylevel","5. healthcare context",0
+"AHRF_TOT_MCR_BN_READM_countylevel","5. healthcare context",0.0166833500166834
+"AHRF_TOT_MCR_IP_DAY_ST_G_countylevel","5. healthcare context",0
+"AHRF_TOT_MDCD_IP_DAY_ST_G_countylevel","5. healthcare context",0
+"AHRF_TOT_MDCR_FFS_ACT_COST_countylevel","5. healthcare context",0.00556111667222778
+"AHRF_TOT_MDCR_FFS_STD_COST_countylevel","5. healthcare context",0.00556111667222778
+"AHRF_TOT_MDS_countylevel","5. healthcare context",0
+"AHRF_TOT_MEDSURGIC_BEDS_countylevel","5. healthcare context",10.2964075186297
+"AHRF_TOT_MEDSURGIC_HOSP_countylevel","5. healthcare context",10.2964075186297
+"AHRF_TOT_MED_SPEC_countylevel","5. healthcare context",0
+"AHRF_TOT_NEONATALIC_BEDS_countylevel","5. healthcare context",10.2964075186297
+"AHRF_TOT_NEONATALIC_HOSP_countylevel","5. healthcare context",10.2964075186297
+"AHRF_TOT_NEUROLOGICAL_SURG_countylevel","5. healthcare context",0
+"AHRF_TOT_NHSC_ACTIVE_countylevel","5. healthcare context",56.495384273162
+"AHRF_TOT_NHSC_FTE_PROV_countylevel","5. healthcare context",35.7635413190969
+"AHRF_TOT_NH_BED_STNGH_countylevel","5. healthcare context",0
+"AHRF_TOT_NURSE_ANESTH_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_TOT_NURSE_MIDWIVES_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_TOT_NURSE_PRACT_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_TOT_N_ST_G_EXP_countylevel","5. healthcare context",0
+"AHRF_TOT_N_ST_G_EXP_1000_countylevel","5. healthcare context",10.2964075186297
+"AHRF_TOT_N_ST_G_PAYRLL_countylevel","5. healthcare context",0
+"AHRF_TOT_N_ST_G_PAYRLL_1000_countylevel","5. healthcare context",0
+"AHRF_TOT_OB_GYN_countylevel","5. healthcare context",0
+"AHRF_TOT_OPHTHALMOLOGY_countylevel","5. healthcare context",0
+"AHRF_TOT_OPRT_ROOM_countylevel","5. healthcare context",0
+"AHRF_TOT_ORTH_SURG_countylevel","5. healthcare context",0
+"AHRF_TOT_OTHER_SPEC_countylevel","5. healthcare context",0
+"AHRF_TOT_OTOLARYNGOLOGY_countylevel","5. healthcare context",0
+"AHRF_TOT_OUTPAT_VST_STNGH_countylevel","5. healthcare context",0
+"AHRF_TOT_PEDIATRICS_countylevel","5. healthcare context",0
+"AHRF_TOT_PHYSICIAN_ASSIST_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_TOT_PHYS_PRIMARY_countylevel","5. healthcare context",0
+"AHRF_TOT_PLASTIC_SURG_countylevel","5. healthcare context",0
+"AHRF_TOT_PSYCH_countylevel","5. healthcare context",0
+"AHRF_TOT_PULMONARY_SPEC_countylevel","5. healthcare context",0
+"AHRF_TOT_RADI_countylevel","5. healthcare context",0
+"AHRF_TOT_RURL_REFRRL_CNT_countylevel","5. healthcare context",10.2964075186297
+"AHRF_TOT_STNG_LT_HOSP_ADMS_countylevel","5. healthcare context",0
+"AHRF_TOT_ST_COMM_HOSP_countylevel","5. healthcare context",0
+"AHRF_TOT_ST_COMM_HOSP_ADMS_countylevel","5. healthcare context",0
+"AHRF_TOT_ST_G_HOSP_countylevel","5. healthcare context",0
+"AHRF_TOT_ST_G_HOSP_ADMS_countylevel","5. healthcare context",0
+"AHRF_TOT_ST_G_HOSP_BED_countylevel","5. healthcare context",0
+"AHRF_TOT_ST_N_G_HOSP_countylevel","5. healthcare context",0
+"AHRF_TOT_SURG_SPECS_countylevel","5. healthcare context",0
+"AHRF_TOT_THORACIC_SURG_countylevel","5. healthcare context",0
+"AHRF_TOT_UROL_countylevel","5. healthcare context",0
+"AHRF_TXC_SITE_CNTRL_countylevel","4. physical infrastructure",46.7217217217217
+"AHRF_TXC_SITE_NO_CNTRL_countylevel","4. physical infrastructure",46.7217217217217
+"AHRF_TXC_SITE_NO_DATA_countylevel","4. physical infrastructure",57.3073073073073
+"AHRF_UNEMPLOYED_RATE_countylevel","2. economic context",0.00278055833611389
+"AHRF_UROL_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AHRF_USDA_RUCC_2013_countylevel","6. geography",0.00278055833611389
+"AHRF_VET_countylevel","1. social context",0.00834167500834168
+"AHRF_VET_FEMALE_countylevel","1. social context",0.00834167500834168
+"AHRF_VET_MALE_countylevel","1. social context",0.00834167500834168
+"AMFAR_AMATFAC_RATE_countylevel","5. healthcare context",35.7635413190969
+"AMFAR_AVG_DISTMAT_countylevel","5. healthcare context",89.2225558892225
+"AMFAR_AVG_DISTSSP_countylevel","5. healthcare context",88.769324880436
+"AMFAR_HCVTFAC_RATE_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_HIVHCVTFAC_RATE_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_HIVTFAC_RATE_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_MEDAMATFAC_RATE_countylevel","5. healthcare context",35.7635413190969
+"AMFAR_MEDHCVTFAC_RATE_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_MEDHIVHCVTFAC_RATE_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_MEDHIVTFAC_RATE_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_MEDMHFAC_RATE_countylevel","5. healthcare context",50.4337671004338
+"AMFAR_MEDSAFAC_RATE_countylevel","5. healthcare context",0.00278055833611389
+"AMFAR_MHFAC_RATE_countylevel","5. healthcare context",50.3698142587032
+"AMFAR_MME_PER_CAPITA_countylevel","5. healthcare context",75.7007007007007
+"AMFAR_OPIOIDRX_RATE_countylevel","5. healthcare context",11.5810254699144
+"AMFAR_PCT_DRUGDEP_ABOVE12_countylevel","5. healthcare context",89.6563229896563
+"AMFAR_PCT_NONMEDPAIN_ABOVE12_countylevel","5. healthcare context",89.6563229896563
+"AMFAR_RWFAC_RATE_countylevel","5. healthcare context",88.769324880436
+"AMFAR_TOT_AMATFAC_countylevel","5. healthcare context",35.7635413190969
+"AMFAR_TOT_HCVTFAC_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_TOT_HIVHCVTFAC_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_TOT_HIVTFAC_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_TOT_MEDAMATFAC_countylevel","5. healthcare context",35.7635413190969
+"AMFAR_TOT_MEDHCVTFAC_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_TOT_MEDHIVHCVTFAC_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_TOT_MEDHIVTFAC_countylevel","5. healthcare context",66.7917917917918
+"AMFAR_TOT_MEDMHFAC_countylevel","5. healthcare context",50.4337671004338
+"AMFAR_TOT_MEDSAFAC_countylevel","5. healthcare context",0.00278055833611389
+"AMFAR_TOT_MHFAC_countylevel","5. healthcare context",50.3698142587032
+"AMFAR_TOT_RWFAC_countylevel","5. healthcare context",88.769324880436
+"CAF_ADJ_COUNTY_1_countylevel","6. geography",0.00278055833611389
+"CAF_ADJ_COUNTY_10_countylevel","6. geography",73.7404070737404
+"CAF_ADJ_COUNTY_11_countylevel","6. geography",99.9916583249917
+"CAF_ADJ_COUNTY_12_countylevel","6. geography",100
+"CAF_ADJ_COUNTY_13_countylevel","6. geography",100
+"CAF_ADJ_COUNTY_14_countylevel","6. geography",100
+"CAF_ADJ_COUNTY_2_countylevel","6. geography",0.00556111667222778
+"CAF_ADJ_COUNTY_3_countylevel","6. geography",0.0528306083861639
+"CAF_ADJ_COUNTY_4_countylevel","6. geography",0.430986542097653
+"CAF_ADJ_COUNTY_5_countylevel","6. geography",4.41274607941275
+"CAF_ADJ_COUNTY_6_countylevel","6. geography",41.7111556000445
+"CAF_ADJ_COUNTY_7_countylevel","6. geography",56.3646980313647
+"CAF_ADJ_COUNTY_8_countylevel","6. geography",63.1548214881548
+"CAF_ADJ_COUNTY_9_countylevel","6. geography",73.1147814481148
+"CCBP_ANNUAL_TOT_POP_countylevel","1. social context",0.00834167500834168
+"CCBP_BWLSTORES_RATE_countylevel","4. physical infrastructure",4.99666332999666
+"CCBP_CFS_RATE_countylevel","4. physical infrastructure",25.8675342008675
+"CCBP_CHILD_RATE_countylevel","4. physical infrastructure",1.14280947614281
+"CCBP_CHS_RATE_countylevel","4. physical infrastructure",23.5374263152041
+"CCBP_CS_RATE_countylevel","4. physical infrastructure",0.05005005005005
+"CCBP_EORS_RATE_countylevel","4. physical infrastructure",35.01001001001
+"CCBP_FCRSC_RATE_countylevel","4. physical infrastructure",5.63897230563897
+"CCBP_FF_RATE_countylevel","4. physical infrastructure",0.175175175175175
+"CCBP_FSR_RATE_countylevel","4. physical infrastructure",0.383717050383717
+"CCBP_GAMBLING_RATE_countylevel","4. physical infrastructure",49.2826159492826
+"CCBP_HOME_RATE_countylevel","4. physical infrastructure",4.12078745412079
+"CCBP_LAB_RATE_countylevel","4. physical infrastructure",10.7329551773996
+"CCBP_LARGE_INDUSTRY_countylevel","4. physical infrastructure",0.0111222333444556
+"CCBP_PCT_HEALTH_EMPLOYMENT_countylevel","4. physical infrastructure",0.077855633411189
+"CCBP_PHYS_RATE_countylevel","4. physical infrastructure",0.767434100767434
+"CCBP_RET_RATE_countylevel","4. physical infrastructure",5.88366143921699
+"CCBP_SA_RATE_countylevel","4. physical infrastructure",0.0389278167055945
+"CCBP_SFS_RATE_countylevel","4. physical infrastructure",13.2882882882883
+"CCBP_SHELTERS_RATE_countylevel","4. physical infrastructure",22.7199421643866
+"CCBP_SOGS_RATE_countylevel","4. physical infrastructure",0.811923034145256
+"CCD_FED_REVENUE_CNA_countylevel","3. education",0.0305861416972528
+"CCD_LOCAL_REVENUE_LUNCH_countylevel","3. education",0.0305861416972528
+"CCD_STATE_REVENUE_LUNCH_countylevel","3. education",0.0305861416972528
+"CCD_TOT_EXPENDITURE_countylevel","3. education",0.0305861416972528
+"CCD_TOT_FED_REVENUE_countylevel","3. education",0.0305861416972528
+"CCD_TOT_LOCAL_REVENUE_countylevel","3. education",0.0305861416972528
+"CCD_TOT_REVENUE_countylevel","3. education",0.0305861416972528
+"CCD_TOT_STATE_REVENUE_countylevel","3. education",0.0305861416972528
+"CCD_TOT_STUDENTS_countylevel","3. education",0.0139027916805695
+"CDCAP_CHLAMYDIA_RATE_countylevel","5. healthcare context",0.00278055833611389
+"CDCAP_GONORRHEA_RATE_countylevel","5. healthcare context",0.00278055833611389
+"CDCAP_HIVDIAG_AIAN_RATE_ABOVE13_countylevel","5. healthcare context",73.0758536314092
+"CDCAP_HIVDIAG_ASN_RATE_ABOVE13_countylevel","5. healthcare context",20.2758313869425
+"CDCAP_HIVDIAG_BLK_RATE_ABOVE13_countylevel","5. healthcare context",2.07429651874096
+"CDCAP_HIVDIAG_F_RATE_ABOVE13_countylevel","5. healthcare context",1.88521855188522
+"CDCAP_HIVDIAG_HIS_RATE_ABOVE13_countylevel","5. healthcare context",7.71326882437994
+"CDCAP_HIVDIAG_MTR_RATE_ABOVE13_countylevel","5. healthcare context",10.1851851851852
+"CDCAP_HIVDIAG_M_RATE_ABOVE13_countylevel","5. healthcare context",1.88521855188522
+"CDCAP_HIVDIAG_NHPI_RATE_ABOVE13_countylevel","5. healthcare context",87.8962295628962
+"CDCAP_HIVDIAG_RATE_ABOVE13_countylevel","5. healthcare context",0.1001001001001
+"CDCAP_HIVDIAG_WHT_RATE_ABOVE13_countylevel","5. healthcare context",2.33566900233567
+"CDCAP_HIV_RATE_ABOVE13_countylevel","5. healthcare context",9.24535646757869
+"CDCAP_SYPHILIS_RATE_countylevel","5. healthcare context",0.00278055833611389
+"CDCAP_TUBERCULOSIS_RATE_countylevel","5. healthcare context",33.4250917584251
+"CDCA_BLOOD_HOSP_RATE_ABOVE65_countylevel","5. healthcare context",0
+"CDCA_HEART_DTH_RATE_ABOVE35_countylevel","5. healthcare context",0.00278055833611389
+"CDCA_HEART_HOSP_RATE_ABOVE65_countylevel","5. healthcare context",0
+"CDCA_PREV_DTH_BLACK_RATE_BELOW74_countylevel","5. healthcare context",0.859192525859193
+"CDCA_PREV_DTH_HISP_RATE_BELOW74_countylevel","5. healthcare context",9.42887331776221
+"CDCA_PREV_DTH_RATE_BELOW74_countylevel","5. healthcare context",0.00556111667222778
+"CDCA_PREV_DTH_WHITE_RATE_BELOW74_countylevel","5. healthcare context",0.00834167500834168
+"CDCA_STROKE_DTH_RATE_ABOVE35_countylevel","5. healthcare context",0.00278055833611389
+"CDCA_STROKE_HOSP_RATE_ABOVE65_countylevel","5. healthcare context",0
+"CDCP_ARTHRITIS_ADULT_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_ARTHRITIS_ADULT_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_ASTHMA_ADULT_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_ASTHMA_ADULT_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_BLOOD_MED_ADULT_A_countylevel","5. healthcare context",89.2225558892225
+"CDCP_BLOOD_MED_ADULT_C_countylevel","5. healthcare context",89.2225558892225
+"CDCP_CERVCAN_SCR_F21_65_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_CERVCAN_SCR_F21_65_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_CHOLES_ADULT_A_countylevel","5. healthcare context",89.2225558892225
+"CDCP_CHOLES_ADULT_C_countylevel","5. healthcare context",89.2225558892225
+"CDCP_CHOLES_SCR_ADULT_A_countylevel","5. healthcare context",89.2225558892225
+"CDCP_CHOLES_SCR_ADULT_C_countylevel","5. healthcare context",89.2225558892225
+"CDCP_DENTIST_VISIT_ADULT_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_DENTIST_VISIT_ADULT_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_DOCTOR_VISIT_ADULT_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_DOCTOR_VISIT_ADULT_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_FOBT_SIG_COL_50_75_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_FOBT_SIG_COL_50_75_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_KIDNEY_DISEASE_ADULT_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_KIDNEY_DISEASE_ADULT_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_MAMMO_SCR_F50_74_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_MAMMO_SCR_F50_74_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_NO_PHY_ACTV_ADULT_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_NO_PHY_ACTV_ADULT_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_NO_TEETH_65_ABOVE_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_NO_TEETH_65_ABOVE_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_PREV_SERV_F65_ABOVE_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_PREV_SERV_F65_ABOVE_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_PREV_SERV_M65_ABOVE_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_PREV_SERV_M65_ABOVE_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_PULMONARY_ADULT_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_PULMONARY_ADULT_C_countylevel","5. healthcare context",88.7721054387721
+"CDCP_SLEEP_LESS7HR_ADULT_A_countylevel","5. healthcare context",88.7721054387721
+"CDCP_SLEEP_LESS7HR_ADULT_C_countylevel","5. healthcare context",88.7721054387721
+"CDCSVI_RPL_THEME1_SOCIECO_countylevel","1. social context",53.1336892448004
+"CDCSVI_RPL_THEME2_HH_COMP_countylevel","1. social context",53.1336892448004
+"CDCSVI_RPL_THEME3_MINO_countylevel","1. social context",53.1336892448004
+"CDCSVI_RPL_THEME4_HH_TRANS_countylevel","1. social context",53.1336892448004
+"CDCSVI_RPL_THEMES_ALL_countylevel","1. social context",53.1336892448004
+"CDCW_ASSAULT_DTH_RATE_countylevel","5. healthcare context",9.08130352574797
+"CDCW_DRUG_DTH_RATE_countylevel","5. healthcare context",3.3422311200089
+"CDCW_INJURY_DTH_RATE_countylevel","5. healthcare context",0.0528306083861639
+"CDCW_MATERNAL_DTH_RATE_countylevel","5. healthcare context",35.4298743187632
+"CDCW_OPIOID_DTH_RATE_countylevel","5. healthcare context",7.63541319096875
+"CDCW_SELFHARM_DTH_RATE_countylevel","5. healthcare context",1.91302413524636
+"CDCW_TOT_POPULATION_countylevel","5. healthcare context",0.00834167500834168
+"CDCW_TRANSPORT_DTH_RATE_countylevel","5. healthcare context",0.467133800467134
+"CDC_USCS_AGE_ADJ_INC_RATE_countylevel","5. healthcare context",56.517628739851
+"CDC_USCS_AGE_ADJ_MORT_RATE_countylevel","5. healthcare context",56.5009453898343
+"CDC_USCS_TOT_INC_COUNT_countylevel","5. healthcare context",56.517628739851
+"CDC_USCS_TOT_MORT_COUNT_countylevel","5. healthcare context",56.5009453898343
+"CEN_AIAN_NH_IND_countylevel","6. geography",21.6661105549994
+"CEN_AREALAND_SQM_COUNTY_countylevel","6. geography",0.00278055833611389
+"CEN_POPDENSITY_COUNTY_countylevel","6. geography",0.00278055833611389
+"CHR_AVG_LIFE_EXPEC_countylevel","5. healthcare context",77.9974418863308
+"CHR_CHILD_DEATH_RATE_countylevel","5. healthcare context",23.9211433655878
+"CHR_FIREARM_DEATH_RATE_countylevel","4. physical infrastructure",57.2099877655433
+"CHR_INFANT_DEATH_RATE_countylevel","5. healthcare context",80.1607162718274
+"CHR_MENTAL_PROV_RATE_countylevel","5. healthcare context",57.0653987320654
+"CHR_PCT_ADULT_OBESITY_countylevel","5. healthcare context",11.2362362362362
+"CHR_PCT_ALCOHOL_DRIV_DEATH_countylevel","5. healthcare context",25.1862974085196
+"CHR_PCT_DIABETES_countylevel","5. healthcare context",11.2362362362362
+"CHR_PCT_EXCESS_DRINK_countylevel","5. healthcare context",46.1572683794906
+"CHR_PCT_FOOD_countylevel","4. physical infrastructure",14.1057724391058
+"CHR_PCT_LOW_BIRTH_WT_countylevel","5. healthcare context",10.3047491936381
+"CHR_PCT_MENTAL_DISTRESS_countylevel","5. healthcare context",46.1572683794906
+"CHR_PCT_PHYSICAL_DISTRESS_countylevel","5. healthcare context",46.1572683794906
+"CHR_PCT_PHYS_INACTIVITY_countylevel","5. healthcare context",11.2362362362362
+"CHR_PCT_POOR_HEALTH_countylevel","5. healthcare context",46.1572683794906
+"CHR_PCT_SMOKING_countylevel","5. healthcare context",46.1572683794906
+"CHR_PREMAT_DEATH_RATE_countylevel","5. healthcare context",21.4297630964298
+"CHR_SEGREG_BLACK_countylevel","1. social context",46.5493271048827
+"CHR_SEGREG_NON_WHITE_countylevel","1. social context",46.2017573128684
+"CHR_TEEN_BIRTH_RATE_15_19_countylevel","5. healthcare context",10.3047491936381
+"CHR_TOT_MENTAL_PROV_countylevel","5. healthcare context",56.5009453898343
+"CHR_TOT_POPULATION_countylevel","5. healthcare context",56.5009453898343
+"CHR_VIOLENT_CRIME_RATE_countylevel","5. healthcare context",53.1531531531532
+"COUNTY","6. geography",0
+"COUNTYFIPS","6. geography",0
+"CRDC_PCT_APEXAM_ONEORMORE_countylevel","3. education",67.7927927927928
+"CRDC_PCT_COUNTY_ECE_countylevel","3. education",67.2283394505617
+"CRDC_PCT_COUNTY_PREK_countylevel","3. education",67.2283394505617
+"CRDC_PCT_CTY_KGTN_countylevel","3. education",67.2283394505617
+"CRDC_PCT_CTY_PSLOWINC_countylevel","3. education",84.8765432098765
+"CRDC_PCT_CTY_PSTITLEI_countylevel","3. education",84.8765432098765
+"CRDC_PCT_GTENR_STUDENTS_countylevel","3. education",67.3923923923924
+"CRDC_PCT_HBA_DISABLE_STUDENTS_countylevel","3. education",67.2283394505617
+"CRDC_PCT_HBA_RACE_STUDENTS_countylevel","3. education",67.2283394505617
+"CRDC_PCT_HBA_SEX_STUDENTS_countylevel","3. education",67.2283394505617
+"CRDC_PCT_LAW_REFERRAL_countylevel","3. education",67.2283394505617
+"CRDC_PCT_LEA_DESEGPLAN_countylevel","3. education",67.2283394505617
+"CRDC_PCT_LEP_STUDENTS_countylevel","3. education",67.2283394505617
+"CRDC_PCT_RETAIN_countylevel","3. education",67.2450228005784
+"CRDC_PCT_SATACT_countylevel","3. education",67.2311200088978
+"CRDC_PCT_SATACT_IDEA_countylevel","3. education",67.2311200088978
+"CRDC_PCT_SATACT_LEP_countylevel","3. education",67.2311200088978
+"CRDC_PCT_STUD_DESEGPLAN_countylevel","3. education",67.2283394505617
+"CRDC_TOT_ALT_countylevel","3. education",67.2283394505617
+"CRDC_TOT_CHARTER_countylevel","3. education",67.2283394505617
+"CRDC_TOT_DIST_ENROLL_countylevel","3. education",79.3348904460016
+"CRDC_TOT_FIREARM_countylevel","3. education",77.5720164609053
+"CRDC_TOT_FTECOUNSELORS_countylevel","3. education",67.2283394505617
+"CRDC_TOT_FTENURSE_countylevel","3. education",77.5720164609053
+"CRDC_TOT_FTEPSY_countylevel","3. education",77.5720164609053
+"CRDC_TOT_FTESOC_countylevel","3. education",77.5720164609053
+"CRDC_TOT_FTETEACH_ABSENT_countylevel","3. education",67.2283394505617
+"CRDC_TOT_FTETEACH_CERT_countylevel","3. education",67.2283394505617
+"CRDC_TOT_FTETEACH_NOTCERT_countylevel","3. education",67.2283394505617
+"CRDC_TOT_LEA_countylevel","3. education",67.2283394505617
+"CRDC_TOT_MAGNET_countylevel","3. education",67.2283394505617
+"CRDC_TOT_PRESCHOOL_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_AIAN_F_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_AIAN_M_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_ASN_F_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_ASN_M_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_BLK_F_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_BLK_M_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_HIS_F_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_HIS_M_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_MTR_F_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_MTR_M_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_NHPI_F_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_NHPI_M_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_WHT_F_countylevel","3. education",67.2895117339562
+"CRDC_TOT_PRESCHOOL_WHT_M_countylevel","3. education",67.2895117339562
+"CRDC_TOT_RAPE_ASSAULT_countylevel","3. education",77.5720164609053
+"CRDC_TOT_SCHOOLS_countylevel","3. education",67.2283394505617
+"CRDC_TOT_SCH_FIREARM_countylevel","3. education",77.5720164609053
+"CRDC_TOT_SPEDS_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUDENTS_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_AIAN_F_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_AIAN_M_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_ASN_F_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_ASN_M_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_BLK_F_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_BLK_M_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_HIS_F_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_HIS_M_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_IDEA_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_LEP_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_MTR_F_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_MTR_M_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_NHPI_F_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_NHPI_M_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_WHT_F_countylevel","3. education",67.2283394505617
+"CRDC_TOT_STUD_WHT_M_countylevel","3. education",67.2283394505617
+"CRDC_TOT_SUSP_countylevel","3. education",67.2283394505617
+"CRDC_TOT_SUSP_IDEA_countylevel","3. education",67.2283394505617
+"CRDC_TOT_SUSP_IDEA_LEP_countylevel","3. education",67.2283394505617
+"CRDC_TOT_SUSP_LEP_countylevel","3. education",67.2283394505617
+"CRDC_TOT_TRANSFER_countylevel","3. education",77.5720164609053
+"CRDC_TOT_TRANSFER_IDEA_countylevel","3. education",77.5720164609053
+"EPAA_2NDMAX_CO_1HR_countylevel","4. physical infrastructure",50.3864976087198
+"EPAA_2NDMAX_CO_8HR_countylevel","4. physical infrastructure",50.3864976087198
+"EPAA_2NDMAX_O3_1HR_countylevel","4. physical infrastructure",30.2886219552886
+"EPAA_2NDMAX_PM10_24HR_countylevel","4. physical infrastructure",49.4550105661217
+"EPAA_2NDMAX_SO2_24HR_countylevel","4. physical infrastructure",52.1855188521855
+"EPAA_4THMAX_O3_8HR_countylevel","4. physical infrastructure",30.2719386052719
+"EPAA_98PR_NO2_1HR_countylevel","4. physical infrastructure",65.2040929818708
+"EPAA_98PR_PM25_DAILY_countylevel","4. physical infrastructure",38.0185741296852
+"EPAA_99PR_SO2_1HR_countylevel","4. physical infrastructure",52.1855188521855
+"EPAA_MAX_PB_3MON_countylevel","4. physical infrastructure",89.0640640640641
+"EPAA_MEAN_NO2_1HR_countylevel","4. physical infrastructure",64.9844288733178
+"EPAA_MEAN_SO2_1HR_countylevel","4. physical infrastructure",52.1632743854966
+"EPAA_MEAN_WTD_PM10_countylevel","4. physical infrastructure",49.4550105661217
+"EPAA_MEAN_WTD_PM25_countylevel","4. physical infrastructure",38.0185741296852
+"FEA_PCT_FARMERS_MARKET_SFMNP_countylevel","4. physical infrastructure",88.7721054387721
+"FEA_PCT_FARMERS_MARKET_SNAP_countylevel","4. physical infrastructure",88.7721054387721
+"FEA_PCT_FARMERS_MARKET_WIC_countylevel","4. physical infrastructure",88.7721054387721
+"FEA_PCT_FARMERS_MARKET_WIC_CASH_countylevel","4. physical infrastructure",88.7721054387721
+"FEA_SNAP_BENEFITS_PER_CAPITA_countylevel","4. physical infrastructure",78.6397508619731
+"FEA_TOT_FARMERS_MARKET_countylevel","4. physical infrastructure",78.3839394950506
+"FEA_TOT_FDPIR_countylevel","4. physical infrastructure",79.1180068957847
+"FEA_TOT_FOODBANK_countylevel","4. physical infrastructure",88.7721054387721
+"FEA_TOT_WIC_STORES_countylevel","4. physical infrastructure",77.7610944277611
+"FEA_WIC_REDEMP_PER_CAPITA_countylevel","4. physical infrastructure",78.6564342119898
+"FEA_WIC_REDEMP_PER_STORE_countylevel","4. physical infrastructure",77.7610944277611
+"FEA_WIC_STORES_PER_1000_countylevel","4. physical infrastructure",77.7610944277611
+"HHC_PCT_HHA_AIDE_countylevel","5. healthcare context",46.1517072628184
+"HHC_PCT_HHA_MEDICAL_countylevel","5. healthcare context",46.1517072628184
+"HHC_PCT_HHA_NURSING_countylevel","5. healthcare context",46.1517072628184
+"HHC_PCT_HHA_OCC_THERAPY_countylevel","5. healthcare context",46.1517072628184
+"HHC_PCT_HHA_PHYS_THERAPY_countylevel","5. healthcare context",46.1517072628184
+"HHC_PCT_HHA_SPEECH_countylevel","5. healthcare context",46.1517072628184
+"HRSA_MUA_COUNTY_countylevel","5. healthcare context",0
+"LTC_AVG_ACUITY_INDEX_countylevel","5. healthcare context",0.358692025358692
+"LTC_AVG_AGE_countylevel","5. healthcare context",14.3643643643644
+"LTC_AVG_DAILY_CENSUS_countylevel","5. healthcare context",14.381047714381
+"LTC_AVG_OBS_MEDIAN_LOS_countylevel","5. healthcare context",14.4005116227338
+"LTC_AVG_OBS_REHOSP_RATE_countylevel","5. healthcare context",14.3977310643977
+"LTC_AVG_OBS_SUCCESSFUL_DISC_RATE_countylevel","5. healthcare context",14.4005116227338
+"LTC_AVG_PCT_MEDICAID_countylevel","5. healthcare context",0.358692025358692
+"LTC_AVG_PCT_MEDICARE_countylevel","5. healthcare context",0.358692025358692
+"LTC_AVG_PCT_PRESSURE_ULCER_countylevel","5. healthcare context",14.5200756311867
+"LTC_AVG_PCT_PVT_PATIENT_DAYS_countylevel","5. healthcare context",33.3861639417195
+"LTC_OCCUPANCY_RATE_countylevel","5. healthcare context",0.358692025358692
+"LTC_PCT_FOR_PROFIT_countylevel","5. healthcare context",0.358692025358692
+"LTC_PCT_MULTI_FAC_countylevel","5. healthcare context",0.358692025358692
+"LTC_PCT_RESD_BLACK_countylevel","5. healthcare context",17.1727282838394
+"LTC_PCT_RESD_HISPANIC_countylevel","5. healthcare context",36.7061505950395
+"LTC_PCT_RESD_WHITE_countylevel","5. healthcare context",14.3893893893894
+"LTC_TOT_BEDS_countylevel","5. healthcare context",0.358692025358692
+"LTC_TOT_BEDS_RATE_countylevel","5. healthcare context",0.283616950283617
+"LTC_TOT_RESIDENTS_countylevel","5. healthcare context",78.0613947280614
+"LTC_TOT_RESIDENTS_RATE_countylevel","5. healthcare context",78.0613947280614
+"MGV_PCT_BEN_FFS_BLACK_countylevel","5. healthcare context",3.44511177844511
+"MGV_PCT_BEN_FFS_HISPANIC_countylevel","5. healthcare context",3.44511177844511
+"MGV_PCT_BEN_FFS_WHITE_countylevel","5. healthcare context",3.44511177844511
+"MGV_PCT_MEDICAID_countylevel","5. healthcare context",0.00556111667222778
+"MGV_PER_CAPITA_ACTUAL_EM_countylevel","5. healthcare context",0.00556111667222778
+"MGV_PER_CAPITA_ACTUAL_HC_countylevel","5. healthcare context",0.0139027916805695
+"MGV_PER_CAPITA_ACTUAL_IP_countylevel","5. healthcare context",0.00556111667222778
+"MGV_PER_CAPITA_ACTUAL_OP_countylevel","5. healthcare context",0.00556111667222778
+"MGV_PER_CAPITA_ACTUAL_PA_countylevel","5. healthcare context",0.00556111667222778
+"MGV_PER_CAPITA_STD_EM_countylevel","5. healthcare context",0.00556111667222778
+"MGV_PER_CAPITA_STD_HC_countylevel","5. healthcare context",0.0139027916805695
+"MGV_PER_CAPITA_STD_IP_countylevel","5. healthcare context",0.00556111667222778
+"MGV_PER_CAPITA_STD_OP_countylevel","5. healthcare context",0.00556111667222778
+"MGV_PER_CAPITA_STD_PA_countylevel","5. healthcare context",0.00556111667222778
+"MGV_TOT_BEN_FFS_countylevel","5. healthcare context",0.00556111667222778
+"MGV_TOT_BEN_PART_A_B_countylevel","5. healthcare context",0.00556111667222778
+"MHSVI_RPL_THEME1_SOCIECO_countylevel","1. social context",88.7721054387721
+"MHSVI_RPL_THEME2_HH_COMP_countylevel","1. social context",88.7721054387721
+"MHSVI_RPL_THEME3_MINO_countylevel","1. social context",88.7721054387721
+"MHSVI_RPL_THEME4_HH_TRANS_countylevel","1. social context",88.7721054387721
+"MHSVI_RPL_THEME5_HCI_ACCESS_countylevel","1. social context",88.7721054387721
+"MHSVI_RPL_THEME6_MV_countylevel","1. social context",88.7721054387721
+"MHSVI_RPL_THEMES_ALL_countylevel","1. social context",88.7721054387721
+"MP_MEDICARE_ADVTG_ENROLLED_countylevel","5. healthcare context",0
+"MP_MEDICARE_ELIGIBLES_countylevel","5. healthcare context",0
+"MP_PCT_ADVTG_PEN_countylevel","5. healthcare context",0
+"NCHS_URCS_2006_countylevel","6. geography",0.00834167500834168
+"NCHS_URCS_2013_countylevel","6. geography",0.00834167500834168
+"NEPHTN_ARSENIC_MEAN_CSW_countylevel","4. physical infrastructure",96.9830942053164
+"NEPHTN_ARSENIC_MEAN_POP_countylevel","4. physical infrastructure",96.9830942053164
+"NEPHTN_AVG_MODAAAC_PM25_countylevel","4. physical infrastructure",22.0136803470137
+"NEPHTN_AVG_MONAAAC_PM25_countylevel","4. physical infrastructure",31.5788010232455
+"NEPHTN_HEATIND_100_countylevel","4. physical infrastructure",0.0111222333444556
+"NEPHTN_HEATIND_105_countylevel","4. physical infrastructure",0.0111222333444556
+"NEPHTN_HEATIND_90_countylevel","4. physical infrastructure",0.0111222333444556
+"NEPHTN_HEATIND_95_countylevel","4. physical infrastructure",0.0111222333444556
+"NEPHTN_MAXDROUGHT_countylevel","4. physical infrastructure",0.0111222333444556
+"NEPHTN_NUMDROUGHT_countylevel","4. physical infrastructure",0.0111222333444556
+"NEPHTN_PCT_ARSENIC_MCL_GREATER10_countylevel","4. physical infrastructure",99.902680458236
+"NEPHTN_PCT_ARSENIC_MCL_LESS10_countylevel","4. physical infrastructure",96.9830942053164
+"NEPHTN_PCT_ARSENIC_MCL_NOTDETECT_countylevel","4. physical infrastructure",97.094316538761
+"NEPHTN_PCT_MODPD_PM25_countylevel","4. physical infrastructure",22.0136803470137
+"NEPHTN_PCT_MONPD_PM25_countylevel","4. physical infrastructure",31.5788010232455
+"NEPHTN_PCT_PARK_countylevel","4. physical infrastructure",75.6061617172728
+"NEPHTN_SEX_RATIO_RATE_countylevel","5. healthcare context",0.00834167500834168
+"NEPHTN_TEMPERATURE_100_countylevel","4. physical infrastructure",0.0111222333444556
+"NEPHTN_TEMPERATURE_105_countylevel","4. physical infrastructure",0.0111222333444556
+"NEPHTN_TEMPERATURE_90_countylevel","4. physical infrastructure",0.0111222333444556
+"NEPHTN_TEMPERATURE_95_countylevel","4. physical infrastructure",0.0111222333444556
+"NHC_AVG_ADJ_NURSE_STAFF_countylevel","5. healthcare context",36.0332554776999
+"NHC_AVG_LIC_STAFF_countylevel","5. healthcare context",36.0304749193638
+"NHC_AVG_REP_NURSE_STAFF_countylevel","5. healthcare context",36.0304749193638
+"NHC_FACS_RATE_countylevel","5. healthcare context",35.9971082193304
+"NHC_TOT_FACS_countylevel","5. healthcare context",35.9971082193304
+"NOAAC_AVG_TEMP_APR_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_AVG_TEMP_AUG_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_AVG_TEMP_DEC_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_AVG_TEMP_FEB_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_AVG_TEMP_JAN_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_AVG_TEMP_JUL_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_AVG_TEMP_JUN_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_AVG_TEMP_MAR_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_AVG_TEMP_MAY_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_AVG_TEMP_NOV_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_AVG_TEMP_OCT_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_AVG_TEMP_SEP_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_APR_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_AUG_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_DEC_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_FEB_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_JAN_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_JUL_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_JUN_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_MAR_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_MAY_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_NOV_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_OCT_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MAX_TEMP_SEP_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_APR_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_AUG_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_DEC_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_FEB_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_JAN_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_JUL_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_JUN_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_MAR_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_MAY_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_NOV_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_OCT_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_MIN_TEMP_SEP_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_APR_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_AUG_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_DEC_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_FEB_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_JAN_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_JUL_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_JUN_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_MAR_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_MAY_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_NOV_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_OCT_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAC_PRECIPITATION_SEP_countylevel","4. physical infrastructure",0.0222444666889111
+"NOAAS_PROPERTY_DAMAGE_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_DEATHS_DIRECT_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_DEATHS_INDIRECT_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_DROUGHT_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_FLOOD_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_HAIL_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_HEAT_EVENTS_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_HURRICANE_STORM_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_INJURIES_DIRECT_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_INJURIES_INDIRECT_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_STORMEVENT_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_TORNADO_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_WILDFIRE_countylevel","4. physical infrastructure",0.26415304193082
+"NOAAS_TOT_WIND_countylevel","4. physical infrastructure",0.26415304193082
+"OPP_INCAR_ASN_F_HH_100PT_countylevel","2. economic context",87.6765654543432
+"OPP_INCAR_ASN_F_HH_1PT_countylevel","2. economic context",87.6765654543432
+"OPP_INCAR_ASN_F_HH_25PT_countylevel","2. economic context",87.6765654543432
+"OPP_INCAR_ASN_F_HH_50PT_countylevel","2. economic context",87.6765654543432
+"OPP_INCAR_ASN_F_HH_75PT_countylevel","2. economic context",87.6765654543432
+"OPP_INCAR_ASN_F_N_countylevel","2. economic context",87.6765654543432
+"OPP_INCAR_ASN_M_HH_100PT_countylevel","2. economic context",87.5542208875542
+"OPP_INCAR_ASN_M_HH_1PT_countylevel","2. economic context",87.5542208875542
+"OPP_INCAR_ASN_M_HH_25PT_countylevel","2. economic context",87.5542208875542
+"OPP_INCAR_ASN_M_HH_50PT_countylevel","2. economic context",87.5542208875542
+"OPP_INCAR_ASN_M_HH_75PT_countylevel","2. economic context",87.5542208875542
+"OPP_INCAR_ASN_M_N_countylevel","2. economic context",87.5542208875542
+"OPP_INCAR_BLK_F_HH_100PT_countylevel","2. economic context",86.1416972528084
+"OPP_INCAR_BLK_F_HH_1PT_countylevel","2. economic context",86.1416972528084
+"OPP_INCAR_BLK_F_HH_25PT_countylevel","2. economic context",86.1416972528084
+"OPP_INCAR_BLK_F_HH_50PT_countylevel","2. economic context",86.1416972528084
+"OPP_INCAR_BLK_F_HH_75PT_countylevel","2. economic context",86.1416972528084
+"OPP_INCAR_BLK_F_N_countylevel","2. economic context",86.1416972528084
+"OPP_INCAR_BLK_M_HH_100PT_countylevel","2. economic context",86.1389166944722
+"OPP_INCAR_BLK_M_HH_1PT_countylevel","2. economic context",86.1389166944722
+"OPP_INCAR_BLK_M_HH_25PT_countylevel","2. economic context",86.1389166944722
+"OPP_INCAR_BLK_M_HH_50PT_countylevel","2. economic context",86.1389166944722
+"OPP_INCAR_BLK_M_HH_75PT_countylevel","2. economic context",86.1389166944722
+"OPP_INCAR_BLK_M_N_countylevel","2. economic context",86.1389166944722
+"OPP_INCAR_HSP_F_HH_100PT_countylevel","2. economic context",86.7033700367034
+"OPP_INCAR_HSP_F_HH_1PT_countylevel","2. economic context",86.7033700367034
+"OPP_INCAR_HSP_F_HH_25PT_countylevel","2. economic context",86.7033700367034
+"OPP_INCAR_HSP_F_HH_50PT_countylevel","2. economic context",86.7033700367034
+"OPP_INCAR_HSP_F_HH_75PT_countylevel","2. economic context",86.7033700367034
+"OPP_INCAR_HSP_F_N_countylevel","2. economic context",86.7033700367034
+"OPP_INCAR_HSP_M_HH_100PT_countylevel","2. economic context",86.8006895784674
+"OPP_INCAR_HSP_M_HH_1PT_countylevel","2. economic context",86.8006895784674
+"OPP_INCAR_HSP_M_HH_25PT_countylevel","2. economic context",86.8006895784674
+"OPP_INCAR_HSP_M_HH_50PT_countylevel","2. economic context",86.8006895784674
+"OPP_INCAR_HSP_M_HH_75PT_countylevel","2. economic context",86.8006895784674
+"OPP_INCAR_HSP_M_N_countylevel","2. economic context",86.8006895784674
+"OPP_INCAR_NAM_F_HH_100PT_countylevel","2. economic context",90.6906906906907
+"OPP_INCAR_NAM_F_HH_1PT_countylevel","2. economic context",90.6906906906907
+"OPP_INCAR_NAM_F_HH_25PT_countylevel","2. economic context",90.6906906906907
+"OPP_INCAR_NAM_F_HH_50PT_countylevel","2. economic context",90.6906906906907
+"OPP_INCAR_NAM_F_HH_75PT_countylevel","2. economic context",90.6906906906907
+"OPP_INCAR_NAM_F_N_countylevel","2. economic context",90.6906906906907
+"OPP_INCAR_NAM_M_HH_100PT_countylevel","2. economic context",90.1929707485263
+"OPP_INCAR_NAM_M_HH_1PT_countylevel","2. economic context",90.1929707485263
+"OPP_INCAR_NAM_M_HH_25PT_countylevel","2. economic context",90.1929707485263
+"OPP_INCAR_NAM_M_HH_50PT_countylevel","2. economic context",90.1929707485263
+"OPP_INCAR_NAM_M_HH_75PT_countylevel","2. economic context",90.1929707485263
+"OPP_INCAR_NAM_M_N_countylevel","2. economic context",90.1929707485263
+"OPP_INCAR_OTHER_F_HH_100PT_countylevel","2. economic context",87.2038705372039
+"OPP_INCAR_OTHER_F_HH_1PT_countylevel","2. economic context",87.2038705372039
+"OPP_INCAR_OTHER_F_HH_25PT_countylevel","2. economic context",87.2038705372039
+"OPP_INCAR_OTHER_F_HH_50PT_countylevel","2. economic context",87.2038705372039
+"OPP_INCAR_OTHER_F_HH_75PT_countylevel","2. economic context",87.2038705372039
+"OPP_INCAR_OTHER_F_N_countylevel","2. economic context",87.2038705372039
+"OPP_INCAR_OTHER_M_HH_100PT_countylevel","2. economic context",87.1677232788344
+"OPP_INCAR_OTHER_M_HH_1PT_countylevel","2. economic context",87.1677232788344
+"OPP_INCAR_OTHER_M_HH_25PT_countylevel","2. economic context",87.1677232788344
+"OPP_INCAR_OTHER_M_HH_50PT_countylevel","2. economic context",87.1677232788344
+"OPP_INCAR_OTHER_M_HH_75PT_countylevel","2. economic context",87.1677232788344
+"OPP_INCAR_OTHER_M_N_countylevel","2. economic context",87.1677232788344
+"OPP_INCAR_WHT_F_HH_100PT_countylevel","2. economic context",85.9025692359026
+"OPP_INCAR_WHT_F_HH_1PT_countylevel","2. economic context",85.9025692359026
+"OPP_INCAR_WHT_F_HH_25PT_countylevel","2. economic context",85.9025692359026
+"OPP_INCAR_WHT_F_HH_50PT_countylevel","2. economic context",85.9025692359026
+"OPP_INCAR_WHT_F_HH_75PT_countylevel","2. economic context",85.9025692359026
+"OPP_INCAR_WHT_F_N_countylevel","2. economic context",85.9025692359026
+"OPP_INCAR_WHT_M_HH_100PT_countylevel","2. economic context",85.9025692359026
+"OPP_INCAR_WHT_M_HH_1PT_countylevel","2. economic context",85.9025692359026
+"OPP_INCAR_WHT_M_HH_25PT_countylevel","2. economic context",85.9025692359026
+"OPP_INCAR_WHT_M_HH_50PT_countylevel","2. economic context",85.9025692359026
+"OPP_INCAR_WHT_M_HH_75PT_countylevel","2. economic context",85.9025692359026
+"OPP_INCAR_WHT_M_N_countylevel","2. economic context",85.9025692359026
+"OPP_TOP20_ASN_F_HH_100PT_countylevel","2. economic context",91.3969525080636
+"OPP_TOP20_ASN_F_HH_1PT_countylevel","2. economic context",91.3969525080636
+"OPP_TOP20_ASN_F_HH_25PT_countylevel","2. economic context",91.3969525080636
+"OPP_TOP20_ASN_F_HH_50PT_countylevel","2. economic context",91.3969525080636
+"OPP_TOP20_ASN_F_HH_75PT_countylevel","2. economic context",91.3969525080636
+"OPP_TOP20_ASN_F_N_countylevel","2. economic context",91.3969525080636
+"OPP_TOP20_ASN_M_HH_100PT_countylevel","2. economic context",90.965965965966
+"OPP_TOP20_ASN_M_HH_1PT_countylevel","2. economic context",90.965965965966
+"OPP_TOP20_ASN_M_HH_25PT_countylevel","2. economic context",90.965965965966
+"OPP_TOP20_ASN_M_HH_50PT_countylevel","2. economic context",90.965965965966
+"OPP_TOP20_ASN_M_HH_75PT_countylevel","2. economic context",90.965965965966
+"OPP_TOP20_ASN_M_N_countylevel","2. economic context",90.965965965966
+"OPP_TOP20_BLK_F_HH_100PT_countylevel","2. economic context",89.8537426315204
+"OPP_TOP20_BLK_F_HH_1PT_countylevel","2. economic context",89.8537426315204
+"OPP_TOP20_BLK_F_HH_25PT_countylevel","2. economic context",89.8537426315204
+"OPP_TOP20_BLK_F_HH_50PT_countylevel","2. economic context",89.8537426315204
+"OPP_TOP20_BLK_F_HH_75PT_countylevel","2. economic context",89.8537426315204
+"OPP_TOP20_BLK_F_N_countylevel","2. economic context",89.8537426315204
+"OPP_TOP20_BLK_M_HH_100PT_countylevel","2. economic context",89.8620843065288
+"OPP_TOP20_BLK_M_HH_1PT_countylevel","2. economic context",89.8620843065288
+"OPP_TOP20_BLK_M_HH_25PT_countylevel","2. economic context",89.8620843065288
+"OPP_TOP20_BLK_M_HH_50PT_countylevel","2. economic context",89.8620843065288
+"OPP_TOP20_BLK_M_HH_75PT_countylevel","2. economic context",89.8620843065288
+"OPP_TOP20_BLK_M_N_countylevel","2. economic context",89.8620843065288
+"OPP_TOP20_HSP_F_HH_100PT_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_HSP_F_HH_1PT_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_HSP_F_HH_25PT_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_HSP_F_HH_50PT_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_HSP_F_HH_75PT_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_HSP_F_N_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_HSP_M_HH_100PT_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_HSP_M_HH_1PT_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_HSP_M_HH_25PT_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_HSP_M_HH_50PT_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_HSP_M_HH_75PT_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_HSP_M_N_countylevel","2. economic context",90.4654654654655
+"OPP_TOP20_NAM_F_HH_100PT_countylevel","2. economic context",93.824379935491
+"OPP_TOP20_NAM_F_HH_1PT_countylevel","2. economic context",93.824379935491
+"OPP_TOP20_NAM_F_HH_25PT_countylevel","2. economic context",93.824379935491
+"OPP_TOP20_NAM_F_HH_50PT_countylevel","2. economic context",93.824379935491
+"OPP_TOP20_NAM_F_HH_75PT_countylevel","2. economic context",93.824379935491
+"OPP_TOP20_NAM_F_N_countylevel","2. economic context",93.824379935491
+"OPP_TOP20_NAM_M_HH_100PT_countylevel","2. economic context",93.4768101434768
+"OPP_TOP20_NAM_M_HH_1PT_countylevel","2. economic context",93.4768101434768
+"OPP_TOP20_NAM_M_HH_25PT_countylevel","2. economic context",93.4768101434768
+"OPP_TOP20_NAM_M_HH_50PT_countylevel","2. economic context",93.4768101434768
+"OPP_TOP20_NAM_M_HH_75PT_countylevel","2. economic context",93.4768101434768
+"OPP_TOP20_NAM_M_N_countylevel","2. economic context",93.4768101434768
+"OPP_TOP20_OTHER_F_HH_100PT_countylevel","2. economic context",90.8769880992103
+"OPP_TOP20_OTHER_F_HH_1PT_countylevel","2. economic context",90.8769880992103
+"OPP_TOP20_OTHER_F_HH_25PT_countylevel","2. economic context",90.8769880992103
+"OPP_TOP20_OTHER_F_HH_50PT_countylevel","2. economic context",90.8769880992103
+"OPP_TOP20_OTHER_F_HH_75PT_countylevel","2. economic context",90.8769880992103
+"OPP_TOP20_OTHER_F_N_countylevel","2. economic context",90.8769880992103
+"OPP_TOP20_OTHER_M_HH_100PT_countylevel","2. economic context",90.8547436325214
+"OPP_TOP20_OTHER_M_HH_1PT_countylevel","2. economic context",90.8547436325214
+"OPP_TOP20_OTHER_M_HH_25PT_countylevel","2. economic context",90.8547436325214
+"OPP_TOP20_OTHER_M_HH_50PT_countylevel","2. economic context",90.8547436325214
+"OPP_TOP20_OTHER_M_HH_75PT_countylevel","2. economic context",90.8547436325214
+"OPP_TOP20_OTHER_M_N_countylevel","2. economic context",90.8547436325214
+"OPP_TOP20_WHT_F_HH_100PT_countylevel","2. economic context",89.7035924813703
+"OPP_TOP20_WHT_F_HH_1PT_countylevel","2. economic context",89.7035924813703
+"OPP_TOP20_WHT_F_HH_25PT_countylevel","2. economic context",89.7035924813703
+"OPP_TOP20_WHT_F_HH_50PT_countylevel","2. economic context",89.7035924813703
+"OPP_TOP20_WHT_F_HH_75PT_countylevel","2. economic context",89.7035924813703
+"OPP_TOP20_WHT_F_N_countylevel","2. economic context",89.7035924813703
+"OPP_TOP20_WHT_M_HH_100PT_countylevel","2. economic context",89.7035924813703
+"OPP_TOP20_WHT_M_HH_1PT_countylevel","2. economic context",89.7035924813703
+"OPP_TOP20_WHT_M_HH_25PT_countylevel","2. economic context",89.7035924813703
+"OPP_TOP20_WHT_M_HH_50PT_countylevel","2. economic context",89.7035924813703
+"OPP_TOP20_WHT_M_HH_75PT_countylevel","2. economic context",89.7035924813703
+"OPP_TOP20_WHT_M_N_countylevel","2. economic context",89.7035924813703
+"PC_PCT_MEDICARE_APPRVD_FULL_AMT_countylevel","5. healthcare context",46.1517072628184
+"PC_PCT_MCARE_MAY_ACPT_APPRVD_AMT_countylevel","5. healthcare context",46.1517072628184
+"PIAAC_LIT_AVG_SCORE_countylevel","3. education",89.2225558892225
+"PIAAC_LIT_PCT_LEVEL1_OR_BELOW_countylevel","3. education",89.2225558892225
+"PIAAC_LIT_PCT_LEVEL2_countylevel","3. education",89.2225558892225
+"PIAAC_LIT_PCT_LEVEL3_OR_ABOVE_countylevel","3. education",89.2225558892225
+"PIAAC_NUM_AVG_SCORE_countylevel","3. education",89.2225558892225
+"PIAAC_NUM_PCT_LEVEL1_OR_BELOW_countylevel","3. education",89.2225558892225
+"PIAAC_NUM_PCT_LEVEL2_countylevel","3. education",89.2225558892225
+"PIAAC_NUM_PCT_LEVEL3_OR_ABOVE_countylevel","3. education",89.2225558892225
+"PIAAC_POP_TARGET_countylevel","3. education",89.2225558892225
+"POS_ASC_RATE_countylevel","5. healthcare context",0
+"POS_CMHC_RATE_countylevel","5. healthcare context",0
+"POS_FQHC_RATE_countylevel","5. healthcare context",0
+"POS_HHA_RATE_countylevel","5. healthcare context",0
+"POS_HOSPICE_RATE_countylevel","5. healthcare context",0
+"POS_HOSP_ALC_RATE_countylevel","5. healthcare context",0
+"POS_HOSP_AMBULANCE_RATE_countylevel","5. healthcare context",32.0514959403848
+"POS_HOSP_BURN_RATE_countylevel","5. healthcare context",0
+"POS_HOSP_CHEMO_RATE_countylevel","5. healthcare context",0
+"POS_HOSP_ED_RATE_countylevel","5. healthcare context",0
+"POS_HOSP_MEDSURG_ICU_RATE_countylevel","5. healthcare context",0
+"POS_HOSP_OBSTETRIC_RATE_countylevel","5. healthcare context",0
+"POS_HOSP_PED_ICU_RATE_countylevel","5. healthcare context",0
+"POS_HOSP_PSYCH_RATE_countylevel","5. healthcare context",0
+"POS_HOSP_REHAB_RATE_countylevel","5. healthcare context",0
+"POS_MAX_DIST_ALC_countylevel","5. healthcare context",0.00278055833611389
+"POS_MAX_DIST_CLINIC_countylevel","5. healthcare context",0.00278055833611389
+"POS_MAX_DIST_ED_countylevel","5. healthcare context",0.00278055833611389
+"POS_MAX_DIST_MEDSURG_ICU_countylevel","5. healthcare context",0.00278055833611389
+"POS_MAX_DIST_OBSTETRICS_countylevel","5. healthcare context",0.00278055833611389
+"POS_MAX_DIST_PED_ICU_countylevel","5. healthcare context",0.00278055833611389
+"POS_MAX_DIST_TRAUMA_countylevel","5. healthcare context",0.00556111667222778
+"POS_MEAN_DIST_ALC_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEAN_DIST_CLINIC_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEAN_DIST_ED_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEAN_DIST_MEDSURG_ICU_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEAN_DIST_OBSTETRICS_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEAN_DIST_PED_ICU_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEAN_DIST_TRAUMA_countylevel","5. healthcare context",0.00556111667222778
+"POS_MEDIAN_DIST_ALC_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEDIAN_DIST_CLINIC_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEDIAN_DIST_ED_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEDIAN_DIST_MEDSURG_ICU_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEDIAN_DIST_OBSTETRICS_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEDIAN_DIST_PED_ICU_countylevel","5. healthcare context",0.00278055833611389
+"POS_MEDIAN_DIST_TRAUMA_countylevel","5. healthcare context",0.00556111667222778
+"POS_MIN_DIST_ALC_countylevel","5. healthcare context",0.00278055833611389
+"POS_MIN_DIST_CLINIC_countylevel","5. healthcare context",0.00278055833611389
+"POS_MIN_DIST_ED_countylevel","5. healthcare context",0.00278055833611389
+"POS_MIN_DIST_MEDSURG_ICU_countylevel","5. healthcare context",0.00278055833611389
+"POS_MIN_DIST_OBSTETRICS_countylevel","5. healthcare context",0.00278055833611389
+"POS_MIN_DIST_PED_ICU_countylevel","5. healthcare context",0.00278055833611389
+"POS_MIN_DIST_TRAUMA_countylevel","5. healthcare context",0.00556111667222778
+"POS_NF_BEDS_RATE_countylevel","5. healthcare context",0
+"POS_NF_RATE_countylevel","5. healthcare context",0
+"POS_PCT_HOSP_FOR_PROFIT_countylevel","5. healthcare context",0
+"POS_PCT_HOSP_GOV_countylevel","5. healthcare context",0
+"POS_PCT_HOSP_NON_PROFIT_countylevel","5. healthcare context",0
+"POS_RHC_RATE_countylevel","5. healthcare context",0
+"POS_SNF_BEDS_RATE_countylevel","5. healthcare context",0
+"POS_SNF_RATE_countylevel","5. healthcare context",0
+"POS_TOT_ASC_countylevel","5. healthcare context",0
+"POS_TOT_CMHC_countylevel","5. healthcare context",0
+"POS_TOT_FQHC_countylevel","5. healthcare context",0
+"POS_TOT_HHA_countylevel","5. healthcare context",0
+"POS_TOT_HOSPICE_countylevel","5. healthcare context",0
+"POS_TOT_HOSP_ALC_countylevel","5. healthcare context",0
+"POS_TOT_HOSP_AMBULANCE_countylevel","5. healthcare context",32.0514959403848
+"POS_TOT_HOSP_BURN_countylevel","5. healthcare context",0
+"POS_TOT_HOSP_CHEMO_countylevel","5. healthcare context",0
+"POS_TOT_HOSP_ED_countylevel","5. healthcare context",0
+"POS_TOT_HOSP_MEDSURG_ICU_countylevel","5. healthcare context",0
+"POS_TOT_HOSP_OBSTETRIC_countylevel","5. healthcare context",0
+"POS_TOT_HOSP_PED_ICU_countylevel","5. healthcare context",0
+"POS_TOT_HOSP_PSYCH_countylevel","5. healthcare context",0
+"POS_TOT_HOSP_REHAB_countylevel","5. healthcare context",0
+"POS_TOT_NF_countylevel","5. healthcare context",0
+"POS_TOT_NF_BEDS_countylevel","5. healthcare context",0
+"POS_TOT_RHC_countylevel","5. healthcare context",0
+"POS_TOT_SNF_countylevel","5. healthcare context",0
+"POS_TOT_SNF_BEDS_countylevel","5. healthcare context",0
+"REGION","6. geography",0
+"SAHIE_PCT_UNINSURED64_countylevel","5. healthcare context",0.00834167500834168
+"SAHIE_PCT_UNINSURED64_138FPL_countylevel","5. healthcare context",0.00834167500834168
+"SAHIE_PCT_UNINSURED64_138_400FPL_countylevel","5. healthcare context",25.1835168501835
+"SAHIE_PCT_UNINSURED64_200FPL_countylevel","5. healthcare context",0.00834167500834168
+"SAHIE_PCT_UNINSURED64_250FPL_countylevel","5. healthcare context",0.00834167500834168
+"SAHIE_PCT_UNINSURED64_400FPL_countylevel","5. healthcare context",0.00834167500834168
+"SAHIE_TOT_POP64_countylevel","5. healthcare context",0.00834167500834168
+"SAIPE_MEDIAN_HH_INCOME_countylevel","2. economic context",0.00834167500834168
+"SAIPE_PCT_POV_countylevel","2. economic context",0.00834167500834168
+"SAIPE_PCT_POV_0_17_countylevel","2. economic context",0.00834167500834168
+"SAIPE_PCT_POV_5_17_countylevel","2. economic context",0.00834167500834168
+"SAIPE_TOT_POV_countylevel","2. economic context",0.00834167500834168
+"SAIPE_TOT_POV_0_17_countylevel","2. economic context",0.00834167500834168
+"SAIPE_TOT_POV_5_17_countylevel","2. economic context",0.00834167500834168
+"SEDA_CS_MN_ELA_GR3_ALL_countylevel","3. education",0.269714158603047
+"SEDA_CS_MN_ELA_GR3_ASN_countylevel","3. education",43.2237793348904
+"SEDA_CS_MN_ELA_GR3_BLK_countylevel","3. education",19.0023356690023
+"SEDA_CS_MN_ELA_GR3_ECD_countylevel","3. education",0.753531309086865
+"SEDA_CS_MN_ELA_GR3_HSP_countylevel","3. education",23.4428873317762
+"SEDA_CS_MN_ELA_GR3_MTR_countylevel","3. education",27.635969302636
+"SEDA_CS_MN_ELA_GR3_NAM_countylevel","3. education",76.7211656100545
+"SEDA_CS_MN_ELA_GR3_NEC_countylevel","3. education",7.25725725725726
+"SEDA_CS_MN_ELA_GR3_WHT_countylevel","3. education",16.64998331665
+"SEDA_CS_MN_ELA_GR8_ALL_countylevel","3. education",0.481036592147703
+"SEDA_CS_MN_ELA_GR8_ASN_countylevel","3. education",35.1462573684796
+"SEDA_CS_MN_ELA_GR8_BLK_countylevel","3. education",4.53231008786564
+"SEDA_CS_MN_ELA_GR8_ECD_countylevel","3. education",3.24769213658103
+"SEDA_CS_MN_ELA_GR8_HSP_countylevel","3. education",15.062284506729
+"SEDA_CS_MN_ELA_GR8_MTR_countylevel","3. education",15.3403403403403
+"SEDA_CS_MN_ELA_GR8_NAM_countylevel","3. education",86.9508397286175
+"SEDA_CS_MN_ELA_GR8_NEC_countylevel","3. education",7.38794349905461
+"SEDA_CS_MN_ELA_GR8_WHT_countylevel","3. education",2.51084417751084
+"SEDA_CS_MN_MATH_GR3_ALL_countylevel","3. education",0.397619842064287
+"SEDA_CS_MN_MATH_GR3_ASN_countylevel","3. education",22.6115003892782
+"SEDA_CS_MN_MATH_GR3_BLK_countylevel","3. education",3.65365365365365
+"SEDA_CS_MN_MATH_GR3_ECD_countylevel","3. education",0.836948059170281
+"SEDA_CS_MN_MATH_GR3_HSP_countylevel","3. education",8.25269714158603
+"SEDA_CS_MN_MATH_GR3_MTR_countylevel","3. education",13.1631631631632
+"SEDA_CS_MN_MATH_GR3_NAM_countylevel","3. education",76.0844177510844
+"SEDA_CS_MN_MATH_GR3_NEC_countylevel","3. education",7.46301857412969
+"SEDA_CS_MN_MATH_GR3_WHT_countylevel","3. education",1.14280947614281
+"SEDA_CS_MN_MATH_GR8_ALL_countylevel","3. education",0.917584250917584
+"SEDA_CS_MN_MATH_GR8_ASN_countylevel","3. education",23.4540095651207
+"SEDA_CS_MN_MATH_GR8_BLK_countylevel","3. education",3.91780669558447
+"SEDA_CS_MN_MATH_GR8_ECD_countylevel","3. education",1.53208764319875
+"SEDA_CS_MN_MATH_GR8_HSP_countylevel","3. education",10.0127905683461
+"SEDA_CS_MN_MATH_GR8_MTR_countylevel","3. education",15.0456011567123
+"SEDA_CS_MN_MATH_GR8_NAM_countylevel","3. education",92.9123568012457
+"SEDA_CS_MN_MATH_GR8_NEC_countylevel","3. education",7.79946613279947
+"SEDA_CS_MN_MATH_GR8_WHT_countylevel","3. education",1.73506840173507
+"SEDA_CS_TOT_ELA_GR3_ALL_countylevel","3. education",0.258591925258592
+"SEDA_CS_TOT_ELA_GR3_ASN_countylevel","3. education",29.2987431876321
+"SEDA_CS_TOT_ELA_GR3_BLK_countylevel","3. education",17.0114559003448
+"SEDA_CS_TOT_ELA_GR3_ECD_countylevel","3. education",0.72850628406184
+"SEDA_CS_TOT_ELA_GR3_HSP_countylevel","3. education",17.2700478256034
+"SEDA_CS_TOT_ELA_GR3_MTR_countylevel","3. education",18.6936936936937
+"SEDA_CS_TOT_ELA_GR3_NAM_countylevel","3. education",31.737292848404
+"SEDA_CS_TOT_ELA_GR3_NEC_countylevel","3. education",5.83083083083083
+"SEDA_CS_TOT_ELA_GR3_WHT_countylevel","3. education",16.3441218996775
+"SEDA_CS_TOT_ELA_GR8_ALL_countylevel","3. education",0.472694917139362
+"SEDA_CS_TOT_ELA_GR8_ASN_countylevel","3. education",19.96996996997
+"SEDA_CS_TOT_ELA_GR8_BLK_countylevel","3. education",2.49972194416639
+"SEDA_CS_TOT_ELA_GR8_ECD_countylevel","3. education",3.23656990323657
+"SEDA_CS_TOT_ELA_GR8_HSP_countylevel","3. education",7.81614948281615
+"SEDA_CS_TOT_ELA_GR8_MTR_countylevel","3. education",4.61572683794906
+"SEDA_CS_TOT_ELA_GR8_NAM_countylevel","3. education",20.7596485374263
+"SEDA_CS_TOT_ELA_GR8_NEC_countylevel","3. education",6.47313980647314
+"SEDA_CS_TOT_ELA_GR8_WHT_countylevel","3. education",2.12990768546324
+"SEDA_CS_TOT_MATH_GR3_ALL_countylevel","3. education",0.380936492047603
+"SEDA_CS_TOT_MATH_GR3_ASN_countylevel","3. education",6.59548437326215
+"SEDA_CS_TOT_MATH_GR3_BLK_countylevel","3. education",1.55711266822378
+"SEDA_CS_TOT_MATH_GR3_ECD_countylevel","3. education",0.806361917473029
+"SEDA_CS_TOT_MATH_GR3_HSP_countylevel","3. education",1.43476810143477
+"SEDA_CS_TOT_MATH_GR3_MTR_countylevel","3. education",3.03080858636414
+"SEDA_CS_TOT_MATH_GR3_NAM_countylevel","3. education",16.9892114336559
+"SEDA_CS_TOT_MATH_GR3_NEC_countylevel","3. education",6.25347569792014
+"SEDA_CS_TOT_MATH_GR3_WHT_countylevel","3. education",0.809142475809142
+"SEDA_CS_TOT_MATH_GR8_ALL_countylevel","3. education",0.903681459237015
+"SEDA_CS_TOT_MATH_GR8_ASN_countylevel","3. education",6.8457346235124
+"SEDA_CS_TOT_MATH_GR8_BLK_countylevel","3. education",1.83516850183517
+"SEDA_CS_TOT_MATH_GR8_ECD_countylevel","3. education",1.51818485151818
+"SEDA_CS_TOT_MATH_GR8_HSP_countylevel","3. education",2.05205205205205
+"SEDA_CS_TOT_MATH_GR8_MTR_countylevel","3. education",4.02068735402069
+"SEDA_CS_TOT_MATH_GR8_NAM_countylevel","3. education",16.822377933489
+"SEDA_CS_TOT_MATH_GR8_NEC_countylevel","3. education",7.15993771549327
+"SEDA_CS_TOT_MATH_GR8_WHT_countylevel","3. education",1.34857079301524
+"SEDA_ELA_GR3_NEG_countylevel","3. education",7.27950172394617
+"SEDA_ELA_GR3_WAG_countylevel","3. education",43.2293404515627
+"SEDA_ELA_GR3_WBG_countylevel","3. education",19.4333222111
+"SEDA_ELA_GR3_WHG_countylevel","3. education",23.4929373818263
+"SEDA_ELA_GR3_WMG_countylevel","3. education",27.6637748859971
+"SEDA_ELA_GR3_WNG_countylevel","3. education",76.7211656100545
+"SEDA_ELA_GR8_NEG_countylevel","3. education",9.66244021799577
+"SEDA_ELA_GR8_WAG_countylevel","3. education",35.157379601824
+"SEDA_ELA_GR8_WBG_countylevel","3. education",5.3053053053053
+"SEDA_ELA_GR8_WHG_countylevel","3. education",15.3876098320543
+"SEDA_ELA_GR8_WMG_countylevel","3. education",15.6211767322878
+"SEDA_ELA_GR8_WNG_countylevel","3. education",86.9536202869536
+"SEDA_MATH_GR3_NEG_countylevel","3. education",7.44911578244912
+"SEDA_MATH_GR3_WAG_countylevel","3. education",22.6170615059504
+"SEDA_MATH_GR3_WBG_countylevel","3. education",4.08185963741519
+"SEDA_MATH_GR3_WHG_countylevel","3. education",8.27772216661105
+"SEDA_MATH_GR3_WMG_countylevel","3. education",13.1659437214993
+"SEDA_MATH_GR3_WNG_countylevel","3. education",76.0844177510844
+"SEDA_MATH_GR8_NEG_countylevel","3. education",7.93293293293293
+"SEDA_MATH_GR8_WAG_countylevel","3. education",23.5207429651874
+"SEDA_MATH_GR8_WBG_countylevel","3. education",4.57123790457124
+"SEDA_MATH_GR8_WHG_countylevel","3. education",10.1851851851852
+"SEDA_MATH_GR8_WMG_countylevel","3. education",15.1735068401735
+"SEDA_MATH_GR8_WNG_countylevel","3. education",92.9179179179179
+"STATE","6. geography",0
+"STATEFIPS","6. geography",0
+"TERRITORY","6. geography",0
+"WUSTL_AVG_PM25_countylevel","4. physical infrastructure",0.0111222333444556
+"ACS_AVG_HH_SIZE_census_tractlevel","1. social context",6.01712823935046
+"ACS_GINI_INDEX_census_tractlevel","2. economic context",6.00600600600601
+"ACS_MDN_GRNDPRNT_INC_census_tractlevel","2. economic context",55.0578356133912
+"ACS_MDN_GRNDPRNT_NO_PRNT_INC_census_tractlevel","2. economic context",82.7521966410855
+"ACS_MDN_OWNER_COST_MORTGAGE_census_tractlevel","4. physical infrastructure",6.49538427316205
+"ACS_MDN_OWNER_COST_NO_MORTG_census_tractlevel","4. physical infrastructure",7.53809364920476
+"ACS_MEDIAN_AGE_census_tractlevel","1. social context",6.00044488933378
+"ACS_MEDIAN_AGE_FEMALE_census_tractlevel","1. social context",6.01156712267823
+"ACS_MEDIAN_AGE_MALE_census_tractlevel","1. social context",6.00044488933378
+"ACS_MEDIAN_HH_INC_census_tractlevel","2. economic context",6.01434768101435
+"ACS_MEDIAN_HH_INC_AIAN_census_tractlevel","2. economic context",97.7838950061172
+"ACS_MEDIAN_HH_INC_ASIAN_census_tractlevel","2. economic context",69.116338560783
+"ACS_MEDIAN_HH_INC_BLACK_census_tractlevel","2. economic context",13.8638638638639
+"ACS_MEDIAN_HH_INC_HISP_census_tractlevel","2. economic context",49.0101212323435
+"ACS_MEDIAN_HH_INC_MULTI_census_tractlevel","2. economic context",75.4504504504504
+"ACS_MEDIAN_HH_INC_NHPI_census_tractlevel","2. economic context",99.9805360916472
+"ACS_MEDIAN_HH_INC_OTHER_census_tractlevel","2. economic context",81.0421532643755
+"ACS_MEDIAN_HH_INC_WHITE_census_tractlevel","2. economic context",17.7065954843733
+"ACS_MEDIAN_HOME_VALUE_census_tractlevel","4. physical infrastructure",6.48704259815371
+"ACS_MEDIAN_INC_F_census_tractlevel","2. economic context",6.32855077299522
+"ACS_MEDIAN_INC_M_census_tractlevel","2. economic context",6.30352574797019
+"ACS_MEDIAN_NONVET_INC_census_tractlevel","2. economic context",8.48070292514737
+"ACS_MEDIAN_RENT_census_tractlevel","4. physical infrastructure",6.58158158158158
+"ACS_MEDIAN_VET_INC_census_tractlevel","2. economic context",11.7562006450895
+"ACS_MEDIAN_YEAR_BUILT_census_tractlevel","4. physical infrastructure",6.19230341452564
+"ACS_PCT_10UNITS_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_1UP_OWNER_1ROOM_census_tractlevel","4. physical infrastructure",6.08664219775331
+"ACS_PCT_1UP_PERS_1ROOM_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_1UP_RENT_1ROOM_census_tractlevel","4. physical infrastructure",6.00878656434212
+"ACS_PCT_ADMIN_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_AGE_0_17_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AGE_0_4_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AGE_10_14_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AGE_15_17_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AGE_18_29_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AGE_18_44_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AGE_30_44_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AGE_45_64_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AGE_50_64_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AGE_5_9_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AGE_ABOVE65_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AGE_ABOVE80_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AIAN_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AIAN_COMB_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_AIAN_FEMALE_census_tractlevel","1. social context",67.4758091424758
+"ACS_PCT_AIAN_MALE_census_tractlevel","1. social context",67.4758091424758
+"ACS_PCT_AIAN_NONHISP_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_API_LANG_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_ARMED_FORCES_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_ART_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_ASIAN_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_ASIAN_COMB_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_ASIAN_FEMALE_census_tractlevel","1. social context",31.8818818818819
+"ACS_PCT_ASIAN_MALE_census_tractlevel","1. social context",31.8818818818819
+"ACS_PCT_ASIAN_NONHISP_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_BACHELOR_DGR_census_tractlevel","3. education",5.99210321432544
+"ACS_PCT_BLACK_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_BLACK_COMB_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_BLACK_FEMALE_census_tractlevel","1. social context",6.99588477366255
+"ACS_PCT_BLACK_MALE_census_tractlevel","1. social context",6.99588477366255
+"ACS_PCT_BLACK_NONHISP_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_CHILDREN_GRANDPARENT_census_tractlevel","1. social context",6.05049493938383
+"ACS_PCT_CHILD_1FAM_census_tractlevel","1. social context",6.08108108108108
+"ACS_PCT_CHILD_DISAB_census_tractlevel","1. social context",29.6852407963519
+"ACS_PCT_COLLEGE_ASSOCIATE_DGR_census_tractlevel","3. education",5.99210321432544
+"ACS_PCT_COMMT_15MIN_census_tractlevel","4. physical infrastructure",6.00044488933378
+"ACS_PCT_COMMT_29MIN_census_tractlevel","4. physical infrastructure",6.00044488933378
+"ACS_PCT_COMMT_59MIN_census_tractlevel","4. physical infrastructure",6.00044488933378
+"ACS_PCT_COMMT_60MINUP_census_tractlevel","4. physical infrastructure",6.00044488933378
+"ACS_PCT_CONSTRUCT_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_CTZ_ABOVE18_census_tractlevel","1. social context",89.4199755310866
+"ACS_PCT_CTZ_NATURALIZED_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_CTZ_NONUS_BORN_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_CTZ_US_BORN_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_DIF_STATE_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_DISABLE_census_tractlevel","1. social context",29.6268490712935
+"ACS_PCT_DIVORCED_F_census_tractlevel","1. social context",6.00044488933378
+"ACS_PCT_DIVORCED_M_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_DRIVE_2WORK_census_tractlevel","4. physical infrastructure",6.00044488933378
+"ACS_PCT_EDUC_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_EMPLOYED_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_ENGLISH_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_ENGL_NOT_ALL_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_ENGL_NOT_WELL_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_ENGL_VERY_WELL_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_ENGL_WELL_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_FEMALE_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_FINANCE_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_FOREIGN_BORN_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_GOVT_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_GRADUATE_DGR_census_tractlevel","3. education",5.99210321432544
+"ACS_PCT_GRANDP_NO_RESPS_census_tractlevel","1. social context",14.7341786230675
+"ACS_PCT_GRANDP_RESPS_NO_P_census_tractlevel","1. social context",14.7341786230675
+"ACS_PCT_GRANDP_RESPS_P_census_tractlevel","1. social context",14.7341786230675
+"ACS_PCT_GRP_QRT_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_GULFWAR_1990_2001_census_tractlevel","1. social context",6.01434768101435
+"ACS_PCT_GULFWAR_2001_census_tractlevel","1. social context",6.01434768101435
+"ACS_PCT_GULFWAR_VIETNAM_census_tractlevel","1. social context",6.01434768101435
+"ACS_PCT_HEALTH_INC_138_199_census_tractlevel","2. economic context",39.5784673562451
+"ACS_PCT_HEALTH_INC_200_399_census_tractlevel","2. economic context",39.5784673562451
+"ACS_PCT_HEALTH_INC_ABOVE400_census_tractlevel","2. economic context",39.5784673562451
+"ACS_PCT_HEALTH_INC_BELOW137_census_tractlevel","2. economic context",39.5784673562451
+"ACS_PCT_HH_1FAM_FOOD_STMP_census_tractlevel","2. economic context",6.18674229785341
+"ACS_PCT_HH_1PERS_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HH_ABOVE65_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HH_ALONE_ABOVE65_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HH_BROADBAND_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_BROADBAND_ANY_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_BROADBAND_ONLY_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_CELLULAR_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_CELLULAR_ONLY_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_DIAL_INTERNET_ONLY_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_FOOD_STMP_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_HH_FOOD_STMP_BLW_POV_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_HH_INC_10000_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_HH_INC_100000_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_HH_INC_14999_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_HH_INC_24999_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_HH_INC_49999_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_HH_INC_99999_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_HH_INTERNET_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_INTERNET_NO_SUBS_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_KID_1PRNT_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HH_LIMIT_ENGLISH_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HH_NO_COMP_DEV_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_NO_FD_STMP_BLW_POV_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_HH_NO_INTERNET_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_OTHER_COMP_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_OTHER_COMP_ONLY_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_PC_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_PC_ONLY_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_PUB_ASSIST_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_HH_SAT_INTERNET_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_SMARTPHONE_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_SMARTPHONE_ONLY_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_TABLET_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HH_TABLET_ONLY_census_tractlevel","4. physical infrastructure",79.2570348125904
+"ACS_PCT_HISPANIC_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HISP_FEMALE_census_tractlevel","1. social context",11.2835057279502
+"ACS_PCT_HISP_MALE_census_tractlevel","1. social context",11.2835057279502
+"ACS_PCT_HOUSEHOLDER_AIAN_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HOUSEHOLDER_ASIAN_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HOUSEHOLDER_BLACK_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HOUSEHOLDER_MULT_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HOUSEHOLDER_NHPI_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HOUSEHOLDER_OTHER_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HOUSEHOLDER_WHITE_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_HS_GRADUATE_census_tractlevel","3. education",5.99210321432544
+"ACS_PCT_HU_BOT_TANK_LP_GAS_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_BUILT_1979_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_COAL_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_ELEC_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_KITCHEN_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_MOBILE_HOME_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_NO_FUEL_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_NO_VEH_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_OIL_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_OTHER_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_PLUMBING_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_SOLAR_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_UTILITY_GAS_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_HU_WOOD_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_INC50_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_INC50_ABOVE65_census_tractlevel","2. economic context",6.02268935602269
+"ACS_PCT_INC50_BELOW17_census_tractlevel","2. economic context",6.07551996440885
+"ACS_PCT_INFORM_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_IN_COUNTY_MOVE_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_IN_STATE_MOVE_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_LT_HS_census_tractlevel","3. education",5.99210321432544
+"ACS_PCT_MALE_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_MANUFACT_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_MARRIED_SP_AB_F_census_tractlevel","1. social context",6.00044488933378
+"ACS_PCT_MARRIED_SP_AB_M_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_MARRIED_SP_PR_F_census_tractlevel","1. social context",6.00044488933378
+"ACS_PCT_MARRIED_SP_PR_M_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_MEDICAID_ANY_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_MEDICAID_ANY_BELOW64_census_tractlevel","5. healthcare context",39.5979312645979
+"ACS_PCT_MEDICARE_ONLY_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_MULT_RACE_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_MULT_RACE_FEMALE_census_tractlevel","1. social context",14.2392392392392
+"ACS_PCT_MULT_RACE_MALE_census_tractlevel","1. social context",14.2392392392392
+"ACS_PCT_MULT_RACE_NONHISP_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_NATURE_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_NHPI_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_NHPI_COMB_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_NHPI_FEMALE_census_tractlevel","1. social context",93.8410632855077
+"ACS_PCT_NHPI_MALE_census_tractlevel","1. social context",93.8410632855077
+"ACS_PCT_NHPI_NONHISP_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_NONCTN_1990_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_NONCTN_1999_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_NONCTN_2000_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_NONCTN_2010_census_tractlevel","1. social context",29.6268490712935
+"ACS_PCT_NONVET_DISABLE_18_64_census_tractlevel","1. social context",29.6463129796463
+"ACS_PCT_NONVET_POV_18_64_census_tractlevel","2. economic context",29.6463129796463
+"ACS_PCT_NON_CITIZEN_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_NOT_LABOR_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_NO_WORK_NO_SCHL_16_19_census_tractlevel","3. education",6.43421198976754
+"ACS_PCT_NVR_MARRIED_F_census_tractlevel","1. social context",6.00044488933378
+"ACS_PCT_NVR_MARRIED_M_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_OTHER_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_OTHER_FEMALE_census_tractlevel","1. social context",30.7724391057724
+"ACS_PCT_OTHER_INS_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_OTHER_MALE_census_tractlevel","1. social context",30.7724391057724
+"ACS_PCT_OTHER_NONHISP_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_OTHER_RACE_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_OTH_EURP_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_OTH_LANG_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_OWNER_HU_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_OWNER_HU_CHILD_census_tractlevel","4. physical infrastructure",6.08664219775331
+"ACS_PCT_OWNER_HU_COST_30PCT_census_tractlevel","4. physical infrastructure",6.08664219775331
+"ACS_PCT_OWNER_HU_COST_50PCT_census_tractlevel","4. physical infrastructure",6.08664219775331
+"ACS_PCT_PERSON_INC_100_124_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_PERSON_INC_125_199_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_PERSON_INC_ABOVE200_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_PERSON_INC_BELOW99_census_tractlevel","2. economic context",5.99210321432544
+"ACS_PCT_POSTHS_ED_census_tractlevel","3. education",5.99210321432544
+"ACS_PCT_POV_AIAN_census_tractlevel","2. economic context",68.9077966855745
+"ACS_PCT_POV_ASIAN_census_tractlevel","2. economic context",32.8495161828495
+"ACS_PCT_POV_BLACK_census_tractlevel","2. economic context",7.19608497386275
+"ACS_PCT_POV_HISPANIC_census_tractlevel","2. economic context",11.6032699366033
+"ACS_PCT_POV_MULTI_census_tractlevel","2. economic context",15.0428205983762
+"ACS_PCT_POV_NHPI_census_tractlevel","2. economic context",94.2247803358914
+"ACS_PCT_POV_OTHER_census_tractlevel","2. economic context",32.421310199088
+"ACS_PCT_POV_WHITE_census_tractlevel","2. economic context",7.83005227449672
+"ACS_PCT_PRIVATE_ANY_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_PRIVATE_ANY_BELOW64_census_tractlevel","5. healthcare context",39.5979312645979
+"ACS_PCT_PRIVATE_EMPL_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_PRIVATE_EMPL_BELOW64_census_tractlevel","5. healthcare context",39.5979312645979
+"ACS_PCT_PRIVATE_MDCR_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_PRIVATE_MDCR_35_64_census_tractlevel","5. healthcare context",39.5979312645979
+"ACS_PCT_PRIVATE_OTHER_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_PRIVATE_OTHER_BELOW64_census_tractlevel","5. healthcare context",39.5979312645979
+"ACS_PCT_PRIVATE_SELF_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_PRIVATE_SELF_BELOW64_census_tractlevel","5. healthcare context",39.5979312645979
+"ACS_PCT_PROFESS_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_PUBLIC_OTHER_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_PUBLIC_ONLY_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_PUBLIC_OTHER_BELOW64_census_tractlevel","5. healthcare context",39.5979312645979
+"ACS_PCT_PUBL_TRANSIT_census_tractlevel","4. physical infrastructure",6.00044488933378
+"ACS_PCT_PUB_COMMT_15MIN_census_tractlevel","4. physical infrastructure",27.3301078856634
+"ACS_PCT_PUB_COMMT_29MIN_census_tractlevel","4. physical infrastructure",27.3301078856634
+"ACS_PCT_PUB_COMMT_59MIN_census_tractlevel","4. physical infrastructure",27.3301078856634
+"ACS_PCT_PUB_COMMT_60MINUP_census_tractlevel","4. physical infrastructure",27.3301078856634
+"ACS_PCT_PVT_EMPL_DRCT_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_PVT_EMPL_DRCT_BELOW64_census_tractlevel","5. healthcare context",39.5979312645979
+"ACS_PCT_PVT_NONPROFIT_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_PVT_PROFIT_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_RENTER_HU_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_RENTER_HU_ABOVE65_census_tractlevel","4. physical infrastructure",6.00878656434212
+"ACS_PCT_RENTER_HU_CHILD_census_tractlevel","4. physical infrastructure",6.00878656434212
+"ACS_PCT_RENTER_HU_COST_30PCT_census_tractlevel","4. physical infrastructure",6.02268935602269
+"ACS_PCT_RENTER_HU_COST_50PCT_census_tractlevel","4. physical infrastructure",6.02268935602269
+"ACS_PCT_RETAIL_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_SAME_SEX_UNMRD_PRTNR_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_SELF_MDCR_ABOVE35_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_SPANISH_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_TAXICAB_2WORK_census_tractlevel","4. physical infrastructure",6.00044488933378
+"ACS_PCT_TRANSPORT_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_TRICARE_VA_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_TRICARE_VA_BELOW64_census_tractlevel","5. healthcare context",39.5979312645979
+"ACS_PCT_UNEMPLOY_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_UNINSURED_census_tractlevel","5. healthcare context",39.5784673562451
+"ACS_PCT_UNINSURED_BELOW64_census_tractlevel","5. healthcare context",39.5979312645979
+"ACS_PCT_VACANT_HU_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_PCT_VET_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_VET_BACHELOR_census_tractlevel","3. education",6.01712823935046
+"ACS_PCT_VET_COLLEGE_census_tractlevel","3. education",6.01712823935046
+"ACS_PCT_VET_DISABLE_18_64_census_tractlevel","1. social context",29.8353909465021
+"ACS_PCT_VET_HS_census_tractlevel","3. education",6.01712823935046
+"ACS_PCT_VET_LABOR_FORCE_18_64_census_tractlevel","2. economic context",6.25625625625626
+"ACS_PCT_VET_POV_18_64_census_tractlevel","2. economic context",29.8353909465021
+"ACS_PCT_VET_UNEMPL_18_64_census_tractlevel","2. economic context",6.82905127349572
+"ACS_PCT_VIETNAM_census_tractlevel","1. social context",6.01434768101435
+"ACS_PCT_WALK_2WORK_census_tractlevel","4. physical infrastructure",6.00044488933378
+"ACS_PCT_WHITE_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_WHITE_COMB_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_WHITE_FEMALE_census_tractlevel","1. social context",7.49360471582694
+"ACS_PCT_WHITE_MALE_census_tractlevel","1. social context",7.49360471582694
+"ACS_PCT_WHITE_NONHISP_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_WHOLESALE_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PCT_WIDOWED_F_census_tractlevel","1. social context",6.00044488933378
+"ACS_PCT_WIDOWED_M_census_tractlevel","1. social context",5.99210321432544
+"ACS_PCT_WORK_NO_CAR_census_tractlevel","4. physical infrastructure",6.00600600600601
+"ACS_PCT_WORK_RES_F_census_tractlevel","2. economic context",6.0254699143588
+"ACS_PCT_WORK_RES_M_census_tractlevel","2. economic context",6.00044488933378
+"ACS_PER_CAPITA_INC_census_tractlevel","2. economic context",6.00044488933378
+"ACS_TOT_CIVIL_EMPLOY_POP_census_tractlevel","2. economic context",5.99210321432544
+"ACS_TOT_CIVIL_NONINST_POP_census_tractlevel","1. social context",29.6268490712935
+"ACS_TOT_CIVIL_NONINST_POP_POV_census_tractlevel","2. economic context",29.6268490712935
+"ACS_TOT_CIVIL_POP_ABOVE18_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_CIVIL_POP_POV_census_tractlevel","2. economic context",29.6268490712935
+"ACS_TOT_CIVIL_VET_POP_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_CIVIL_VET_POP_ABOVE25_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_GRANDCHILDREN_GP_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_HH_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_HU_census_tractlevel","4. physical infrastructure",5.99210321432544
+"ACS_TOT_OWN_CHILD_BELOW17_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_POP_16_19_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_POP_ABOVE15_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_POP_ABOVE16_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_POP_ABOVE25_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_POP_ABOVE5_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_POP_POV_census_tractlevel","2. economic context",5.99210321432544
+"ACS_TOT_POP_US_ABOVE1_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_POP_WT_census_tractlevel","1. social context",5.99210321432544
+"ACS_TOT_CIVILIAN_LABOR_census_tractlevel","2. economic context",5.99210321432544
+"ACS_TOT_WORKER_HH_census_tractlevel","2. economic context",5.99210321432544
+"ACS_TOT_WORKER_NWFH_census_tractlevel","2. economic context",5.99210321432544
+"CDCP_ARTHRITIS_ADULT_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_ASTHMA_ADULT_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_BLOOD_MED_ADULT_C_census_tractlevel","5. healthcare context",89.8398398398398
+"CDCP_CERVCAN_SCR_F21_65_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_CHOLES_ADULT_C_census_tractlevel","5. healthcare context",89.8398398398398
+"CDCP_CHOLES_SCR_ADULT_C_census_tractlevel","5. healthcare context",89.8398398398398
+"CDCP_DENTIST_VISIT_ADULT_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_DOCTOR_VISIT_ADULT_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_FOBT_SIG_COL_50_75_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_KIDNEY_DISEASE_ADULT_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_MAMMO_SCR_F50_74_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_NO_PHY_ACTV_ADULT_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_NO_TEETH_65_ABOVE_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_PREV_SERV_F65_ABOVE_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_PREV_SERV_M65_ABOVE_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_PULMONARY_ADULT_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCP_SLEEP_LESS7HR_ADULT_C_census_tractlevel","5. healthcare context",89.4255366477589
+"CDCSVI_RPL_THEME1_SOCIECO_census_tractlevel","1. social context",55.9948837726616
+"CDCSVI_RPL_THEME2_HH_COMP_census_tractlevel","1. social context",55.9726393059726
+"CDCSVI_RPL_THEME3_MINO_census_tractlevel","1. social context",55.9726393059726
+"CDCSVI_RPL_THEME4_HH_TRANS_census_tractlevel","1. social context",55.9726393059726
+"CDCSVI_RPL_THEMES_ALL_census_tractlevel","1. social context",55.9948837726616
+"CEN_AIAN_NH_IND_census_tractlevel","6. geography",26.3402291180069
+"CEN_AREALAND_SQM_TRACT_census_tractlevel","6. geography",5.98654209765321
+"CEN_POPDENSITY_TRACT_census_tractlevel","6. geography",5.99210321432544
+"COUNTY","6. geography",0
+"COUNTYFIPS","6. geography",0
+"ERS_RUCA1_2010_census_tractlevel","6. geography",5.98932265598932
+"ERS_RUCA2_2010_census_tractlevel","6. geography",5.98932265598932
+"FARA_PCT_LA_1_10_POP_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_PCT_LA_1_20_POP_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_PCT_LA_1_AIAN_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_PCT_LA_1_ASIAN_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_PCT_LA_1_BLACK_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_PCT_LA_1_HISP_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_PCT_LA_1_MR_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_PCT_LA_1_NHPI_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_PCT_LA_1_WHITE_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_PCT_LA_HALF_10_POP_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_TOT_AIAN_DENOM_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_TOT_ASIAN_DENOM_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_TOT_BLACK_DENOM_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_TOT_HISP_DENOM_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_TOT_MR_DENOM_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_TOT_NHPI_DENOM_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_TOT_POP_DENOM_census_tractlevel","4. physical infrastructure",77.0409298187076
+"FARA_TOT_WHITE_DENOM_census_tractlevel","4. physical infrastructure",90.2736069402736
+"FARA_TRACT_LILA_1_10_census_tractlevel","4. physical infrastructure",77.0409298187076
+"FARA_TRACT_LILA_1_20_census_tractlevel","4. physical infrastructure",77.0409298187076
+"FARA_TRACT_LILA_HALF_10_census_tractlevel","4. physical infrastructure",77.0409298187076
+"FARA_TRACT_LILA_VEHICLE_20_census_tractlevel","4. physical infrastructure",77.0409298187076
+"FARA_TRACT_URBANICITY_census_tractlevel","4. physical infrastructure",77.0409298187076
+"HRSA_MUA_CENSUS_TRACT_census_tractlevel","5. healthcare context",5.98932265598932
+"OPP_INCAR_ASN_F_HH_100PT_census_tractlevel","2. economic context",99.1352463574686
+"OPP_INCAR_ASN_F_HH_1PT_census_tractlevel","2. economic context",99.1352463574686
+"OPP_INCAR_ASN_F_HH_25PT_census_tractlevel","2. economic context",99.1352463574686
+"OPP_INCAR_ASN_F_HH_50PT_census_tractlevel","2. economic context",99.1352463574686
+"OPP_INCAR_ASN_F_HH_75PT_census_tractlevel","2. economic context",99.1352463574686
+"OPP_INCAR_ASN_F_N_census_tractlevel","2. economic context",99.1352463574686
+"OPP_INCAR_ASN_M_HH_100PT_census_tractlevel","2. economic context",99.1630519408297
+"OPP_INCAR_ASN_M_HH_1PT_census_tractlevel","2. economic context",99.1630519408297
+"OPP_INCAR_ASN_M_HH_25PT_census_tractlevel","2. economic context",99.1630519408297
+"OPP_INCAR_ASN_M_HH_50PT_census_tractlevel","2. economic context",99.1630519408297
+"OPP_INCAR_ASN_M_HH_75PT_census_tractlevel","2. economic context",99.1630519408297
+"OPP_INCAR_ASN_M_N_census_tractlevel","2. economic context",99.1630519408297
+"OPP_INCAR_BLK_F_HH_100PT_census_tractlevel","2. economic context",89.1196752307863
+"OPP_INCAR_BLK_F_HH_1PT_census_tractlevel","2. economic context",89.1196752307863
+"OPP_INCAR_BLK_F_HH_25PT_census_tractlevel","2. economic context",89.1196752307863
+"OPP_INCAR_BLK_F_HH_50PT_census_tractlevel","2. economic context",89.1196752307863
+"OPP_INCAR_BLK_F_HH_75PT_census_tractlevel","2. economic context",89.1196752307863
+"OPP_INCAR_BLK_F_N_census_tractlevel","2. economic context",89.1196752307863
+"OPP_INCAR_BLK_M_HH_100PT_census_tractlevel","2. economic context",89.3198754309865
+"OPP_INCAR_BLK_M_HH_1PT_census_tractlevel","2. economic context",89.3198754309865
+"OPP_INCAR_BLK_M_HH_25PT_census_tractlevel","2. economic context",89.3198754309865
+"OPP_INCAR_BLK_M_HH_50PT_census_tractlevel","2. economic context",89.3198754309865
+"OPP_INCAR_BLK_M_HH_75PT_census_tractlevel","2. economic context",89.3198754309865
+"OPP_INCAR_BLK_M_N_census_tractlevel","2. economic context",89.3198754309865
+"OPP_INCAR_HSP_F_HH_100PT_census_tractlevel","2. economic context",98.6653319986653
+"OPP_INCAR_HSP_F_HH_1PT_census_tractlevel","2. economic context",98.6653319986653
+"OPP_INCAR_HSP_F_HH_25PT_census_tractlevel","2. economic context",98.6653319986653
+"OPP_INCAR_HSP_F_HH_50PT_census_tractlevel","2. economic context",98.6653319986653
+"OPP_INCAR_HSP_F_HH_75PT_census_tractlevel","2. economic context",98.6653319986653
+"OPP_INCAR_HSP_F_N_census_tractlevel","2. economic context",98.6653319986653
+"OPP_INCAR_HSP_M_HH_100PT_census_tractlevel","2. economic context",98.804359915471
+"OPP_INCAR_HSP_M_HH_1PT_census_tractlevel","2. economic context",98.804359915471
+"OPP_INCAR_HSP_M_HH_25PT_census_tractlevel","2. economic context",98.804359915471
+"OPP_INCAR_HSP_M_HH_50PT_census_tractlevel","2. economic context",98.804359915471
+"OPP_INCAR_HSP_M_HH_75PT_census_tractlevel","2. economic context",98.804359915471
+"OPP_INCAR_HSP_M_N_census_tractlevel","2. economic context",98.804359915471
+"OPP_INCAR_NAM_F_HH_100PT_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_NAM_F_HH_1PT_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_NAM_F_HH_25PT_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_NAM_F_HH_50PT_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_NAM_F_HH_75PT_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_NAM_F_N_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_NAM_M_HH_100PT_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_NAM_M_HH_1PT_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_NAM_M_HH_25PT_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_NAM_M_HH_50PT_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_NAM_M_HH_75PT_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_NAM_M_N_census_tractlevel","2. economic context",99.9972194416639
+"OPP_INCAR_OTHER_F_HH_100PT_census_tractlevel","2. economic context",99.902680458236
+"OPP_INCAR_OTHER_F_HH_1PT_census_tractlevel","2. economic context",99.902680458236
+"OPP_INCAR_OTHER_F_HH_25PT_census_tractlevel","2. economic context",99.902680458236
+"OPP_INCAR_OTHER_F_HH_50PT_census_tractlevel","2. economic context",99.902680458236
+"OPP_INCAR_OTHER_F_HH_75PT_census_tractlevel","2. economic context",99.902680458236
+"OPP_INCAR_OTHER_F_N_census_tractlevel","2. economic context",99.902680458236
+"OPP_INCAR_OTHER_M_HH_100PT_census_tractlevel","2. economic context",99.9499499499499
+"OPP_INCAR_OTHER_M_HH_1PT_census_tractlevel","2. economic context",99.9499499499499
+"OPP_INCAR_OTHER_M_HH_25PT_census_tractlevel","2. economic context",99.9499499499499
+"OPP_INCAR_OTHER_M_HH_50PT_census_tractlevel","2. economic context",99.9499499499499
+"OPP_INCAR_OTHER_M_HH_75PT_census_tractlevel","2. economic context",99.9499499499499
+"OPP_INCAR_OTHER_M_N_census_tractlevel","2. economic context",99.9499499499499
+"OPP_INCAR_WHT_F_HH_100PT_census_tractlevel","2. economic context",91.2078745412079
+"OPP_INCAR_WHT_F_HH_1PT_census_tractlevel","2. economic context",91.2078745412079
+"OPP_INCAR_WHT_F_HH_25PT_census_tractlevel","2. economic context",91.2078745412079
+"OPP_INCAR_WHT_F_HH_50PT_census_tractlevel","2. economic context",91.2078745412079
+"OPP_INCAR_WHT_F_HH_75PT_census_tractlevel","2. economic context",91.2078745412079
+"OPP_INCAR_WHT_F_N_census_tractlevel","2. economic context",91.2078745412079
+"OPP_INCAR_WHT_M_HH_100PT_census_tractlevel","2. economic context",91.1717272828384
+"OPP_INCAR_WHT_M_HH_1PT_census_tractlevel","2. economic context",91.1717272828384
+"OPP_INCAR_WHT_M_HH_25PT_census_tractlevel","2. economic context",91.1717272828384
+"OPP_INCAR_WHT_M_HH_50PT_census_tractlevel","2. economic context",91.1717272828384
+"OPP_INCAR_WHT_M_HH_75PT_census_tractlevel","2. economic context",91.1717272828384
+"OPP_INCAR_WHT_M_N_census_tractlevel","2. economic context",91.1717272828384
+"OPP_TOP20_ASN_F_HH_100PT_census_tractlevel","2. economic context",99.218663107552
+"OPP_TOP20_ASN_F_HH_1PT_census_tractlevel","2. economic context",99.218663107552
+"OPP_TOP20_ASN_F_HH_25PT_census_tractlevel","2. economic context",99.218663107552
+"OPP_TOP20_ASN_F_HH_50PT_census_tractlevel","2. economic context",99.218663107552
+"OPP_TOP20_ASN_F_HH_75PT_census_tractlevel","2. economic context",99.218663107552
+"OPP_TOP20_ASN_F_N_census_tractlevel","2. economic context",99.218663107552
+"OPP_TOP20_ASN_M_HH_100PT_census_tractlevel","2. economic context",99.2131019908798
+"OPP_TOP20_ASN_M_HH_1PT_census_tractlevel","2. economic context",99.2131019908798
+"OPP_TOP20_ASN_M_HH_25PT_census_tractlevel","2. economic context",99.2131019908798
+"OPP_TOP20_ASN_M_HH_50PT_census_tractlevel","2. economic context",99.2131019908798
+"OPP_TOP20_ASN_M_HH_75PT_census_tractlevel","2. economic context",99.2131019908798
+"OPP_TOP20_ASN_M_N_census_tractlevel","2. economic context",99.2131019908798
+"OPP_TOP20_BLK_F_HH_100PT_census_tractlevel","2. economic context",91.8668668668669
+"OPP_TOP20_BLK_F_HH_1PT_census_tractlevel","2. economic context",91.8668668668669
+"OPP_TOP20_BLK_F_HH_25PT_census_tractlevel","2. economic context",91.8668668668669
+"OPP_TOP20_BLK_F_HH_50PT_census_tractlevel","2. economic context",91.8668668668669
+"OPP_TOP20_BLK_F_HH_75PT_census_tractlevel","2. economic context",91.8668668668669
+"OPP_TOP20_BLK_F_N_census_tractlevel","2. economic context",91.8668668668669
+"OPP_TOP20_BLK_M_HH_100PT_census_tractlevel","2. economic context",91.8390612835057
+"OPP_TOP20_BLK_M_HH_1PT_census_tractlevel","2. economic context",91.8390612835057
+"OPP_TOP20_BLK_M_HH_25PT_census_tractlevel","2. economic context",91.8390612835057
+"OPP_TOP20_BLK_M_HH_50PT_census_tractlevel","2. economic context",91.8390612835057
+"OPP_TOP20_BLK_M_HH_75PT_census_tractlevel","2. economic context",91.8390612835057
+"OPP_TOP20_BLK_M_N_census_tractlevel","2. economic context",91.8390612835057
+"OPP_TOP20_HSP_F_HH_100PT_census_tractlevel","2. economic context",98.5819152485819
+"OPP_TOP20_HSP_F_HH_1PT_census_tractlevel","2. economic context",98.5819152485819
+"OPP_TOP20_HSP_F_HH_25PT_census_tractlevel","2. economic context",98.5819152485819
+"OPP_TOP20_HSP_F_HH_50PT_census_tractlevel","2. economic context",98.5819152485819
+"OPP_TOP20_HSP_F_HH_75PT_census_tractlevel","2. economic context",98.5819152485819
+"OPP_TOP20_HSP_F_N_census_tractlevel","2. economic context",98.5819152485819
+"OPP_TOP20_HSP_M_HH_100PT_census_tractlevel","2. economic context",98.5040596151707
+"OPP_TOP20_HSP_M_HH_1PT_census_tractlevel","2. economic context",98.5040596151707
+"OPP_TOP20_HSP_M_HH_25PT_census_tractlevel","2. economic context",98.5040596151707
+"OPP_TOP20_HSP_M_HH_50PT_census_tractlevel","2. economic context",98.5040596151707
+"OPP_TOP20_HSP_M_HH_75PT_census_tractlevel","2. economic context",98.5040596151707
+"OPP_TOP20_HSP_M_N_census_tractlevel","2. economic context",98.5040596151707
+"OPP_TOP20_NAM_F_HH_100PT_census_tractlevel","2. economic context",100
+"OPP_TOP20_NAM_F_HH_1PT_census_tractlevel","2. economic context",100
+"OPP_TOP20_NAM_F_HH_25PT_census_tractlevel","2. economic context",100
+"OPP_TOP20_NAM_F_HH_50PT_census_tractlevel","2. economic context",100
+"OPP_TOP20_NAM_F_HH_75PT_census_tractlevel","2. economic context",100
+"OPP_TOP20_NAM_F_N_census_tractlevel","2. economic context",100
+"OPP_TOP20_NAM_M_HH_100PT_census_tractlevel","2. economic context",100
+"OPP_TOP20_NAM_M_HH_1PT_census_tractlevel","2. economic context",100
+"OPP_TOP20_NAM_M_HH_25PT_census_tractlevel","2. economic context",100
+"OPP_TOP20_NAM_M_HH_50PT_census_tractlevel","2. economic context",100
+"OPP_TOP20_NAM_M_HH_75PT_census_tractlevel","2. economic context",100
+"OPP_TOP20_NAM_M_N_census_tractlevel","2. economic context",100
+"OPP_TOP20_OTHER_F_HH_100PT_census_tractlevel","2. economic context",99.8025803581359
+"OPP_TOP20_OTHER_F_HH_1PT_census_tractlevel","2. economic context",99.8025803581359
+"OPP_TOP20_OTHER_F_HH_25PT_census_tractlevel","2. economic context",99.8025803581359
+"OPP_TOP20_OTHER_F_HH_50PT_census_tractlevel","2. economic context",99.8025803581359
+"OPP_TOP20_OTHER_F_HH_75PT_census_tractlevel","2. economic context",99.8025803581359
+"OPP_TOP20_OTHER_F_N_census_tractlevel","2. economic context",99.8025803581359
+"OPP_TOP20_OTHER_M_HH_100PT_census_tractlevel","2. economic context",99.9165832499166
+"OPP_TOP20_OTHER_M_HH_1PT_census_tractlevel","2. economic context",99.9165832499166
+"OPP_TOP20_OTHER_M_HH_25PT_census_tractlevel","2. economic context",99.9165832499166
+"OPP_TOP20_OTHER_M_HH_50PT_census_tractlevel","2. economic context",99.9165832499166
+"OPP_TOP20_OTHER_M_HH_75PT_census_tractlevel","2. economic context",99.9165832499166
+"OPP_TOP20_OTHER_M_N_census_tractlevel","2. economic context",99.9165832499166
+"OPP_TOP20_WHT_F_HH_100PT_census_tractlevel","2. economic context",92.5314203091981
+"OPP_TOP20_WHT_F_HH_1PT_census_tractlevel","2. economic context",92.5314203091981
+"OPP_TOP20_WHT_F_HH_25PT_census_tractlevel","2. economic context",92.5314203091981
+"OPP_TOP20_WHT_F_HH_50PT_census_tractlevel","2. economic context",92.5314203091981
+"OPP_TOP20_WHT_F_HH_75PT_census_tractlevel","2. economic context",92.5314203091981
+"OPP_TOP20_WHT_F_N_census_tractlevel","2. economic context",92.5314203091981
+"OPP_TOP20_WHT_M_HH_100PT_census_tractlevel","2. economic context",92.4841508174841
+"OPP_TOP20_WHT_M_HH_1PT_census_tractlevel","2. economic context",92.4841508174841
+"OPP_TOP20_WHT_M_HH_25PT_census_tractlevel","2. economic context",92.4841508174841
+"OPP_TOP20_WHT_M_HH_50PT_census_tractlevel","2. economic context",92.4841508174841
+"OPP_TOP20_WHT_M_HH_75PT_census_tractlevel","2. economic context",92.4841508174841
+"OPP_TOP20_WHT_M_N_census_tractlevel","2. economic context",92.4841508174841
+"POS_DIST_ALC_TRACT_census_tractlevel","5. healthcare context",5.98932265598932
+"POS_DIST_CLINIC_TRACT_census_tractlevel","5. healthcare context",5.98932265598932
+"POS_DIST_ED_TRACT_census_tractlevel","5. healthcare context",5.98932265598932
+"POS_DIST_MEDSURG_ICU_TRACT_census_tractlevel","5. healthcare context",5.98932265598932
+"POS_DIST_OBSTETRICS_TRACT_census_tractlevel","5. healthcare context",5.98932265598932
+"POS_DIST_PED_ICU_TRACT_census_tractlevel","5. healthcare context",5.98932265598932
+"POS_DIST_TRAUMA_TRACT_census_tractlevel","5. healthcare context",5.99210321432544
+"REGION","6. geography",0
+"STATE","6. geography",0
+"STATEFIPS","6. geography",0
+"TERRITORY","6. geography",0
+"TRACTFIPS","6. geography",5.98654209765321
+"WUSTL_AVG_PM25_census_tractlevel","4. physical infrastructure",5.99488377266155
