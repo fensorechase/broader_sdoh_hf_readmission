@@ -32,6 +32,10 @@ MANIFEST
 *.manifest
 *.spec
 
+# Files
+data/TRACT_AHRQ/*
+data/COUNTY_AHRQ/*
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
