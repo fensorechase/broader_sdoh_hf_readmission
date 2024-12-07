@@ -54,15 +54,15 @@ To get feature importance information (from trained XGBoost models):
 python analyze_XGB_SHAP.py
 ```
 
-## 3. Code to generate all tables and plots can be found in ```/data/```
+## 3. Code to generate all tables and plots:
 First, pull readmission prediction model results from your local MongoDB: 
-- ```/scripts/analyze_classification_perf_results.py ``` to gather prediction performance values.
-- ```/scripts/fairness_analyze_results.py ``` to gather prediction fairness values.
-- ```/scripts/analyze_XGB_SHAP.py``` to gather feature importance values for XGBoost models.
+- ```python /scripts/analyze_classification_perf_results.py ``` to gather prediction performance values.
+- ```python /scripts/fairness_analyze_results.py ``` to gather prediction fairness values.
+- ```python /scripts/analyze_XGB_SHAP.py``` to gather feature importance values for XGBoost models.
 
-Then, to generate the patient characteristics table, use ```table1_Circ_2024.Rmd```.
+Then, to generate the patient characteristics table, use ```/data/table1_Circ_2024.Rmd```.
 
-To tabulate model performance and fairness run ```calculate_HF_performance_2024.Rmd```, and to tabulate feature importance run ```plot_HF_SHAP_Circ_2024.Rmd```.
+To tabulate model performance and fairness run ```/data/calculate_HF_performance_2024.Rmd```, and to tabulate feature importance run ```/data/plot_HF_SHAP_Circ_2024.Rmd```.
 
 Note that all SDOH features used from AHRQ SDOHD can be found below in Related Documents.
 
