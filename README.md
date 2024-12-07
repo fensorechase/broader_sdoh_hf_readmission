@@ -31,7 +31,8 @@ The social determinants of health (SDOH) datasets used in this study can be foun
 # Reproducibility
 ## 1. Prepare patient data, gather SDOH data and merge  ```/data/```:
 Run ``` /data/patient_inclusion_Circ_2024.Rmd ``` to apply study inclusion, exclusion criteria.
-Run ``` /data/merge_SDOH_Circ_2024.Rmd ``` to merge SDOH data with patients.
+
+Then run ``` /data/merge_SDOH_Circ_2024.Rmd ``` to merge SDOH data with patients.
 
 ## 2. Heart Failure (HF) Readmission Prediction
 The patient dataset is unavailable due to privacy reasons --- however the following commands demonstrate the steps we used to train and evaluate binary classification models (using clinical and public SDOH data):
@@ -60,7 +61,9 @@ First, pull readmission prediction model results from your local MongoDB:
 - ```/scripts/analyze_XGB_SHAP.py``` to gather feature importance values for XGBoost models.
 
 Then, to generate the patient characteristics table, use ```table1_Circ_2024.Rmd```.
-To tabulate model performance and fairness run ```calculate_HF_performance_2024.Rmd```, and to tabulate feature importance run ```plot_HF_SHAP_Circ_2024.Rmd```
+
+To tabulate model performance and fairness run ```calculate_HF_performance_2024.Rmd```, and to tabulate feature importance run ```plot_HF_SHAP_Circ_2024.Rmd```.
+
 Note that all SDOH features used from AHRQ SDOHD can be found below in Related Documents.
 
 ## All Related Documents: 
