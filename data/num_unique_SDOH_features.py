@@ -1,5 +1,6 @@
 import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
+
+warnings.simplefilter(action="ignore", category=FutureWarning)
 
 import argparse
 import json
@@ -8,15 +9,18 @@ import json
 Analyzes and compares unique expanded SDOH features (from AHRQ SDOHD) between county and tract levels from JSON files, removing specific suffixes of features and printing the summary statistics.
 """
 
+
 def read_json(filepath):
-    with open(filepath, 'r') as f:
+    with open(filepath, "r") as f:
         return json.load(f)
+
 
 def remove_level_suffix(feature_list, suffix):
     """
     Remove specified suffix from each feature in the list
     """
-    return [feature.replace(suffix, '').strip() for feature in feature_list]
+    return [feature.replace(suffix, "").strip() for feature in feature_list]
+
 
 def analyze_feature_uniqueness(base_feat, feat_column, cty_key, trct_key):
     """
@@ -67,15 +71,16 @@ def analyze_feature_uniqueness(base_feat, feat_column, cty_key, trct_key):
     print("\nFeatures Appearing Once or More:")
     print(sorted(feats_once_or_more))
 
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-base_feat", 
-                        default="../data/feat_base.json",
-                        help="base features JSON")
-    parser.add_argument("-feat_column", 
-                        default="../data/feat_column.json",
-                        help="feature column JSON")
-    
+    parser.add_argument(
+        "-base_feat", default="../data/feat_base.json", help="base features JSON"
+    )
+    parser.add_argument(
+        "-feat_column", default="../data/feat_column.json", help="feature column JSON"
+    )
+
     args = parser.parse_args()
 
     # Read base features and feature columns
@@ -83,10 +88,10 @@ def main():
     feat_column = read_json(args.feat_column)
 
     # Analyze feature uniqueness for specified feature sets
-    analyze_feature_uniqueness(base_feat, 
-                                feat_column,
-                                "M6_total_ahrq_cty_DF1_nm", 
-                                "M6_total_ahrq_trct_DF1_nm")
+    analyze_feature_uniqueness(
+        base_feat, feat_column, "M6_total_ahrq_cty_DF1_nm", "M6_total_ahrq_trct_DF1_nm"
+    )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
