@@ -37,14 +37,12 @@ library(readr) # For read_tsv
 - input file: DF1_results_individualfolds_Circ_2024.csv
 - 
 
-- train file: private_CHIL_repo/scripts/bal_allfeats_MLHC_nosmote_sgs_evaluate_baselines_nestKfold.py
-- output file: private_CHIL_repo/scripts/3-21-ACC/Circ_HF_results_individualfolds.csv
 
 ```{r}
 
-fairness_full_hf_results <- read.csv("../scripts/individualfolds_Circ_HF_results_fairness_final.csv") # individualfolds_Circ_HF_results_fairness_final
+fairness_full_hf_results <- read.csv("../scripts/<your_fairness_output_filename>.csv") # individualfolds_Circ_HF_results_fairness_final
 
-full_hf_results <- read.csv("../scripts/final_results_individualfolds_Circ_2024.csv") # 
+full_hf_results <- read.csv("../scripts/<your_output_filename>.csv") # 
 
 ```
 
@@ -194,19 +192,19 @@ feat_sets <- c(
         "M6_total_ahrq_cty_DF1_nm")
 
 
-county_only_feats <- c("M6_total_ahrq_cty_DF1_nm",
-        "DF1_nm_county_AHRQ_domain1",
-        "DF1_nm_county_AHRQ_domain2",
-        "DF1_nm_county_AHRQ_domain3",
-        "DF1_nm_county_AHRQ_domain4",
-        "DF1_nm_county_AHRQ_domain5")
+county_only_feats <- c("M6_total_ahrq_cty_DF1_nm", 
+        "demo_DF1_nm_county_AHRQ_domain1",
+        "demo_DF1_nm_county_AHRQ_domain2",
+        "demo_DF1_nm_county_AHRQ_domain3",
+        "demo_DF1_nm_county_AHRQ_domain4",
+        "demo_DF1_nm_county_AHRQ_domain5")
 
-tract_only_feats <- c( "M6_total_ahrq_trct_DF1_nm",
-        "DF1_nm_tract_AHRQ_domain1",
-        "DF1_nm_tract_AHRQ_domain2",
-        "DF1_nm_tract_AHRQ_domain3",
-        "DF1_nm_tract_AHRQ_domain4",
-        "DF1_nm_tract_AHRQ_domain5")
+tract_only_feats <- c("M6_total_ahrq_trct_DF1_nm",
+        "demo_DF1_nm_tract_AHRQ_domain1",
+        "demo_DF1_nm_tract_AHRQ_domain2",
+        "demo_DF1_nm_tract_AHRQ_domain3",
+        "demo_DF1_nm_tract_AHRQ_domain4",
+        "demo_DF1_nm_tract_AHRQ_domain5")
 
 # Prepare a dataframe to store Wilcoxon test results
 wilcoxon_results <- data.frame(
@@ -313,10 +311,10 @@ feat_sets <- c(
 
 sdoh_feat_sets <- c(
   "M6_total_ahrq_cty_DF1_nm", "M6_total_ahrq_trct_DF1_nm",
-  "DF1_nm_county_AHRQ_domain1", "DF1_nm_county_AHRQ_domain2", "DF1_nm_county_AHRQ_domain3",
-  "DF1_nm_county_AHRQ_domain4", "DF1_nm_county_AHRQ_domain5", "DF1_nm_tract_AHRQ_domain1",
-  "DF1_nm_tract_AHRQ_domain2", "DF1_nm_tract_AHRQ_domain3", "DF1_nm_tract_AHRQ_domain4",
-  "DF1_nm_tract_AHRQ_domain5"
+  "demo_DF1_nm_county_AHRQ_domain1", "demo_DF1_nm_county_AHRQ_domain2", "demo_DF1_nm_county_AHRQ_domain3",
+  "demo_DF1_nm_county_AHRQ_domain4", "demo_DF1_nm_county_AHRQ_domain5", "demo_DF1_nm_tract_AHRQ_domain1",
+  "demo_DF1_nm_tract_AHRQ_domain2", "demo_DF1_nm_tract_AHRQ_domain3", "demo_DF1_nm_tract_AHRQ_domain4",
+  "demo_DF1_nm_tract_AHRQ_domain5"
 )
 
 # Ensure all required subgroups are present in the data
@@ -374,16 +372,16 @@ feat_sets <- c(
 
 sdoh_feat_sets <- c(
     "M6_total_ahrq_cty_DF1_nm", "M6_total_ahrq_trct_DF1_nm",
-    "DF1_nm_county_AHRQ_domain1",
-    "DF1_nm_county_AHRQ_domain2",
-    "DF1_nm_county_AHRQ_domain3",
-    "DF1_nm_county_AHRQ_domain4",
-    "DF1_nm_county_AHRQ_domain5",
-    "DF1_nm_tract_AHRQ_domain1",
-    "DF1_nm_tract_AHRQ_domain2",
-    "DF1_nm_tract_AHRQ_domain3",
-    "DF1_nm_tract_AHRQ_domain4",
-    "DF1_nm_tract_AHRQ_domain5"
+    "demo_DF1_nm_county_AHRQ_domain1",
+    "demo_DF1_nm_county_AHRQ_domain2",
+    "demo_DF1_nm_county_AHRQ_domain3",
+    "demo_DF1_nm_county_AHRQ_domain4",
+    "demo_DF1_nm_county_AHRQ_domain5",
+    "demo_DF1_nm_tract_AHRQ_domain1",
+    "demo_DF1_nm_tract_AHRQ_domain2",
+    "demo_DF1_nm_tract_AHRQ_domain3",
+    "demo_DF1_nm_tract_AHRQ_domain4",
+    "demo_DF1_nm_tract_AHRQ_domain5"
 )
 
 # Filter, group, and summarize results
@@ -452,10 +450,10 @@ feat_sets <- c(
 
 sdoh_feat_sets <- c(
   "M6_total_ahrq_cty_DF1_nm", "M6_total_ahrq_trct_DF1_nm",
-  "DF1_nm_county_AHRQ_domain1", "DF1_nm_county_AHRQ_domain2", "DF1_nm_county_AHRQ_domain3",
-  "DF1_nm_county_AHRQ_domain4", "DF1_nm_county_AHRQ_domain5", "DF1_nm_tract_AHRQ_domain1",
-  "DF1_nm_tract_AHRQ_domain2", "DF1_nm_tract_AHRQ_domain3", "DF1_nm_tract_AHRQ_domain4",
-  "DF1_nm_tract_AHRQ_domain5"
+  "demo_DF1_nm_county_AHRQ_domain1", "demo_DF1_nm_county_AHRQ_domain2", "demo_DF1_nm_county_AHRQ_domain3",
+  "demo_DF1_nm_county_AHRQ_domain4", "demo_DF1_nm_county_AHRQ_domain5", "demo_DF1_nm_tract_AHRQ_domain1",
+  "demo_DF1_nm_tract_AHRQ_domain2", "demo_DF1_nm_tract_AHRQ_domain3", "demo_DF1_nm_tract_AHRQ_domain4",
+  "demo_DF1_nm_tract_AHRQ_domain5"
 )
 
 fairness_full_hf_results$dp_ratio
@@ -561,15 +559,15 @@ county_feat_sets <- c("M1",
         "M5_and_demo",
         "M6_total_ahrq_cty_DF1_nm")
 county_only_feats <- c( "DF1_nm_county_AHRQ_domain1",
-        "DF1_nm_county_AHRQ_domain2",
-        "DF1_nm_county_AHRQ_domain3",
-        "DF1_nm_county_AHRQ_domain4",
-        "DF1_nm_county_AHRQ_domain5")
+        "demo_DF1_nm_county_AHRQ_domain2",
+        "demo_DF1_nm_county_AHRQ_domain3",
+        "demo_DF1_nm_county_AHRQ_domain4",
+        "demo_DF1_nm_county_AHRQ_domain5")
 tract_only_feats <- c( "DF1_nm_tract_AHRQ_domain1",
-        "DF1_nm_tract_AHRQ_domain2",
-        "DF1_nm_tract_AHRQ_domain3",
-        "DF1_nm_tract_AHRQ_domain4",
-        "DF1_nm_tract_AHRQ_domain5", "M6_total_ahrq_trct_DF1_nm")
+        "demo_DF1_nm_tract_AHRQ_domain2",
+        "demo_DF1_nm_tract_AHRQ_domain3",
+        "demo_DF1_nm_tract_AHRQ_domain4",
+        "demo_DF1_nm_tract_AHRQ_domain5", "M6_total_ahrq_trct_DF1_nm")
 
 
 model_order <- c("logr", "rf", "xgb")
@@ -700,18 +698,18 @@ county_feat_sets <- c("M1",
         "M5_and_demo",
         "M6_total_ahrq_cty_DF1_nm")
 county_only_feats <- c("M6_total_ahrq_cty_DF1_nm",
-                       "DF1_nm_county_AHRQ_domain1",
-        "DF1_nm_county_AHRQ_domain2",
-        "DF1_nm_county_AHRQ_domain3",
-        "DF1_nm_county_AHRQ_domain4",
-        "DF1_nm_county_AHRQ_domain5"
+                       "demo_DF1_nm_county_AHRQ_domain1",
+        "demo_DF1_nm_county_AHRQ_domain2",
+        "demo_DF1_nm_county_AHRQ_domain3",
+        "demo_DF1_nm_county_AHRQ_domain4",
+        "demo_DF1_nm_county_AHRQ_domain5"
         )
 tract_only_feats <- c("M6_total_ahrq_trct_DF1_nm",
-                      "DF1_nm_tract_AHRQ_domain1",
-        "DF1_nm_tract_AHRQ_domain2",
-        "DF1_nm_tract_AHRQ_domain3",
-        "DF1_nm_tract_AHRQ_domain4",
-        "DF1_nm_tract_AHRQ_domain5"
+                      "demo_DF1_nm_tract_AHRQ_domain1",
+        "demo_DF1_nm_tract_AHRQ_domain2",
+        "demo_DF1_nm_tract_AHRQ_domain3",
+        "demo_DF1_nm_tract_AHRQ_domain4",
+        "demo_DF1_nm_tract_AHRQ_domain5"
         )
 
 
@@ -724,18 +722,18 @@ total_feats_used <- c("M1",
         "M5_and_demo",
         "M6_total_ahrq_cty_DF1_nm",
         
-        "DF1_nm_county_AHRQ_domain1",
-        "DF1_nm_county_AHRQ_domain2",
-        "DF1_nm_county_AHRQ_domain3",
-        "DF1_nm_county_AHRQ_domain4",
-        "DF1_nm_county_AHRQ_domain5",
+        "demo_DF1_nm_county_AHRQ_domain1",
+        "demo_DF1_nm_county_AHRQ_domain2",
+        "demo_DF1_nm_county_AHRQ_domain3",
+        "demo_DF1_nm_county_AHRQ_domain4",
+        "demo_DF1_nm_county_AHRQ_domain5",
         
-        "DF1_nm_tract_AHRQ_domain1",
-        "DF1_nm_tract_AHRQ_domain2",
-        "DF1_nm_tract_AHRQ_domain3",
-        "DF1_nm_tract_AHRQ_domain4",
-        "DF1_nm_tract_AHRQ_domain5",
-        "total_ahrq_trct_nomissing"
+        "demo_DF1_nm_tract_AHRQ_domain1",
+        "demo_DF1_nm_tract_AHRQ_domain2",
+        "demo_DF1_nm_tract_AHRQ_domain3",
+        "demo_DF1_nm_tract_AHRQ_domain4",
+        "demo_DF1_nm_tract_AHRQ_domain5",
+        "M6_total_ahrq_trct_DF1_nm"
         )
 
 long_names <- c("Set 1",

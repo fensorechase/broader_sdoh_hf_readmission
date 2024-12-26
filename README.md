@@ -1,6 +1,6 @@
 # broader_sdoh_hf_readmission
 
-This repo contains our code for the paper _Exploring Broader Integration of Social Determinants of Health for Predicting Readmission of Patients with Heart Failure_.
+This repo contains the code for the paper _Exploring Broader Integration of Social Determinants of Health for Predicting Readmission of Patients with Heart Failure_.
 
 # Requirements
 Heart failure 30-day hospital readmission prediction:
@@ -30,9 +30,17 @@ The social determinants of health (SDOH) datasets used in this study can be foun
 
 # Reproducibility
 ## 1. Prepare patient data, gather SDOH data and merge  ```/data/```:
-Run ``` /data/patient_inclusion_Circ_2024.Rmd ``` to apply study inclusion, exclusion criteria.
+Run 
+```
+/data/patient_inclusion_Circ_2024.Rmd
+```
+to apply study inclusion, exclusion criteria.
 
-Then run ``` /data/merge_SDOH_Circ_2024.Rmd ``` to merge SDOH data with patients.
+Then run 
+```
+/data/merge_SDOH_Circ_2024.Rmd
+``` 
+to merge SDOH data with patients.
 
 ## 2. Heart Failure (HF) Readmission Prediction
 The patient dataset is unavailable due to privacy reasons --- however the following commands demonstrate the steps we used to train and evaluate binary classification models (using clinical and public SDOH data):
@@ -56,15 +64,77 @@ python analyze_XGB_SHAP.py
 
 ## 3. Code to generate all tables and plots:
 First, pull readmission prediction model results from your local MongoDB: 
-- ```python /scripts/analyze_classification_perf_results.py ``` to gather prediction performance values.
-- ```python /scripts/fairness_analyze_results.py ``` to gather prediction fairness values.
-- ```python /scripts/analyze_XGB_SHAP.py``` to gather feature importance values for XGBoost models.
+- ```
+    python /scripts/analyze_classification_perf_results.py 
+    ``` to gather prediction performance values.
+- ```
+    python /scripts/fairness_analyze_results.py 
+    ``` to gather prediction fairness values.
+- ```
+    python /scripts/analyze_XGB_SHAP.py
+    ``` to gather feature importance values for XGBoost models.
 
-Then, to generate the patient characteristics table, use ```/data/table1_Circ_2024.Rmd```.
+Then, to generate the patient characteristics table, use 
+    ```
+        /data/table1_Circ_2024.Rmd
+        ```.
 
-To tabulate model performance and fairness run ```/data/calculate_HF_performance_2024.Rmd```, and to tabulate feature importance run ```/data/plot_HF_SHAP_Circ_2024.Rmd```.
+To tabulate model performance and fairness run ```
+    /data/calculate_HF_performance_2024.Rmd
+    ```
+    , and to tabulate feature importance run 
+    ```
+    /data/plot_HF_SHAP_Circ_2024.Rmd
+    ```.
 
 Note that all SDOH features used from AHRQ SDOHD can be found below in Related Documents.
 
 ## All Related Documents: 
 - [Expanded SDOH variables used from AHRQ SDOHD](https://zenodo.org/records/14291734?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjI1NTlhZTZhLTYwY2EtNDJkNS1iYTNhLTZjMGRhNWU2ZGNiYyIsImRhdGEiOnt9LCJyYW5kb20iOiI0MDdiMWU4Nzc4MmQzNzEwOWVmMTFlOTIzZjYwODI1ZiJ9.RXHy7WwMZR46nhAV989LX3zCdW_TyO-lxC7HRMVTWcp7kt9mWySZKmAVO9jTAJX10oOnF4ezbisPBE1Z13dAtw)
+
+## Rates of missingness for all expanded SDOH variables (i.e., from AHRQ SDOHD) can be found in ```summary_statistics/```: 
+- ```TotalCohort_missing_rates_by_race.csv```
+- ```TotalCohort_missing_rates_by_readmission.csv```
+- ```TotalCohort_missing_rates_by_readmission_black.csv```
+- ```TotalCohort_missing_rates_by_readmission_white.csv```
+
+
+
+## Folder Structure
+
+```plaintext
+data/
+|-- adi-download-2020-tract/
+|-- sdi-download-2019-tract/
+|-- feat_base.json
+|-- feat_column.json
+|-- subgroup_cols_fast.json
+|-- subgroup_cols_many.json
+|-- 2010-18-all-granularities-AHRQ-dict.xlsx
+|-- count_features.py
+|-- num_unique_SDOH_features.py
+|-- calculate_HF_performance_2024.Rmd
+|-- merge_SDOH_Circ_2024.Rmd
+|-- patient_inclusion_Circ_2024.Rmd
+|-- plot_HF_SHAP_Circ_2024.Rmd
+|-- table1_Circ_2024.Rmd
+|-- data_cleaners.R
+|-- gen_chars.R
+
+scripts/
+|-- analyze_classification_perf_results.py
+|-- analyze_XGB_SHAP.py
+|-- classification_driver_nestKfold.py
+|-- evalHelper.py
+|-- fairness_analyze_results.py
+|-- fake_patient_data.csv
+
+summary_statistics/
+|-- Circ_AHRQ_used_county_metadata.csv
+|-- Circ_AHRQ_used_tract_metadata.csv
+|-- missing_rates_Circ_final_allstates_modelinput.csv
+|-- TotalCohort_missing_rates_by_race.csv
+|-- TotalCohort_missing_rates_by_readmission_black.csv
+|-- TotalCohort_missing_rates_by_readmission_white.csv
+|-- TotalCohort_missing_rates_by_readmission.csv
+|-- domains_lists.json

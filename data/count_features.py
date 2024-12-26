@@ -15,6 +15,7 @@ def main():
     feat_column_file = "/feat_column.json"
 
     keys_to_check = [
+        "M1",
         "M2",
         "M3_county_DF1_nm",
         "M4_DF1_nm_demo",
@@ -22,16 +23,16 @@ def main():
         "M5_and_demo",
         "M6_total_ahrq_cty_DF1_nm",
         "M6_total_ahrq_trct_DF1_nm",
-        "DF1_nm_county_AHRQ_domain1",
-        "DF1_nm_county_AHRQ_domain2",
-        "DF1_nm_county_AHRQ_domain3",
-        "DF1_nm_county_AHRQ_domain4",
-        "DF1_nm_county_AHRQ_domain5",
-        "DF1_nm_tract_AHRQ_domain1",
-        "DF1_nm_tract_AHRQ_domain2",
-        "DF1_nm_tract_AHRQ_domain3",
-        "DF1_nm_tract_AHRQ_domain4",
-        "DF1_nm_tract_AHRQ_domain5",
+        "demo_DF1_nm_county_AHRQ_domain1",
+        "demo_DF1_nm_county_AHRQ_domain2",
+        "demo_DF1_nm_county_AHRQ_domain3",
+        "demo_DF1_nm_county_AHRQ_domain4",
+        "demo_DF1_nm_county_AHRQ_domain5",
+        "demo_DF1_nm_tract_AHRQ_domain1",
+        "demo_DF1_nm_tract_AHRQ_domain2",
+        "demo_DF1_nm_tract_AHRQ_domain3",
+        "demo_DF1_nm_tract_AHRQ_domain4",
+        "demo_DF1_nm_tract_AHRQ_domain5"
     ]  # Replace with actual keys you want to check
 
     with open(feat_base_file, "r") as base_file:

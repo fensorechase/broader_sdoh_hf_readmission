@@ -106,12 +106,12 @@ def main():
 
     parser.add_argument("-mongo_db", default="CIRC_HF_CLUSTER")
     parser.add_argument(
-        "-mongo_col", default="Circ_HF_results_final", help="collection_type"
+        "-mongo_col", default="Circ_HF_results_final", help="collection_type" # <your_collection_name>
     )
     # default information
     parser.add_argument(
         "-data_file",
-        default="../data/Circ_final_allstates_modelinput.csv",
+        default="../data/Circ_final_allstates_modelinput.csv", # <your_output_filename>
         help="data file",
     )
     parser.add_argument(
@@ -135,22 +135,23 @@ def main():
         "--feats",
         nargs="+",
         default=[
-            "competition_non_SDOH",
+            "M1",
             "M2",
             "M3_county_DF1_nm",
             "M4_DF1_nm_demo",  # Demo has 7 vars.
             "M5_and_demo" "M6_total_ahrq_cty_DF1_nm",
             "M6_total_ahrq_trct_DF1_nm",
-            "DF1_nm_county_AHRQ_domain1",
-            "DF1_nm_county_AHRQ_domain2",
-            "DF1_nm_county_AHRQ_domain3",
-            "DF1_nm_county_AHRQ_domain4",
-            "DF1_nm_county_AHRQ_domain5",
-            "DF1_nm_tract_AHRQ_domain1",
-            "DF1_nm_tract_AHRQ_domain2",
-            "DF1_nm_tract_AHRQ_domain3",
-            "DF1_nm_tract_AHRQ_domain4",
-            "DF1_nm_tract_AHRQ_domain5",
+            "demo_DF1_nm_county_AHRQ_domain1",
+            "demo_DF1_nm_county_AHRQ_domain2",
+            "demo_DF1_nm_county_AHRQ_domain3",
+            "demo_DF1_nm_county_AHRQ_domain4",
+            "demo_DF1_nm_county_AHRQ_domain5",
+
+            "demo_DF1_nm_tract_AHRQ_domain1",
+            "demo_DF1_nm_tract_AHRQ_domain2",
+            "demo_DF1_nm_tract_AHRQ_domain3",
+            "demo_DF1_nm_tract_AHRQ_domain4",
+            "demo_DF1_nm_tract_AHRQ_domain5",
         ],
     )
 
@@ -160,11 +161,11 @@ def main():
     mclient = MongoClient(args.mongo_url)
     mdb = mclient[args.mongo_db]
     mcol = mdb[args.mongo_col]
-    fairness_mcol = mdb["Circ_HF_results_fairness_final"]
+    fairness_mcol = mdb["Circ_HF_results_fairness_final"] # <your_fairness_collection_name>
     # raw_mcol = mdb["smote_raw_preds"] # If you would like to store the raw binary model predictions for each patient (0/1).
     logcoeffs_mcol = mdb[
         "Circ_HF_results_log_coeffs_final"
-    ]  # To save logisitic coeffs: "bal_allfeats_logr_nosmote_CHIL_2_4_log_coeffs"
+    ]  
     # logCI_mcol = mdb["log_CI"] # If you would like to store 95% CI of logistic regression coefficients.
     shap_mcol = mdb[
         "Circ_HF_results_xgb_SHAP_final"

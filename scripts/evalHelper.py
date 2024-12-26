@@ -74,7 +74,7 @@ def evaluate_results(model, test_x, test_y, endpoint, imputer=None, scaler=None)
     # Get more fairness metrics:
     # 1. FNR (i.e., "miss rate")
     if not (recall == np.nan):
-        fnr = 1 - recall  # TODO: return
+        fnr = 1 - recall
     else:
         fnr = np.nan
 

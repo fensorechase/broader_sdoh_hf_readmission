@@ -12,10 +12,18 @@
        "K",
        "ALB",
        "BNP",
-       "Resp"
+       "Resp",
+
+
+       "privinsurance",
+       "Medicare",
+       "Medicaid",
+       "female",
+       "white",
+       "black"
    ],
 
-   "competition_SDOH_vars":
+   "limited_SDOH_vars":
    [
        "percnt_ltfpl100", "percnt_singlparntfly", "percnt_black",
        "percnt_dropout", "percnt_hhnocar", "percnt_rentoccup",

@@ -9,7 +9,7 @@ from pymongo import MongoClient
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-output", help="output file", default="Circ_HF_results_xgb_SHAP_final.csv"
+        "-output", help="output file", default="<your_SHAP_output_filename>.csv"
     )
     # For local Mongo:
     # Your connection string may look slightly difference. You should copy it from your local MongoDB Compass cluster, after the cluster is started using "mongosh" in the terminal.
@@ -19,9 +19,8 @@ def main():
     )
 
     parser.add_argument("-mongo_db", default="CIRC_HF_CLUSTER")
-    # 10_4_ACC_agnostic
     parser.add_argument(
-        "-mongo_col", default="Circ_HF_results_xgb_SHAP_final", help="collection_type"
+        "-mongo_col", default="<insert_your_collection_name>", help="collection_type"
     )
     args = parser.parse_args()
 

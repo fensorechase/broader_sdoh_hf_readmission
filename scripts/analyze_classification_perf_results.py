@@ -11,7 +11,7 @@ def main():
     parser.add_argument(
         "-output",
         help="output file",
-        default="final_results_individualfolds_Circ_2024.csv",
+        default="<your_output_filename>.csv",
     )  # Circ_HF_results_individualfolds, ML4H_rebuttal_HF_results_individualfolds,
 
     # For local Mongo:
@@ -21,9 +21,8 @@ def main():
         default="mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3",
     )
     parser.add_argument("-mongo_db", default="CIRC_HF_CLUSTER")
-    # 10_4_ACC_agnostic
     parser.add_argument(
-        "-mongo_col", default="Circ_HF_results_final", help="collection_type"
+        "-mongo_col", default="<insert_your_collection_name>", help="collection_type" # Your collection name.
     )  # For subgroup results, set default="subgroups_baseline", for entire dataset, default="baseline"
     args = parser.parse_args()
 

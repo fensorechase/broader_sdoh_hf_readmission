@@ -11,20 +11,17 @@ def main():
     parser.add_argument(
         "-output",
         help="output file",
-        default="individualfolds_Circ_HF_results_fairness_final.csv",
+        default="<your_fairness_output_filename>.csv",
     )
     # For local Mongo:
     # Your connection string may look slightly difference. You should copy it from your local MongoDB Compass cluster, after the cluster is started using "mongosh" in the terminal.
-    username = urllib.parse.quote_plus("fensorechase")
-    password = urllib.parse.quote_plus("7pzNiMi7dD!d@Ab")
     parser.add_argument(
         "-mongo_url",
         default="mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3",
     )
     parser.add_argument("-mongo_db", default="CIRC_HF_CLUSTER")
-    # 10_4_ACC_agnostic
     parser.add_argument(
-        "-mongo_col", default="Circ_HF_results_fairness_final", help="collection_type"
+        "-mongo_col", default="<insert_your_collection_name>", help="collection_type"
     )
     args = parser.parse_args()
 
