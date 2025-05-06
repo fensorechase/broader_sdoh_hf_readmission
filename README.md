@@ -1,6 +1,6 @@
 # broader_sdoh_hf_readmission
 
-This repo contains the code for the paper _Exploring Broader Integration of Social Determinants of Health for Predicting Readmission of Patients with Heart Failure_.
+This repo contains the code for the manuscript _Beyond Composite Indices: Comprehensive Social Determinants Improve Heart Failure Readmission Prediction_.
 
 # Requirements
 Heart failure 30-day hospital readmission prediction:
