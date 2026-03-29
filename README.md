@@ -1,6 +1,6 @@
-# broader_sdoh_hf_readmission
+# Beyond Composite Indices: Comprehensive Social Determinants Improve Heart Failure Readmission Prediction
 
-This repo contains the code for the manuscript _Beyond Composite Indices: Comprehensive Social Determinants Improve Heart Failure Readmission Prediction_.
+This repo contains the code for the article _Beyond Composite Indices: Comprehensive Social Determinants Improve Heart Failure Readmission Prediction_.
 
 # Requirements
 Heart failure 30-day hospital readmission prediction:
@@ -32,13 +32,13 @@ The social determinants of health (SDOH) datasets used in this study can be foun
 ## 1. Prepare patient data, gather SDOH data and merge  ```/data/```:
 Run 
 ```
-/data/patient_inclusion_Circ_2024.Rmd
+/data/patient_inclusion.Rmd
 ```
 to apply study inclusion, exclusion criteria.
 
 Then run 
 ```
-/data/merge_SDOH_Circ_2024.Rmd
+/data/merge_SDOH.Rmd
 ``` 
 to merge SDOH data with patients.
 
@@ -63,7 +63,7 @@ python analyze_XGB_SHAP.py
 ```
 
 ## 3. Code to generate all tables and plots:
-First, pull readmission prediction model results from your local MongoDB: 
+First, pull readmission prediction model results from your local MongoDB collections:
 - ```
     python /scripts/analyze_classification_perf_results.py 
     ``` to gather prediction performance values.
@@ -76,7 +76,7 @@ First, pull readmission prediction model results from your local MongoDB:
 
 Then, to generate the patient characteristics table, use 
     ```
-        /data/table1_Circ_2024.Rmd
+        /data/table1_generate.Rmd
         ```.
 
 To tabulate model performance and fairness run ```
@@ -84,7 +84,7 @@ To tabulate model performance and fairness run ```
     ```
     , and to tabulate feature importance run 
     ```
-    /data/plot_HF_SHAP_Circ_2024.Rmd
+    /data/plot_HF_SHAP.Rmd
     ```.
 
 Note that all SDOH features used from AHRQ SDOHD can be found below in Related Documents.
@@ -109,15 +109,14 @@ data/
 |-- feat_base.json
 |-- feat_column.json
 |-- subgroup_cols_fast.json
-|-- subgroup_cols_many.json
 |-- 2010-18-all-granularities-AHRQ-dict.xlsx
 |-- count_features.py
 |-- num_unique_SDOH_features.py
 |-- calculate_HF_performance_2024.Rmd
-|-- merge_SDOH_Circ_2024.Rmd
-|-- patient_inclusion_Circ_2024.Rmd
-|-- plot_HF_SHAP_Circ_2024.Rmd
-|-- table1_Circ_2024.Rmd
+|-- merge_SDOH.Rmd
+|-- patient_inclusion.Rmd
+|-- plot_HF_SHAP.Rmd
+|-- table1_generate.Rmd
 |-- data_cleaners.R
 |-- gen_chars.R
 
@@ -130,9 +129,9 @@ scripts/
 |-- fake_patient_data.csv
 
 summary_statistics/
-|-- Circ_AHRQ_used_county_metadata.csv
-|-- Circ_AHRQ_used_tract_metadata.csv
-|-- missing_rates_Circ_final_allstates_modelinput.csv
+|-- AHRQ_used_county_metadata.csv
+|-- AHRQ_used_tract_metadata.csv
+|-- missing_rates_final_allstates_modelinput.csv
 |-- TotalCohort_missing_rates_by_race.csv
 |-- TotalCohort_missing_rates_by_readmission_black.csv
 |-- TotalCohort_missing_rates_by_readmission_white.csv

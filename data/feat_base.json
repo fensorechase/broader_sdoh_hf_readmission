@@ -1,10 +1,9 @@
 {
-    "M1":
+    "limited_EHR":
    [
        "Systolic_BP",
        "Creat",
        "Diastolic_BP",
-       "age_current",
        "Heart_Rate",
        "Na",
        "BUN",
@@ -14,7 +13,7 @@
        "BNP",
        "Resp",
 
-
+       "agecalculated",
        "privinsurance",
        "Medicare",
        "Medicaid",
@@ -23,7 +22,7 @@
        "black"
    ],
 
-   "limited_SDOH_vars":
+   "limited_SDOH_vars": 
    [
        "percnt_ltfpl100", "percnt_singlparntfly", "percnt_black",
        "percnt_dropout", "percnt_hhnocar", "percnt_rentoccup",
@@ -76,7 +75,7 @@
 
    "demo":
    [
-       "age_current",
+       "agecalculated",
        "privinsurance",
        "Medicare",
        "Medicaid",

@@ -205,7 +205,7 @@ unique(all_trct_unique_databases$'Data Source')
 ```
 
 
-# Save AHRQ census tract variables for LLM annotation:
+# Save AHRQ census tract variables ...
 ```{r}
 llm_tract_AHRQ_prompts <- trct_features_and_metadata
 
@@ -242,7 +242,7 @@ table(llm_tract_AHRQ_prompts$domain)
 # Read in patient data (includes maximum possible number of geocoded patients)
 ```{r}
 
-patient_cohort <- read.csv(file="./Circ_Circ_Nonmissing_Cohort.csv") # Fully geocoded from patient_inclusion_Circ_2024.Rmd
+patient_cohort <- read.csv(file="./Nonmissing_Cohort.csv") # Fully geocoded from patient_inclusion_2024.Rmd
 cat("Number patients fully geocoded: ", nrow(patient_cohort), "\n")
 
 
@@ -488,21 +488,15 @@ nrow(patient_cohort)
 ```
 
 
-# Final steps: only for Circ.
+# Final steps:
 
-# Before feeding to classifiers, drop potential PHI from ahrq_baseline
+# Before feeding to classifiers, drop potential PHI from ahrq_baseline...
 ```{r}
 
-drop_vars <- c("Lon__Lat", "cxy_address", "cxy_matched_address", "cxy_tiger_line_id", "cxy_tract_id", "cxy_block_id")
-ncol(patient_cohort)
-
-# Remove drop_vars
-patient_cohort <- patient_cohort[, !(names(patient_cohort) %in% drop_vars)]
-
-ncol(patient_cohort)
+# ... Insert some code to drop PHI here, as desired in your code ...
 
 
-# CREATE DEMOGRAPHIC VARS: 
+# Then, CREATE DEMOGRAPHIC VARS: 
 patient_cohort <- patient_cohort %>%
   mutate(baselineyear = as.numeric(baselineyear), na.rm=FALSE)
 
@@ -712,8 +706,8 @@ patient_cohort <- convert_nonnumeric_to_na(patient_cohort, deprivation_cols_tota
 ```
 
 # Final DF:
-- Across US & territories: 35964 (we choose this)
-- GA only: 33579.
+- Across US & territories: 35964
+- GA only: 33579 (we choose this)
 ```{r}
 
 patient_cohort_final <- prepare_inputDF(patient_cohort)
@@ -722,10 +716,10 @@ patient_cohort_final <- prepare_inputDF(patient_cohort)
 missing_rates_df <- calculate_missing_rates(patient_cohort_final, 
                                           cty_features_and_metadata, 
                                           trct_features_and_metadata, 
-                                          "missing_rates_Circ_final_allstates_modelinput.csv")
+                                          "missing_rates_final_allstates_modelinput.csv")
 
 write.csv(patient_cohort_final, 
-          file = "./Circ_final_allstates_modelinput.csv", 
+          file = "./final_allstates_modelinput.csv", 
           row.names = FALSE)
 
 nrow(patient_cohort_final)

@@ -15,10 +15,10 @@ def main():
     # Your connection string may look slightly difference. You should copy it from your local MongoDB Compass cluster, after the cluster is started using "mongosh" in the terminal.
     parser.add_argument(
         "-mongo_url",
-        default="mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3",
+        default="<your_mongo_connection_string>",  # Your MongoDB connection string. You can copy this from your local MongoDB Compass cluster, after the cluster is started using "mongosh" in the terminal.
     )
 
-    parser.add_argument("-mongo_db", default="CIRC_HF_CLUSTER")
+    parser.add_argument("-mongo_db", default="<your_mongodb_cluster_name>")
     parser.add_argument(
         "-mongo_col", default="<insert_your_collection_name>", help="collection_type"
     )

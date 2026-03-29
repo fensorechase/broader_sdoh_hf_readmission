@@ -1,4 +1,4 @@
-df <- read.csv("clean_tract_v2.csv") # Some input data file with patient characteristics.
+df <- read.csv("<your_input_patient_data_file.csv>") # Some input data file with patient characteristics.
 
 
 basechars <- function(x) {

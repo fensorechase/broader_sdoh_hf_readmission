@@ -26,21 +26,9 @@ library(readr) # For read_tsv
 ```
 
 
-# Model input files: 
-- input file:  
-    - Circ_allstates_includemissing_modelinput_DF1.csv
-- output file:
-
-
-
-# Model Circ HF results: 
-- input file: DF1_results_individualfolds_Circ_2024.csv
-- 
-
-
 ```{r}
 
-fairness_full_hf_results <- read.csv("../scripts/<your_fairness_output_filename>.csv") # individualfolds_Circ_HF_results_fairness_final
+fairness_full_hf_results <- read.csv("../scripts/<your_fairness_output_filename>.csv") # individualfolds_HF_results_fairness_final
 
 full_hf_results <- read.csv("../scripts/<your_output_filename>.csv") # 
 
@@ -98,6 +86,15 @@ library(knitr)
 #        "DF1_nm_tract_AHRQ_domain3",
 #        "DF1_nm_tract_AHRQ_domain4",
 #        "DF1_nm_tract_AHRQ_domain5"
+
+# NOTE: These feature names correspond as follows to the feature sets in feat_base.json & feat_column.json:
+# "limited_EHR", # [BASE MODEL]: Routine clinical only (base model) (11 predictors)
+#  "expanded_clinical", # Expanded clinical (39 predictors)
+#  "M6_total_ahrq_cty_DF1_nm", # Comprehensive SDOH only (752 predictors)
+#  "routine_clinical_standard_SDOH", # Routine clinical + standard SDOH (26 predictors)
+#  "routine_clinical_comprehensive_SDOH", # Routine clinical + comprehensive SDOH (778 predictors)
+#  "expanded_clinical_comprehensive_SDOH" # [FULL MODEL]: Expanded clinical and comprehensive SDOH (full model) (806 predictors)
+
 
 feat_sets <- c(
    "M1",
@@ -521,7 +518,7 @@ kable(
 
 ```{r}
 
-fair_hf_results <- read.csv("../scripts/individualfolds_Circ_HF_results_fairness_final.csv") # "../v3_fairness_circulation_results.csv"
+fair_hf_results <- read.csv("../scripts/individualfolds_HF_results_fairness_final.csv") # <your_individualfolds_fairness_output_filename>
 fair_hf_results
 
 ```
@@ -641,12 +638,12 @@ cat(paste(dp_ratio_avg %>% pull(mean_dp_ratio), collapse = "\n"))
 # COMPARE: performance vs. fairness. 
 ```{r}
 # PREDICTION PERFORMANCE:
-pred_hf_results <- full_hf_results <- read.csv("../scripts/final_results_individualfolds_Circ_2024.csv")# "../Circ_HF_results_individualfolds.csv"
+pred_hf_results <- full_hf_results <- read.csv("../scripts/final_results_individualfolds_2024.csv")# <your_individualfolds_fairness_output_filename>
 pred_hf_results <- pred_hf_results[pred_hf_results$subgroup == "blackorwhite", ] # blackorwhite, black, white
 
 # FAIRNESS: 
 # Filter out sg_key == "all_patients". 
-total_fair_hf_results <- read.csv("../scripts/individualfolds_Circ_HF_results_fairness_final.csv") #"../v3_fairness_circulation_results.csv"
+total_fair_hf_results <- read.csv("../scripts/individualfolds_HF_results_fairness_final.csv") #<your_individualfolds_fairness_output_filename>
 
 fair_hf_results <- total_fair_hf_results[total_fair_hf_results$sg_key != "all_patients", ]
 fair_hf_results <- fair_hf_results[fair_hf_results$sg_key == "race", ]

@@ -1,5 +1,5 @@
 ---
-title: "table1_Circ_2024"
+title: "table1_2024"
 output: html_notebook
 ---
 
@@ -37,7 +37,7 @@ library(kableExtra)
 # Drop "Race" == "other"
 
 
-input_ahrq_patient_feats <- read.csv(file="../data/Circ_final_allstates_modelinput.csv") # DO NOT USE: Circ_allstates_includemissing_modelinput_DF1.csv
+input_ahrq_patient_feats <- read.csv(file="../data/inal_allstates_modelinput.csv") # DO NOT USE: allstates_includemissing_modelinput_DF1.csv
 
 nrow(input_ahrq_patient_feats[input_ahrq_patient_feats$white == 1, ])
 
@@ -146,7 +146,7 @@ colnames(trans_input_feats)[colnames(trans_input_feats) == "loceclhicu"] = "CLH 
 colnames(trans_input_feats)[colnames(trans_input_feats) == "loceclhfloor"] = "CLH Floor"
 colnames(trans_input_feats)[colnames(trans_input_feats) == "loceuhicu"] = "UH ICU"
 
-# SDOH feats (comp -- other Circulation HF paper)
+# SDOH feats
 
 colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_ltfpl100"] = "percnt_ltfpl100" 
 colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_singlparntfly"] = "percnt_singlparntfly" 
@@ -292,47 +292,7 @@ kable(p, format = "markdown", booktabs = TRUE)
 
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Total: Circ_final_allstates_modelinput.csv
+Total: final_allstates_modelinput.csv
 - df: trans_input_feats
 Unsuccessful geocoded: nonmissing_geocodedf_n-3102.csv
 - df: nonmissing_df_input_ahrq_patient_feats
@@ -491,7 +451,7 @@ colnames(nonmissing_df_input_ahrq_patient_feats)[colnames(nonmissing_df_input_ah
 colnames(nonmissing_df_input_ahrq_patient_feats)[colnames(nonmissing_df_input_ahrq_patient_feats) == "loceclhfloor"] = "CLH Floor"
 colnames(nonmissing_df_input_ahrq_patient_feats)[colnames(nonmissing_df_input_ahrq_patient_feats) == "loceuhicu"] = "UH ICU"
 
-# SDOH feats (comp -- other Circulation HF paper)
+# SDOH feats (comp)
 #colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_ltfpl100"] = "percnt_ltfpl100" 
 #colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_singlparntfly"] = "percnt_singlparntfly" 
 #colnames(trans_input_feats)[colnames(trans_input_feats) == "percnt_dropout"] = "percnt_dropout" 
