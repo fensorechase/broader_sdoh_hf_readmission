@@ -12,15 +12,15 @@ def main():
         "-output",
         help="output file",
         default="<your_output_filename>.csv",
-    )  # Circ_HF_results_individualfolds, ML4H_rebuttal_HF_results_individualfolds,
+    )
 
     # For local Mongo:
     # Your connection string may look slightly difference. You should copy it from your local MongoDB Compass cluster, after the cluster is started using "mongosh" in the terminal.
     parser.add_argument(
         "-mongo_url",
-        default="mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3",
+        default="<your_mongo_connection_string>",  # Your MongoDB connection string. You can copy this from your local MongoDB Compass cluster, after the cluster is started using "mongosh" in the terminal.
     )
-    parser.add_argument("-mongo_db", default="CIRC_HF_CLUSTER")
+    parser.add_argument("-mongo_db", default="<your_mongodb_cluster_name>")  # Your MongoDB cluster name.
     parser.add_argument(
         "-mongo_col", default="<insert_your_collection_name>", help="collection_type" # Your collection name.
     )  # For subgroup results, set default="subgroups_baseline", for entire dataset, default="baseline"

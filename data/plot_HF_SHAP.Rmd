@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ---
-title: "plot_Circ_HF_SHAP"
+title: "plot_HF_SHAP"
 output: html_notebook
 ---
 
@@ -21,7 +21,7 @@ library(stringr)
 
 ```{r}
 # Read in the CSV file
-shap_values_total <- read_csv("../scripts/Circ_HF_results_XGB_SHAP_final.csv") # Circ_HF_results_XGB_SHAP.csv
+shap_values_total <- read_csv("../scripts/HF_results_XGB_SHAP_final.csv") # HF_results_XGB_SHAP.csv
 
 # Display the first few rows of the data
 View(shap_values_total)
@@ -31,62 +31,7 @@ View(shap_values_total)
 # Plot: XGBoost feature importances:
     Black vs. White (sg_key = "race")
     
-    
-M1:
-        "Systolic_BP",
-        "Creat",
-        "Diastolic_BP",
-        "age_current",
-        "Heart_Rate",
-        "Na",
-        "BUN",
-        "Hb",
-        "K",
-        "ALB",
-        "BNP",
-        "Resp"
-        
-   
-     
- "M1":
- 
- 
- 
-- E_expanded:
-        "charlson":
-              "mi",
-              "chf",
-              "pvd",
-              "cvd",
-              "dementia",
-              "cpd",
-              "rheum",
-              "pud",
-              "mliverdz",
-              "dm",
-              "dmcomp",
-              "hemipleg",
-              "renal",
-              "malig",
-              "sliverdz",
-              "mettumor",
-              "aids",
-              "afib",
-              "htn",
-              "cad",
-              "ckd",
-              "dmany"
-        
-        
-        "vitals":
-              "Systolic_BP",
-            	"Heart_Rate",
-            	"Resp"
-        
-        "hf_vars":
-              "hfsystolic",
-            	"hfdiastolic",
-            	"hfother"
+  
         
 ```{r}
 

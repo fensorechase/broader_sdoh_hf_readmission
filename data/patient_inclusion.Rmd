@@ -1,5 +1,5 @@
 ---
-title: "patient_inclusion_Circ_2024"
+title: "patient_inclusion"
 author: "Chase Fensore"
 date: "2024-10-30"
 output: html_document
@@ -20,13 +20,13 @@ library(tidygeocoder)
 
 ```
 
-# Read in tractmlm
+# Read in raw patient data file.
 ```{r}
 source('data_cleaners.R')
 
-orig_df <- read.csv("./tractmlm.csv") # Input file of patients with HF with their encounters.
+orig_df <- read.csv("./<your-raw-patient-data-file.csv>") # Input file of patients with HF with their encounters.
 # Before restricting with inclusion criteria.
-cat("Raw from tractmlm: \n")
+cat("Raw from <your-raw-patient-data-file.csv>: \n")
 nrow(orig_df)
 
 ```
@@ -45,9 +45,7 @@ cat("After endpoints inclusion: ", nrow(filtered_df), "\n") # After endpoints in
 
 
 # 2.) Street address
-# Useful columns: Patient_Home_Street_Address, Patient_Address (less full), fips, censustract, 
 # Drop if: no value/missing/empty string like NA,"", ".", "..", "..." for *ALL* of the useful columns. Keep if at least 1 column is valid.
-# Note: Patient_Home_Street_Address (listed in EHR) vs. Patient_Address (from matching)
 # Define a vector of invalid values
 invalid_values <- c(NA, "", ".", "..", "...")
 
@@ -60,7 +58,6 @@ filtered_df <- filtered_df %>%
       censustract %in% invalid_values)
   )
 
-# To find bad values: head(sort(table(orig_df$Patient_Home_Street_Address), decreasing = TRUE), 10)
 
 # View the filtered data
 cat("After invalid address exclusion: ", nrow(filtered_df), "\n") # After: 
@@ -120,7 +117,7 @@ sum(is.na(strict_filtered_df$ADI_national_rank))
 invalid_values <- c(NA, "", ".", "..", "...")
 
 
-patient_cohort <- read.csv(file="./Circ_final_allstates_modelinput.csv") # Fully geocoded from patient_inclusion_Circ_2024.Rmd, Circ_Circ_Nonmissing_Cohort.csv
+patient_cohort <- read.csv(file="./final_allstates_modelinput.csv") # Fully geocoded version of the patient cohort.
 cat("Number patients fully geocoded: ", nrow(patient_cohort), "\n")
 
 
@@ -233,70 +230,17 @@ cat("Select all patients with INVALID fips or censustract values... but VALID ad
 
 ```
 
-# To geocode more patients, use the code below to directly interface with the Census API.
+# To geocode more patients, use a redacted approach below to directly interface with the Census API.
+# Please contact corresponding author with any questions about this.
+
 # Helper functions: using full address -> get tract, county FIPS values.
 ```{r}
 library(httr)
 library(jsonlite)
 
-# API Docs: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html
-get_fips_from_address <- function(address) {
-  # Build the API URL
-  base_url <- "https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress"
-  params <- list(
-    address = address,
-    benchmark = 4,# Uses "Public_AR_Current". To get 2020 values only, use benchmark "2020". Summary here: https://geocoding.geo.census.gov/geocoder/benchmarks
-    vintage = 4 # Uses "Public_AR_Current"
-  )
-  
-  # Make the API request
-  response <- GET(base_url, query = params)
-  
-  # Check if the request was successful
-  if (response$status_code == 200) {
-    # Parse the response
-    result <- fromJSON(content(response, "text"), flatten = TRUE)
-    
-    # Extract the address matches
-    address_matches <- result$result$addressMatches
-    
-    # Check if there are any address matches
-    if (length(address_matches) > 0) {
-      # Extract the geographies
-      geographies <- address_matches$geographies$`Census Tracts` # [["Census Tracts"]] #.Census.Tracts
-      county_fips <- address_matches$geographies.Counties
-      
-      
-      # Extract FIPS codes from the geographies
-      # tract_fips <- ifelse(!is.null(geographies), sub("^(\\d{1,3})\\d*", "\\1", geographies), NA)
-      county_fips <- ifelse(!is.null(county_fips), sub("^(\\d{1,3})\\d*", "\\1", county_fips), NA)
-
-      # Get County FIPS list: 
-      # tract_fips <- sub('^".*?([^"]+)".*$', '\\1', tract_fips[0]) # [["Census Tracts"]]
-      # tract_fips <- sub(".*\\s(\\d{11})[,].*", "\\1", tract_fips)
-      county_fips <- sub(".*GEOID = \"([^\"]+)\".*", "\\1", county_fips)
-      
-      # Get Tract fips:
-      # Use sub to extract the 11-digit GEOID value
-      tract_fips <- sub('.*GEOID = "(\\d{11})".*', '\\1', paste(address_matches, collapse = ", "))
-      
-
-        
-      return(list(tract_fips = tract_fips, county_fips = county_fips))
-    } else {
-      return(list(tract_fips = NA, county_fips = NA))
-    }
-  } else {
-    stop("Error in API request: ", response$status_code)
-  }
-}
-
-# Example usage
-#address <- "_Some one-line address string here_"
-#fips_codes <- get_fips_from_address(address)
-
-#print(paste("Tract FIPS:", fips_codes$tract_fips))
-#print(paste("County FIPS:", fips_codes$county_fips))
+# ...
+# Patient geocoding in bulk happens here.
+# ...
 
 ```
 
@@ -481,27 +425,10 @@ cat("Saved for analysis in table1.Rmd for ", nrow(failed_second_geocoding), "pat
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Remove PHI columns
 ```{r}
 
-remove_cols <- c("patient_name", "Patient", "Match_Address", "Patient_Address",
-                 "Patient_Birth_Date", "Patient_Home_Street_Address", "Patient_Home_City", "Patient_Home_State", "dob",
-                 "Patient_Death_Day")
-                 
+# Here, Drop your PHI columns as desired.
 
 final_merged_df = final_merged_df[,!(names(final_merged_df) %in% remove_cols)]
 
@@ -527,14 +454,7 @@ table(final_merged_df$statenum, useNA = "ifany")
 # Finally, write final result
 ```{r}
 
-write.csv(final_merged_df, "Circ_Circ_Nonmissing_Cohort.csv", row.names = FALSE)
-
-
-
-# For quick checks.
-ck_df <- read.csv("Circ_Circ_Nonmissing_Cohort.csv")
-
-ck_df[ck_df$Encounter == 8033890056, ]$censustract
+write.csv(final_merged_df, "Nonmissing_Cohort.csv", row.names = FALSE)
 
 ```
 

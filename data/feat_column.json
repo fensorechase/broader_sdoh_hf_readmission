@@ -1,13 +1,23 @@
 {
-    "M2":
+    
+    "expanded_clinical":
     [
-        "M1",
+        "limited_EHR",
+
+        "charlson",
+        "vitals",
+        "hf_vars"
+    ],
+    
+    "routine_clinical_standard_SDOH":
+    [
+        "limited_EHR",
         "limited_SDOH_vars"
     ],
 
-     "M3_county_DF1_nm":
+     "routine_clinical_comprehensive_SDOH":
     [
-        "M1",
+        "limited_EHR",
         "limited_SDOH_vars",
 
 
@@ -18,9 +28,9 @@
         "DF1_nm_county_AHRQ_domain5"
     ],
 
-     "M4_DF1_nm_demo":
+     "expanded_clinical_comprehensive_SDOH":
     [
-        "M1",
+        "limited_EHR",
         "limited_SDOH_vars",
 
         "DF1_nm_county_AHRQ_domain1",
@@ -31,21 +41,7 @@
 
         "charlson",
         "vitals",
-        "hf_vars",
-        "demo"
-
-    ],
-
-     "M5_and_demo":
-    [
-        "M1",
-
-        "charlson",
-        "vitals",
-        "hf_vars",
-
-        "demo"
-
+        "hf_vars"
     ],
 
      "M6_total_ahrq_cty_DF1_nm":
@@ -133,8 +129,26 @@
     [
         "demo",
         "DF1_nm_tract_AHRQ_domain5"
+    ],
+
+        "demo_nm_intersect_county_AHRQ":
+    [
+        "DF1_nm_county_AHRQ_domain1_intersect",
+        "DF1_nm_county_AHRQ_domain2_intersect",
+        "DF1_nm_county_AHRQ_domain3_intersect",
+        "DF1_nm_county_AHRQ_domain4_intersect",
+
+        "demo"
+    ],
+
+    "demo_nm_intersect_tract_AHRQ":
+    [
+        "DF1_nm_tract_AHRQ_domain1_intersect",
+        "DF1_nm_tract_AHRQ_domain2_intersect",
+        "DF1_nm_tract_AHRQ_domain3_intersect",
+        "DF1_nm_tract_AHRQ_domain4_intersect",
+
+        "demo"
     ]
-
-
 
 }
